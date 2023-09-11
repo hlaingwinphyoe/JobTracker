@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class City extends Model
 {
@@ -13,7 +14,7 @@ class City extends Model
 
     protected $guarded = [];
 
-    public function township()
+    public function township(): BelongsTo
     {
         return $this->belongsTo(Township::class, 'township_id');
     }

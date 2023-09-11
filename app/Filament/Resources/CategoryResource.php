@@ -2,29 +2,31 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TypeResource\Pages;
-use App\Filament\Resources\TypeResource\RelationManagers;
-use App\Models\Type;
+use App\Filament\Resources\CategoryResource\Pages;
+use App\Filament\Resources\CategoryResource\RelationManagers;
+use App\Models\Category;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
-class TypeResource extends Resource
+class CategoryResource extends Resource
 {
-    protected static ?string $model = Type::class;
+    protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'fas-shapes';
+    protected static ?string $navigationIcon = 'fas-layer-group';
 
     protected static ?string $navigationGroup = 'Jobs Settings';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -48,7 +50,6 @@ class TypeResource extends Resource
                 Hidden::make('slug_change')
                     ->default(false)
                     ->dehydrated(false),
-                TextInput::make('type')->default('job')->helperText("default: job"),
             ]);
     }
 
@@ -56,12 +57,8 @@ class TypeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('type'),
+                TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('slug')->sortable(),
             ])
             ->filters([
                 //
@@ -89,9 +86,9 @@ class TypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTypes::route('/'),
-            'create' => Pages\CreateType::route('/create'),
-            'edit' => Pages\EditType::route('/{record}/edit'),
+            'index' => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
 }

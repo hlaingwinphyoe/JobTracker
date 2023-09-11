@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EmployeeResource\Pages;
-use App\Filament\Resources\EmployeeResource\RelationManagers;
-use App\Models\Employee;
+use App\Filament\Resources\JobPostResource\Pages;
+use App\Filament\Resources\JobPostResource\RelationManagers;
+use App\Models\JobPost;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,29 +13,19 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class EmployeeResource extends Resource
+class JobPostResource extends Resource
 {
-    protected static ?string $model = Employee::class;
+    protected static ?string $model = JobPost::class;
 
-    protected static ?string $navigationIcon = 'fas-users';
+    protected static ?string $navigationIcon = 'fas-briefcase';
 
-    protected static ?string $navigationGroup = 'Resource Settings';
-
-    // protected static ?int $navigationSort = 3;
+    protected static ?string $navigationGroup = 'Jobs Settings';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                ->required()
-                ->maxLength(255),
-
-                Forms\Components\TextInput::make('phone')
-                ->required()
-                ->unique(),
-
-                Forms\Components\TextInput::make('email'),
+                //
             ]);
     }
 
@@ -43,11 +33,7 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
-                ->searchable(),
-                Tables\Columns\TextColumn::make('email'),
+                //
             ])
             ->filters([
                 //
@@ -75,9 +61,9 @@ class EmployeeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEmployees::route('/'),
-            'create' => Pages\CreateEmployee::route('/create'),
-            'edit' => Pages\EditEmployee::route('/{record}/edit'),
+            'index' => Pages\ListJobPosts::route('/'),
+            'create' => Pages\CreateJobPost::route('/create'),
+            'edit' => Pages\EditJobPost::route('/{record}/edit'),
         ];
     }    
 }

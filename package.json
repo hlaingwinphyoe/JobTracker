@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@jridgewell/sourcemap-codec": "^1.4.15",
+        "@vitejs/plugin-vue": "^4.3.4",
         "bootstrap": "^5.3.1",
         "vue": "^3.2.36"
     }

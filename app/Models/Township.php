@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Township extends Model
 {
@@ -13,12 +15,12 @@ class Township extends Model
 
     protected $guarded = [];
 
-    public function region()
+    public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class, 'region_id');
     }
 
-    public function addresses()
+    public function addresses(): HasMany
     {
         return $this->hasMany(Address::class, 'township_id', 'id');
     }
