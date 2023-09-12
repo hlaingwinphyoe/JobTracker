@@ -24,4 +24,9 @@ class Region extends Model
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
+
+    public function job_post(): HasMany
+    {
+        return $this->hasMany(JobPost::class);
+    }
 }

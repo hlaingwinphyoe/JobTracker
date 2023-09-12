@@ -24,8 +24,10 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('name');
-            $table->foreignId('country_id');
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('mm_name')->nullable();
+            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
+            $table->text('desc')->nullable();
+            $table->boolean('disabled')->default(0);
         });
 
 

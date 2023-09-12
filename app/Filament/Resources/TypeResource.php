@@ -44,6 +44,7 @@ class TypeResource extends Resource
                     ->afterStateUpdated(function (callable $set) {
                         $set('slug_change', true);
                     })
+                    ->live(debounce: 1000)
                     ->required(),
                 Hidden::make('slug_change')
                     ->default(false)

@@ -4,11 +4,22 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\JobPostResource\Pages;
 use App\Filament\Resources\JobPostResource\RelationManagers;
+use App\Models\Category;
 use App\Models\JobPost;
+use App\Models\Region;
+use App\Models\Status;
+use App\Models\Type;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -25,7 +36,55 @@ class JobPostResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('title')->required()->columnSpanFull(),
+                Grid::make([
+                    'default' => 1,
+                    'sm' => 2,
+                    'md' => 3,
+                    'lg' => 4,
+                    '2xl' => 8,
+                ])
+                    ->schema([
+                        Select::make('category_id')
+                            ->label('Category')
+                            ->placeholder('Choose Cateogry')
+                            ->options(Category::all()->pluck('name', 'id'))
+                            ->searchable()
+                            ->required(),
+                        Select::make('type_id')
+                            ->label('Type')
+                            ->placeholder('Choose Type')
+                            ->options(Type::all()->pluck('name', 'id'))
+                            ->native(false)
+                            ->required(),
+                        Select::make('region_id')
+                            ->label('Region')
+                            ->placeholder('Choose Region')
+                            ->options(Region::all()->pluck('name', 'id'))
+                            ->searchable()
+                            ->required(),
+                        Select::make('status_id')
+                            ->label('Status')
+                            ->placeholder('Choose Status')
+                            ->options(Status::where('type', 'status')->pluck('title', 'id'))
+                            ->default(7)
+                            ->native(false)
+                            ->required(),
+
+                    ]),
+                TextInput::make('salary')
+                    ->placeholder('eg: nego')
+                    ->prefix("$")
+                    ->required(),
+                DateTimePicker::make('deadline_date')
+                    ->placeholder("dd/mm/yyyy")
+                    ->native(false)
+                    ->seconds(false)
+                    ->timezone("Asia/Yangon")
+                    ->required(),
+                MarkdownEditor::make('desc')
+                    ->label('Job Description')
+                    ->columnSpanFull()
             ]);
     }
 
@@ -33,10 +92,33 @@ class JobPostResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id')->label("No.")->sortable(),
+                TextColumn::make('title')->searchable(),
+                TextColumn::make("salary")->sortable(),
+                TextColumn::make("type.name"),
+                TextColumn::make("category.name"),
+                TextColumn::make("status.title"),
+                TextColumn::make("region.name"),
+                TextColumn::make("created_at")->label("Published")->since()
             ])
             ->filters([
-                //
+                SelectFilter::make("type_id")
+                    ->label("Type")
+                    ->multiple()
+                    ->native(false)
+                    ->options(Type::all()->pluck('name', 'id')),
+                SelectFilter::make("category_id")
+                    ->label("Category")
+                    ->native(false)
+                    ->options(Category::all()->pluck('name', 'id')),
+                SelectFilter::make("region_id")
+                    ->label("Region")
+                    ->native(false)
+                    ->options(Region::all()->pluck('name', 'id')),
+                SelectFilter::make("status_id")
+                    ->label("Status")
+                    ->native(false)
+                    ->options(Status::where('type', 'status')->pluck('title', 'id'))
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -50,14 +132,14 @@ class JobPostResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -65,5 +147,5 @@ class JobPostResource extends Resource
             'create' => Pages\CreateJobPost::route('/create'),
             'edit' => Pages\EditJobPost::route('/{record}/edit'),
         ];
-    }    
+    }
 }
