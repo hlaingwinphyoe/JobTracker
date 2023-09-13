@@ -12,4 +12,9 @@ class Employee extends Model
     protected $table = 'employees';
 
     protected $guarded = [];
+
+    public function medias()
+    {
+        return $this->morphToMany(Media::class, 'mediabble');
+    }
 }
