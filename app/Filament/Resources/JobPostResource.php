@@ -11,6 +11,7 @@ use App\Models\Status;
 use App\Models\Type;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Select;
@@ -82,9 +83,26 @@ class JobPostResource extends Resource
                     ->seconds(false)
                     ->timezone("Asia/Yangon")
                     ->required(),
+                // FileUpload::make('image')
+                //     ->image()
+                //     ->imageEditor()
+                //     ->maxSize(1024)
+                //     ->relationship(),
                 MarkdownEditor::make('desc')
                     ->label('Job Description')
-                    ->columnSpanFull()
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
             ]);
     }
 
