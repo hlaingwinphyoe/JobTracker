@@ -11,6 +11,9 @@
         <!-- Latest Job Section -->
         @include('pages.latestJobs')
 
+        <!-- Know About User -->
+        <employer></employer>
+
         <!-- Footer Section -->
         @include('pages.footer')
     </main>

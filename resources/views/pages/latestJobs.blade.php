@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-12">
-                <h1 class="text-2xl fw-bold my-2">Latest Jobs</h1>
+                <h1 class="display-4 fw-bold my-2">Latest Jobs</h1>
                 {{-- <div class="d-flex align-items-center justify-content-between">
                     <p class="text-secondary">Find the type of work you need, clearly defined and ready to start.</p>
                     <button class="btn btn-primary">
@@ -50,7 +50,8 @@
                                         </div>
                                     </div>
                                     <article class="my-3">
-                                        <a href="#" class="h6 text-decoration-none d-block fw-bold">Senior Full Stack
+                                        <a href="#" class="h6 text-decoration-none d-block fw-bold">Senior Full
+                                            Stack
                                             Engineer</a>
                                         <small class="text-secondary me-3">
                                             <i class="fa-regular fa-clock"></i>

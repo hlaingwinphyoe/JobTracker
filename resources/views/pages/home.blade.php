@@ -1,11 +1,11 @@
 <section class="home vh-100 overflow-hidden bg-white">
-    {{-- @for ($i = 1; $i <= 10; $i++)
+    @for ($i = 1; $i <= 10; $i++)
         <div class="circle"></div>
-    @endfor --}}
+    @endfor
     <div class="container-fluid home-container">
         <div class="row g-5 align-items-center">
             <div class="col-md-6">
-                <p class="text-xl text-uppercase">
+                <p class="h-4 text-uppercase">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="icon icon-tabler icon-tabler-circle-dotted d-inline-flex align-items-center mb-1"
                         width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -26,7 +26,7 @@
                     </svg>
                     Best Job Place
                 </p>
-                <h1 class="text-wrap text-3xl fw-bold">The Easiest Way to Get Your New Job</h1>
+                <h1 class="text-wrap display-1 fw-bold">The Easiest Way to Get Your New Job</h1>
                 <h4 class="my-4 text-secondary">Find your dream job today!</h4>
                 <div class="card border-0 bg-white rounded-4 shadow">
                     <div class="card-body">

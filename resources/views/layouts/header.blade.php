@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 bg-opacity-75" style="z-index: 9999;backdrop-filter: blur(9px)">
+<nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 bg-opacity-75"
+    style="z-index: 9999;backdrop-filter: blur(9px)">
     <div class="container p-2">
         <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -19,7 +20,6 @@
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </div>

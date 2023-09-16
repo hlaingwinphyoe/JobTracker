@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-12">
-                <h1 class="text-2xl fw-bold my-2">Browse Category</h1>
+                <h1 class="display-4 fw-bold my-2">Browse Category</h1>
                 <div class="d-flex align-items-center justify-content-between">
                     <p class="text-secondary">Find the type of work you need, clearly defined and ready to start.</p>
                     <button class="btn btn-primary">

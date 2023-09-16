@@ -7,26 +7,134 @@ p {
   margin-bottom: 0px !important;
 }
 
-/* font size */
-.text-xl {
-  font-size: 1.25rem;
-}
-
-.text-2xl {
-  font-size: 3.441rem;
-}
-
-.text-3xl {
-  font-size: 5.052rem;
-}
-
 /* btn */
 .btn-primary {
   color: #fff !important;
+}
+
+/* CSS */
+.button-56 {
+  align-items: center;
+  background-color: $primary;
+  border: 2px solid $primary;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-56:after {
+  background-color: #f1e3e3;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform 0.2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
+}
+
+/* Home Button */
+
+.button {
+  --background: #07a4b5;
+  --text: #fff;
+  --font-size: 16px;
+  --duration: 0.32s;
+  --move-hover: -4px;
+  --shadow: 0 2px 8px -1px #{rgba(#07a4b5, 0.04)};
+  --shadow-hover: 0 4px 20px -2px #{rgba(#07a4b5, 0.12)};
+  --font-shadow: var(--font-size);
+  padding: 13px 32px;
+  font-weight: 500;
+  line-height: var(--font-size);
+  border-radius: 24px;
+  display: block;
+  outline: none;
+  text-decoration: none;
+  font-size: var(--font-size);
+  letter-spacing: 0.5px;
+  background: var(--background);
+  color: var(--text);
+  border: none;
+  box-shadow: var(--shadow);
+  transform: translateY(var(--y)) translateZ(0);
+  transition: transform var(--duration) ease, box-shadow var(--duration) ease;
+  div {
+    display: flex;
+    overflow: hidden;
+    text-shadow: 0 var(--font-shadow) 0 var(--text);
+    span {
+      display: block;
+      backface-visibility: hidden;
+      // font-style: normal;
+      transition: transform var(--duration) ease;
+      transform: translateY(var(--m)) translateZ(0);
+      $i: 1;
+      @while $i < 12 {
+        &:nth-child(#{$i}) {
+          transition-delay: $i / 20 + s;
+        }
+        $i: $i + 1;
+      }
+    }
+  }
+  &:hover {
+    --y: var(--move-hover);
+    --shadow: var(--shadow-hover);
+    span {
+      --m: calc(var(--font-size) * -1);
+    }
+  }
 }
 
 /* form input  */
 .form-control,
 .form-select {
   background: transparent !important;
+}
+
+.job-image {
+  height: 30rem;
+  border-radius: 9.5rem 3px;
+}
+
+.modal {
+  z-index: 9999 !important;
 }
