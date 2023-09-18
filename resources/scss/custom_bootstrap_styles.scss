@@ -7,104 +7,45 @@ p {
   margin-bottom: 0px !important;
 }
 
+.line-clamp {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 /* btn */
 .btn-primary {
   color: #fff !important;
 }
 
-/* CSS */
-.button-56 {
-  align-items: center;
-  background-color: $primary;
-  border: 2px solid $primary;
-  border-radius: 8px;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: flex;
-  font-family: Inter, sans-serif;
-  font-size: 16px;
-  height: 48px;
-  justify-content: center;
-  line-height: 24px;
-  max-width: 100%;
-  padding: 0 25px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-56:after {
-  background-color: #f1e3e3;
-  border-radius: 8px;
-  content: "";
-  display: block;
-  height: 48px;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  top: -2px;
-  transform: translate(8px, 8px);
-  transition: transform 0.2s ease-out;
-  z-index: -1;
-}
-
-.button-56:hover:after {
-  transform: translate(0, 0);
-}
-
-.button-56:active {
-  background-color: #ffdeda;
-  outline: 0;
-}
-
-.button-56:hover {
-  outline: 0;
-}
-
-@media (min-width: 768px) {
-  .button-56 {
-    padding: 0 40px;
-  }
-}
-
 /* Home Button */
 
 .button {
-  --background: #07a4b5;
-  --text: #fff;
-  --font-size: 16px;
-  --duration: 0.32s;
-  --move-hover: -4px;
-  --shadow: 0 2px 8px -1px #{rgba(#07a4b5, 0.04)};
-  --shadow-hover: 0 4px 20px -2px #{rgba(#07a4b5, 0.12)};
-  --font-shadow: var(--font-size);
   padding: 13px 32px;
   font-weight: 500;
-  line-height: var(--font-size);
+  line-height: 16px;
   border-radius: 24px;
   display: block;
   outline: none;
   text-decoration: none;
-  font-size: var(--font-size);
+  font-size: 16px;
   letter-spacing: 0.5px;
-  background: var(--background);
-  color: var(--text);
+  background: $primary;
+  color: #fff;
   border: none;
-  box-shadow: var(--shadow);
+  box-shadow: 0 2px 8px -1px #{rgba($primary, 0.04)};
   transform: translateY(var(--y)) translateZ(0);
-  transition: transform var(--duration) ease, box-shadow var(--duration) ease;
+  transition: transform 0.32s ease, box-shadow 0.32s ease;
   div {
     display: flex;
     overflow: hidden;
-    text-shadow: 0 var(--font-shadow) 0 var(--text);
+    text-shadow: 0 16px 0 #fff;
     span {
       display: block;
       backface-visibility: hidden;
       // font-style: normal;
-      transition: transform var(--duration) ease;
+      transition: transform 0.32s ease;
       transform: translateY(var(--m)) translateZ(0);
       $i: 1;
       @while $i < 12 {
@@ -116,10 +57,10 @@ p {
     }
   }
   &:hover {
-    --y: var(--move-hover);
-    --shadow: var(--shadow-hover);
+    --y: -4px;
+    --shadow: 0 4px 20px -2px #{rgba(#07a4b5, 0.12)};
     span {
-      --m: calc(var(--font-size) * -1);
+      --m: calc(16px * -1);
     }
   }
 }
@@ -130,11 +71,111 @@ p {
   background: transparent !important;
 }
 
-.job-image {
-  height: 30rem;
-  border-radius: 9.5rem 3px;
+.search-job-input:focus {
+  box-shadow: none !important;
 }
 
 .modal {
   z-index: 9999 !important;
+}
+
+/* job card */
+
+.job_card {
+  position: relative;
+  display: block;
+  // height: 100%;
+  height: 20em;
+  border-radius: calc(40 * 1px);
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.job_type {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+}
+
+.card__image {
+  width: 100%;
+  height: auto;
+  // height: 19em;
+}
+
+.card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  border-radius: calc(40 * 1px);
+  background-color: #fff;
+  transform: translateY(100%);
+  transition: 0.2s ease-in-out;
+}
+
+.job_card:hover .card__overlay {
+  transform: translateY(0);
+}
+
+.card__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 1em;
+  border-radius: calc(40 * 1px) 0 0 0;
+  background-color: #fff;
+  transform: translateY(-100%);
+  transition: 0.2s ease-in-out;
+}
+
+.card__arc {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  z-index: 1;
+}
+
+.card__arc path {
+  fill: #fff;
+  d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");
+}
+
+.job_card:hover .card__header {
+  transform: translateY(0);
+}
+
+.card__thumb {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.card__title {
+  font-size: 1em;
+  margin: 0 0 0.3em;
+  color: #6a515e;
+}
+
+.card__tagline {
+  display: block;
+  margin: 0.2em 0;
+  font-size: 0.9em;
+  color: $primary;
+}
+
+.card__status {
+  font-size: 0.8em;
+  color: #d7bdca;
+}
+
+.card__description {
+  padding: 0 2em 2em;
+  margin: 0;
+  color: #d7bdca;
 }

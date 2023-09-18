@@ -49,25 +49,40 @@ class JobPostResource extends Resource
                         Select::make('category_id')
                             ->label('Category')
                             ->placeholder('Choose Cateogry')
-                            ->options(Category::all()->pluck('name', 'id'))
+                            ->relationship(
+                                name: "category",
+                                titleAttribute: "name"
+                            )
+                            ->preload()
                             ->searchable()
                             ->required(),
                         Select::make('type_id')
                             ->label('Type')
                             ->placeholder('Choose Type')
-                            ->options(Type::all()->pluck('name', 'id'))
+                            ->relationship(
+                                name: "type",
+                                titleAttribute: "name"
+                            )
                             ->native(false)
                             ->required(),
                         Select::make('region_id')
                             ->label('Region')
                             ->placeholder('Choose Region')
-                            ->options(Region::all()->pluck('name', 'id'))
+                            ->relationship(
+                                name: "region",
+                                titleAttribute: "name",
+                            )
+                            ->preload()
                             ->searchable()
                             ->required(),
                         Select::make('status_id')
                             ->label('Status')
                             ->placeholder('Choose Status')
-                            ->options(Status::where('type', 'status')->pluck('title', 'id'))
+                            ->relationship(
+                                name: "status",
+                                titleAttribute: "title",
+                                modifyQueryUsing: fn (Builder $query) => $query->where('type', 'status')
+                            )
                             ->default(7)
                             ->native(false)
                             ->required(),
@@ -75,7 +90,7 @@ class JobPostResource extends Resource
                     ]),
                 TextInput::make('salary')
                     ->placeholder('eg: nego')
-                    ->prefix("$")
+                    ->postfix("lakhs")
                     ->required(),
                 DateTimePicker::make('deadline_date')
                     ->placeholder("dd/mm/yyyy")

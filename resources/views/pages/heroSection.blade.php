@@ -24,26 +24,30 @@
             </p>
             <h1 class="text-wrap display-1 fw-bold">The Easiest Way to Get Your New Job</h1>
             <h4 class="my-4 text-secondary">Find your dream job today!</h4>
-            <div class="card border-0 bg-white rounded-4 shadow">
+            <div class="card border-0 bg-white shadow-sm rounded-5">
                 <div class="card-body">
-                    <div class="row align-items-center justify-content-center g-4">
-                        <div class="col">
-                            <input type="text" class="form-control py-2" placeholder="Job Title"
-                                aria-label="First name">
+                    <div class="d-flex align-items-center">
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </span>
+                            <input type="text" class="form-control border-0 search-job-input"
+                                placeholder="Job Title">
                         </div>
+                        <div class="vr mx-1"></div>
 
-                        <div class="col">
-                            <select class="form-select py-2" aria-label="Large select example">
-                                <option selected>Select Location</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
+                                <i class="fa-solid fa-earth-asia"></i>
+                            </span>
+                            <select class="form-select border-0 search-job-input">
+                                <option selected>Location</option>
+                                @foreach ($regions as $region)
+                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                @endforeach
                             </select>
                         </div>
-
-                        <div class="col">
-                            <button class="button">Find Now</button>
-                        </div>
+                        <button class="button">Find Now</button>
                     </div>
                 </div>
             </div>
