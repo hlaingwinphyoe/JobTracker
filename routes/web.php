@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Page\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-});
+Route::get('/', [HomeController::class,'index'])->name('home.index');
+
+Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');

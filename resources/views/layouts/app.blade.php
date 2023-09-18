@@ -14,13 +14,16 @@
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 @yield('style')
+
 <body>
     <div id="job-app">
         <!-- Header Content -->
         @include('layouts.header')
 
         <!-- Main Content -->
-        @yield('content')
+        <main class="py-4 overflow-hidden">
+            @yield('content')
+        </main>
     </div>
 
     {{-- @if (session('logout'))
