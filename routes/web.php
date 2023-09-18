@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Page\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index'])->name('home.index');
+
+Route::get('/register',[AuthController::class, 'register'])->name('auth.register');
+Route::get('/login',[AuthController::class, 'login'])->name('auth.login');
 
 Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');

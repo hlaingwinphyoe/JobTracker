@@ -19,8 +19,9 @@
                 </li>
             </ul>
             @guest
-                <button class="btn btn-outline-primary me-2">Login</button>
-                <button class="btn btn-primary">Join Now</button>
+                <a href="{{ route('auth.login') }}" class="btn btn-outline-primary me-2">Login</a>
+                <a href="{{ route('auth.register') }}" class="btn btn-primary">Join Now</a>
+
             @endguest
             @auth
                 <a href="{{ url('/admin') }}" class="btn btn-dark">Dashboard</a>

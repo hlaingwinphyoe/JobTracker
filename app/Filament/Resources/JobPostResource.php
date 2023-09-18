@@ -49,29 +49,20 @@ class JobPostResource extends Resource
                         Select::make('category_id')
                             ->label('Category')
                             ->placeholder('Choose Cateogry')
-                            ->relationship(
-                                name: "category",
-                                titleAttribute: "name"
-                            )
+                            ->relationship("category","name")
                             ->preload()
                             ->searchable()
                             ->required(),
                         Select::make('type_id')
                             ->label('Type')
                             ->placeholder('Choose Type')
-                            ->relationship(
-                                name: "type",
-                                titleAttribute: "name"
-                            )
+                            ->relationship("type","name")
                             ->native(false)
                             ->required(),
                         Select::make('region_id')
                             ->label('Region')
                             ->placeholder('Choose Region')
-                            ->relationship(
-                                name: "region",
-                                titleAttribute: "name",
-                            )
+                            ->relationship("region","name")
                             ->preload()
                             ->searchable()
                             ->required(),
@@ -90,7 +81,7 @@ class JobPostResource extends Resource
                     ]),
                 TextInput::make('salary')
                     ->placeholder('eg: nego')
-                    ->postfix("lakhs")
+                    ->suffix("lakhs")
                     ->required(),
                 DateTimePicker::make('deadline_date')
                     ->placeholder("dd/mm/yyyy")
