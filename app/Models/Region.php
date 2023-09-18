@@ -29,4 +29,9 @@ class Region extends Model
     {
         return $this->hasMany(JobPost::class);
     }
+
+    public function employers(): HasMany
+    {
+        return $this->hasMany(Employer::class, 'region_id', 'id');
+    }
 }

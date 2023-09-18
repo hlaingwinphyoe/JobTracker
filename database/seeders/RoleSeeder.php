@@ -14,10 +14,10 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = Role::create(['slug' => 'admin','name' => 'Admin']);
-        $developer = Role::create(['slug' => 'developer', 'name' => 'Developer']);
+        $admin = Role::create(['name' => 'Admin']);
+        $developer = Role::create(['name' => 'Developer']);
 
-        $employer = Role::create(['slug' => 'employer','name' => 'Employer']);
+        $employer = Role::create(['name' => 'Employer']);
 
 
         $admin->syncPermissions(Permission::all());
