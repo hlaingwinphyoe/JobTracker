@@ -2,7 +2,7 @@
   <a href="javascript:void(0)" class="job_card">
     <div class="job_type">
       <small
-        class="py-1 px-2 fw-semibold text-success-emphasis bg-warning-subtle border border-warning-subtle rounded-2"
+        class="badge fw-semibold text-success-emphasis bg-warning-subtle border border-warning-subtle rounded-2"
         >Full Time</small
       >
     </div>

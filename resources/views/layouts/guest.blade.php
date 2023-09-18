@@ -16,21 +16,9 @@
 @yield('style')
 
 <body>
-    <div id="job-app">
-        <!-- Header Content -->
-        @include('layouts.header')
-
-        <!-- Main Content -->
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-
-    {{-- @if (session('logout'))
-    <script type="module">
-        Swal.fire('{{ session('logout') }}')
-    </script>
-@endif --}}
+    <main class="py-4 overflow-hidden">
+        @yield('content')
+    </main>
 </body>
 
 </html>
