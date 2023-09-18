@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
+
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasSuperAdmin;
 
     /**
      * The attributes that are mass assignable.
@@ -51,4 +54,31 @@ class User extends Authenticatable
     // {
     //     return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
     // }
+
+    public function scopeNotAdmin($query)
+    {
+        $query->whereHas('roles', function ($q) {
+            $q->whereNotIn('slug', ['admin','developer']);
+        });
+    }
+
+    public function scopeAdmin($query)
+    {
+        $query->whereHas('roles', function ($q) {
+            $q->whereIn('slug', ['admin','developer']);
+        });
+    }
+
+    public function scopeFilterOn($query)
+    {
+        if (request('q')) {
+            $query->where('name', 'like', '%' . request('q') . '%');
+        }
+
+        if(request('role')){
+            $query->whereHas('roles',function ($q){
+                $q->where('slug',request('role'));
+            });
+        }
+    }
 }
