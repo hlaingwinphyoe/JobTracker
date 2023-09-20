@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TypeResource extends Resource
 {
     protected static ?string $model = Type::class;
+    // for global search
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationIcon = 'fas-shapes';
 
@@ -35,25 +37,15 @@ class TypeResource extends Resource
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
-                            ->afterStateUpdated(function (callable $get, callable $set, ?string $state) {
-                                if (!$get('slug_change') && filled($state)) {
-                                    $set('slug', Str::slug($state));
-                                }
-                            })
-                            ->reactive()
                             ->required()
-                            ->maxLength(255),
-                        // slug auto fill after text input
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
+
                         TextInput::make('slug')
-                            ->afterStateUpdated(function (callable $set) {
-                                $set('slug_change', true);
-                            })
-                            ->live(debounce: 1000)
-                            ->required(),
-                        Hidden::make('slug_change')
-                            ->default(false)
-                            ->dehydrated(false),
-                        Hidden::make('type')->default('job'),
+                            ->disabled()
+                            ->dehydrated()
+                            ->required()
+                            ->unique(Post::class, 'slug', ignoreRecord: true),
                     ]),
             ]);
     }

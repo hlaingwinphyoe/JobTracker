@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('salary')->nullable();
-            $table->date('deadline_date');
+            // $table->date('deadline_date');
             $table->text('desc')->nullable();
             $table->binary('image')->nullable();
             $table->foreignId('type_id')->constrained()->cascadeOnDelete();

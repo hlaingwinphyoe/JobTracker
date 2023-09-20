@@ -9,7 +9,9 @@ use App\Models\JobPost;
 use App\Models\Region;
 use App\Models\Status;
 use App\Models\Type;
+use Carbon\Carbon;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
@@ -30,12 +32,15 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class JobPostResource extends Resource
@@ -59,7 +64,25 @@ class JobPostResource extends Resource
                         'md' => 2,
                     ])
                     ->schema([
-                        TextInput::make('title')->required()->columnSpanFull(),
+                        TextInput::make('title')
+                            ->required()
+                            ->placeholder('eg. Senior Engineer')
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null)
+                            ->columnSpanFull(),
+
+                        TextInput::make('slug')
+                            ->disabled()
+                            ->dehydrated()
+                            ->required()
+                            ->unique(Post::class, 'slug', ignoreRecord: true),
+                        Select::make('region_id')
+                            ->label('Region')
+                            ->placeholder('Choose Region')
+                            ->relationship("region", "name")
+                            ->preload()
+                            ->searchable()
+                            ->required(),
                         Select::make('category_id')
                             ->label('Category')
                             ->placeholder('Choose Cateogry')
@@ -73,16 +96,14 @@ class JobPostResource extends Resource
                             ->relationship("type", "name")
                             ->native(false)
                             ->required(),
+                        TextInput::make('salary')
+                            ->placeholder('eg: 50, 100, nego...')
+                            ->suffix("lakhs")
+                            ->required()
+                            ->columnSpanFull(),
                     ])->columnSpan(1),
                 Section::make("Job Status")
                     ->schema([
-                        Select::make('region_id')
-                            ->label('Region')
-                            ->placeholder('Choose Region')
-                            ->relationship("region", "name")
-                            ->preload()
-                            ->searchable()
-                            ->required(),
                         Select::make('status_id')
                             ->label('Status')
                             ->placeholder('Choose Status')
@@ -98,16 +119,13 @@ class JobPostResource extends Resource
                 Section::make("Job Description")
                     ->columns(2)
                     ->schema([
-                        TextInput::make('salary')
-                            ->placeholder('eg: nego')
-                            ->suffix("lakhs")
-                            ->required(),
-                        DateTimePicker::make('deadline_date')
-                            ->placeholder("dd/mm/yyyy")
-                            ->native(false)
-                            ->seconds(false)
-                            ->timezone("Asia/Yangon")
-                            ->required(),
+
+                        // DateTimePicker::make('deadline_date')
+                        //     ->placeholder("dd/mm/yyyy")
+                        //     ->native(false)
+                        //     ->seconds(false)
+                        //     ->timezone("Asia/Yangon")
+                        //     ->required(),
                         MarkdownEditor::make('desc')
                             ->label('Job Description')
                             ->toolbarButtons([
@@ -140,19 +158,20 @@ class JobPostResource extends Resource
                 TextColumn::make('id')->label("No.")->sortable(),
                 ImageColumn::make('image')
                     ->label('Image'),
-                TextColumn::make('title')->searchable(),
+                TextColumn::make('title')->searchable()->sortable(),
                 TextColumn::make("salary")->suffix('Lakhs')->sortable(),
-                TextColumn::make("type.name"),
-                TextColumn::make("category.name"),
+                TextColumn::make("type.name")->badge()->toggleable(),
+                TextColumn::make("category.name")->toggleable(),
+                // ToggleColumn::make('status.title'),
+                TextColumn::make("region.name")->toggleable(),
+                TextColumn::make("user.name")->toggleable(),
                 TextColumn::make('status.title')
+                    ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Available' => 'success',
                         'Closed' => 'danger',
-                    }),
-                // ToggleColumn::make('status.title'),
-                TextColumn::make("region.name"),
-                TextColumn::make("user.name"),
-                TextColumn::make("created_at")->label("Published")->since(),
+                    })->toggleable(),
+                TextColumn::make("created_at")->label("Published")->since()->sortable(),
             ])
             ->filters([
                 SelectFilter::make("type_id")
@@ -180,8 +199,36 @@ class JobPostResource extends Resource
                         name: "status",
                         titleAttribute: "title",
                         modifyQueryUsing: fn (Builder $query) => $query->where('type', 'status')
-                    )->preload()
-            ])
+                    )->preload(),
+                Filter::make('created_at')
+                    ->form([
+                        DatePicker::make('from')
+                            ->label('Start Date')
+                            ->native(false)
+                            ->placeholder('dd/mm/yyyy'),
+                        DatePicker::make('until')
+                            ->label('End Date')
+                            ->native(false)
+                            ->placeholder('dd/mm/yyyy'),
+                    ])
+                    ->indicateUsing(function (array $data): array {
+                        $indicators = [];
+
+                        if ($data['from'] ?? null) {
+                            $indicators['from'] = 'Created from ' . Carbon::parse($data['from'])->toFormattedDateString();
+                        }
+
+                        if ($data['until'] ?? null) {
+                            $indicators['until'] = 'Created until ' . Carbon::parse($data['until'])->toFormattedDateString();
+                        }
+
+                        return $indicators;
+                    })
+            ])->filtersTriggerAction(
+                fn (Action $action) => $action
+                    ->button()
+                    ->label('Filter'),
+            )
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),

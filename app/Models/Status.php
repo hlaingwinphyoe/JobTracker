@@ -16,4 +16,10 @@ class Status extends Model
     {
         return $this->hasMany(JobPost::class);
     }
+
+    // scope
+    public function scopeIsType($query, $type)
+    {
+        $query->where('type',$type);
+    }
 }

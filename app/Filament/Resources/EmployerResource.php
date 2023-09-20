@@ -36,14 +36,14 @@ class EmployerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                ->searchable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
-                ->searchable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('company_name')
-                ->searchable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('company_type')
-                ->searchable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('region.name'),
             ])
             ->filters([
@@ -61,13 +61,13 @@ class EmployerResource extends Resource
                 Tables\Actions\CreateAction::make()->disabled(),
             ]);
     }
-    
+
     public static function canCreate(): bool
     {
         return false;
     }
 
-    
+
     public static function getRelations(): array
     {
         return [
@@ -75,11 +75,6 @@ class EmployerResource extends Resource
         ];
     }
 
-    public static function canCreate(): bool
-   {
-      return false;
-   }
-    
     public static function getPages(): array
     {
         return [
@@ -87,5 +82,5 @@ class EmployerResource extends Resource
             // 'create' => Pages\CreateEmployer::route('/create'),
             'edit' => Pages\EditEmployer::route('/{record}/edit'),
         ];
-    }    
+    }
 }
