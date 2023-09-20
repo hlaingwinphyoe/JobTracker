@@ -16,9 +16,7 @@
 @yield('style')
 
 <body>
-    <main class="py-4 overflow-hidden">
-        @yield('content')
-    </main>
+    @yield('content')
 </body>
 
 </html>

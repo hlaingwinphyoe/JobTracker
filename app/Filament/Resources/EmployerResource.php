@@ -68,6 +68,11 @@ class EmployerResource extends Resource
             // RelationManagers\PostsRelationManager::class,
         ];
     }
+
+    public static function canCreate(): bool
+   {
+      return false;
+   }
     
     public static function getPages(): array
     {

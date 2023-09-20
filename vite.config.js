@@ -4,13 +4,15 @@ import vue from "@vitejs/plugin-vue";
 import path from "path";
 
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      external: [/^node:.*/],
-    },
-  },
   plugins: [
-    vue(),
+    vue({
+      // For npm run build <img src="/images/logo.png"> will not work without the code below
+      template: {
+        transformAssetUrls: {
+          includeAbsolute: false,
+        },
+      },
+    }),
     laravel({
       input: ["resources/scss/app.scss", "resources/js/app.js"],
       refresh: [...refreshPaths, "app/Livewire/**"],

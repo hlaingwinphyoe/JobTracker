@@ -8,6 +8,7 @@ use App\Models\Category;
 use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -32,24 +33,28 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->afterStateUpdated(function (callable $get, callable $set, ?string $state) {
-                        if (!$get('slug_change') && filled($state)) {
-                            $set('slug', Str::slug($state));
-                        }
-                    })
-                    ->reactive()
-                    ->required()
-                    ->maxLength(255),
-                // slug auto fill after text input
-                TextInput::make('slug')
-                    ->afterStateUpdated(function (callable $set) {
-                        $set('slug_change', true);
-                    })
-                    ->required(),
-                Hidden::make('slug_change')
-                    ->default(false)
-                    ->dehydrated(false),
+                Section::make()
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('name')
+                            ->afterStateUpdated(function (callable $get, callable $set, ?string $state) {
+                                if (!$get('slug_change') && filled($state)) {
+                                    $set('slug', Str::slug($state));
+                                }
+                            })
+                            ->reactive()
+                            ->required()
+                            ->maxLength(255),
+                        // slug auto fill after text input
+                        TextInput::make('slug')
+                            ->afterStateUpdated(function (callable $set) {
+                                $set('slug_change', true);
+                            })
+                            ->required(),
+                        Hidden::make('slug_change')
+                            ->default(false)
+                            ->dehydrated(false),
+                    ])
             ]);
     }
 

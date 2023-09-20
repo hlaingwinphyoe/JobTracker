@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Employee extends Model
 {
@@ -13,7 +14,7 @@ class Employee extends Model
 
     protected $guarded = [];
 
-    public function medias()
+    public function medias(): MorphToMany
     {
         return $this->morphToMany(Media::class, 'mediabble');
     }

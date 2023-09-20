@@ -15,7 +15,7 @@
                 style="right: 30px; top: 30px"
                 @click="closeModal"
               ></button>
-              <!-- <img src="logo.png" class="logo d-block mx-auto" alt="" /> -->
+              <img src="logo.png" class="logo d-block mx-auto" alt="" />
               <h4 class="text-center text-primary fw-bold text-uppercase">
                 Welcome! Log In
               </h4>
@@ -167,11 +167,11 @@
             class="col-5 bg-primary shadow-lg"
             style="border-radius: 0 3em 3em 0"
           >
-            <!-- <img
+            <img
               src="images/employer_sign_up.svg"
               class="h-100 w-100"
               alt=""
-            /> -->
+            />
           </div>
         </div>
       </div>

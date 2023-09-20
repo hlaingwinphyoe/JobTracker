@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('name');
             $table->string('mm_name')->nullable();
-            $table->text('desc')->nullable();
             $table->boolean('disabled')->default(0);
+            $table->timestamps();
         });
 
         Schema::create('regions', function (Blueprint $table) {
@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('mm_name')->nullable();
             $table->foreignId('country_id')->constrained()->cascadeOnDelete();
-            $table->text('desc')->nullable();
             $table->boolean('disabled')->default(0);
+            $table->timestamps();
         });
 
 
@@ -35,18 +35,16 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('name');
-            $table->foreignId('region_id');
-
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('region_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
         });
 
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
             $table->string('name');
-            $table->foreignId('township_id');
-
-            $table->foreign('township_id')->references('id')->on('townships')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('township_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
         });
 
         Schema::create('addresses', function (Blueprint $table) {

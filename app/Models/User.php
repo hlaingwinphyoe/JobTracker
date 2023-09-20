@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -55,17 +55,22 @@ class User extends Authenticatable
     //     return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
     // }
 
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(JobPost::class);
+    }
+
     public function scopeNotAdmin($query)
     {
         $query->whereHas('roles', function ($q) {
-            $q->whereNotIn('slug', ['admin','developer']);
+            $q->whereNotIn('slug', ['admin', 'developer']);
         });
     }
 
     public function scopeAdmin($query)
     {
         $query->whereHas('roles', function ($q) {
-            $q->whereIn('slug', ['admin','developer']);
+            $q->whereIn('slug', ['admin', 'developer']);
         });
     }
 
@@ -75,9 +80,9 @@ class User extends Authenticatable
             $query->where('name', 'like', '%' . request('q') . '%');
         }
 
-        if(request('role')){
-            $query->whereHas('roles',function ($q){
-                $q->where('slug',request('role'));
+        if (request('role')) {
+            $query->whereHas('roles', function ($q) {
+                $q->where('slug', request('role'));
             });
         }
     }
