@@ -19,7 +19,11 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             StatusSeeder::class,
+<<<<<<< HEAD
             CategorySeeder::class,
+=======
+            FAQTypeSeeder::class,
+>>>>>>> 9d54b0ccb1e275166ebe5efccfdfca4aa697b891
         ]);
     }
 }

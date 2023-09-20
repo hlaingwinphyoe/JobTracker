@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EmployeeResource\Pages;
 use App\Filament\Resources\EmployeeResource\RelationManagers;
 use App\Models\Employee;
+use App\Models\FAQ;
+use App\Models\FAQType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
