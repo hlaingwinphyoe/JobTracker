@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+// use App\Enums\JobPostStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,11 @@ class JobPost extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    // enum casting
+    // protected $casts = [
+    //     'status' => JobPostStatus::class,
+    // ];
 
     public function type(): BelongsTo
     {
@@ -32,7 +38,8 @@ class JobPost extends Model
         return $this->belongsTo(Status::class);
     }
 
-    public function user() : BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 }

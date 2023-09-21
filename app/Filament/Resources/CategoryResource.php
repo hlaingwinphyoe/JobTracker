@@ -47,7 +47,7 @@ class CategoryResource extends Resource
                             ->disabled()
                             ->dehydrated()
                             ->required()
-                            ->unique(Post::class, 'slug', ignoreRecord: true),
+                            ->unique(Category::class, 'slug', ignoreRecord: true),
                     ])
             ]);
     }

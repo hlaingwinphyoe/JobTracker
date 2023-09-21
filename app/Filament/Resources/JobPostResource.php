@@ -22,6 +22,8 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Infolists\Components\Grid as ComponentsGrid;
 use Filament\Infolists\Components\Group;
 use Filament\Infolists\Components\ImageEntry;
@@ -50,9 +52,16 @@ class JobPostResource extends Resource
     // for global search
     protected static ?string $recordTitleAttribute = 'title';
 
+    protected static int $globalSearchResultsLimit = 3;
+
     protected static ?string $navigationIcon = 'fas-briefcase';
 
     protected static ?string $navigationGroup = 'Jobs Settings';
+
+    // protected static array $statuses = [
+    //     'available' => "Available",
+    //     'closed' => "Closed",
+    // ];
 
     public static function form(Form $form): Form
     {
@@ -68,14 +77,20 @@ class JobPostResource extends Resource
                             ->required()
                             ->placeholder('eg. Senior Engineer')
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null)
+                            ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                                if (($get('slug') ?? '') !== Str::slug($old)) {
+                                    return;
+                                }
+
+                                $set('slug', Str::slug($state));
+                            })
                             ->columnSpanFull(),
 
                         TextInput::make('slug')
                             ->disabled()
                             ->dehydrated()
                             ->required()
-                            ->unique(Post::class, 'slug', ignoreRecord: true),
+                            ->unique(JobPost::class, 'slug', ignoreRecord: true),
                         Select::make('region_id')
                             ->label('Region')
                             ->placeholder('Choose Region')
@@ -167,6 +182,10 @@ class JobPostResource extends Resource
                 TextColumn::make("user.name")->toggleable(),
                 TextColumn::make('status.title')
                     ->badge()
+                    ->icon(fn (string $state): string => match ($state) {
+                        'Available' => 'fas-check-circle',
+                        'Closed' => 'fas-x-mark'
+                    })
                     ->color(fn (string $state): string => match ($state) {
                         'Available' => 'success',
                         'Closed' => 'danger',

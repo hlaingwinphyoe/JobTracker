@@ -45,7 +45,7 @@ class TypeResource extends Resource
                             ->disabled()
                             ->dehydrated()
                             ->required()
-                            ->unique(Post::class, 'slug', ignoreRecord: true),
+                            ->unique(Type::class, 'slug', ignoreRecord: true),
                     ]),
             ]);
     }

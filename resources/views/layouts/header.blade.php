@@ -24,7 +24,34 @@
 
             @endguest
             @auth
-                <a href="{{ url('/admin') }}" class="btn btn-dark">Dashboard</a>
+                <div class="dropdown dropstart">
+                    <img src="https://ui-avatars.com/api/?background=random&length=1&size=35&rounded=true&name={{ auth()->user()->name }}"
+                        class="cursor-pointer" alt="" data-bs-toggle="dropdown">
+                    <ul class="dropdown-menu border-0 shadow rounded-4 py-3 px-2">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('profile.index') }}">
+                                <i class="fa-regular fa-user me-1"></i> Profile
+                            </a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('auth.logout') }}"
+                                onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();
+                         ">
+                                <i class="fa-solid fa-arrow-right text-danger me-1"></i> Log Out
+                            </a>
+
+                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+                @hasanyrole('Developer|Admin|Employer')
+                    <a href="{{ url('/admin') }}" class="btn btn-light ms-1">Dashboard</a>
+                @endhasanyrole
             @endauth
         </div>
     </div>

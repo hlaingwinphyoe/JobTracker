@@ -18,4 +18,11 @@ class Type extends Model
     {
         return $this->hasMany(JobPost::class);
     }
+
+    // scope function
+
+    public function scopeIsType($q, $type)
+    {
+        $q->where('type', $type);
+    }
 }

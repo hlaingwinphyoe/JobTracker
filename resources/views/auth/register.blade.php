@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.auth')
 
 @section('content')
     <div class="container-fluid custom-container-fluid px-0 mx-0">
@@ -26,24 +26,58 @@
                         @csrf
                         <div class="col-12">
                             <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="name" id="name" autocomplete="off"
-                                required />
+                            <input type="text"
+                                class="form-control 
+                                @error('name')
+                                    is-invalid
+                                @enderror"
+                                name="name" id="name" autocomplete="off" required />
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="col-12">
                             <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" name="email" id="email" required />
+                            <input type="email"
+                                class="form-control @error('email')
+                                is-invalid
+                            @enderror"
+                                name="email" id="email" required />
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="col-12">
                             <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
-                            <input type="tel" class="form-control" name="phone" id="phone" required />
+                            <input type="tel"
+                                class="form-control @error('phone')
+                                is-invalid
+                            @enderror"
+                                name="phone" id="phone" required />
+                            @error('phone')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="col-12 position-relative">
                             <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                            <input :type="passwordField" class="form-control" name="password" id="password"
-                                autocomplete="off" required />
+                            <input type="password"
+                                class="form-control @error('password')
+                                is-invalid
+                            @enderror"
+                                name="password" id="password" autocomplete="off" required />
                             <i class="fa-regular fa-eye-slash position-absolute"
                                 style="top: 42px; right: 20px;height: 20px;cursor: pointer;"></i>
-
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="col-12">
                             <div class="form-check">

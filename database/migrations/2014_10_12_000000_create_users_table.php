@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->binary('profile')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('company_type')->nullable();
+            $table->text('desc')->nullable();
+            $table->foreignId('region_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('type_id')->constrained()->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

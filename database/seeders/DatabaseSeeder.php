@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('job_images');
 
         $this->call([
+            TypeSeeder::class,
             CountrySeeder::class,
             RegionSeeder::class,
             PermissionSeeder::class,

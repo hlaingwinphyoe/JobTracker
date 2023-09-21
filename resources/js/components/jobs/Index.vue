@@ -2,7 +2,7 @@
   <section class="container mt-5">
     <div class="row">
       <div class="col-md-4 col-lg-3">
-        <div class="">
+        <div class="position-sticky" style="top: 5.5em;">
           <div class="card border-0 rounded-5 bg-white shadow-sm">
             <div class="card-body p-4">
               <h5 class="fw-bold">Type Of Jobs</h5>

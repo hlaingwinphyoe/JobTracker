@@ -12,8 +12,8 @@
                                     Search your career opportunity over <span class="fw-bold">12,800</span> jobs
                                 </span>
                             </div>
-                            <div class="card mb-3">
-                                <div class="card-body">
+                            <div class="card mb-3 border-0 bg-white shadow-sm rounded-4">
+                                <div class="card-body px-4">
                                     <div class="d-flex align-items-center">
                                         <div class="input-group">
                                             <span class="input-group-text border-0" id="basic-addon1">
