@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
         $developer = Role::create(['name' => 'Developer']);
 
         $employer = Role::create(['name' => 'Employer']);
-        $employee = Role::create(['name','Employee']);
+        $employee = Role::create(['name' => 'Employee']);
 
         $admin->syncPermissions(Permission::all());
         $developer->syncPermissions(Permission::all());
