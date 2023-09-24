@@ -15,13 +15,12 @@
                     <a class="nav-link" href="{{ route('home.jobs') }}">Browse Job</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Employers</a>
+                    <a class="nav-link" href="{{ route('home.employers') }}">Employers</a>
                 </li>
             </ul>
             @guest
                 <a href="{{ route('auth.login') }}" class="btn btn-outline-primary me-2">Login</a>
                 <a href="{{ route('auth.register') }}" class="btn btn-primary">Join Now</a>
-
             @endguest
             @auth
                 <div class="dropdown dropstart">

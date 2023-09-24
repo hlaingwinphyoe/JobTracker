@@ -7,9 +7,9 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-3">
-                                <h1 class="text-uppercase mb-3">Search Jobs</h1>
+                                <h1 class="text-uppercase mb-3">Search Companies</h1>
                                 <span class="text-secondary">
-                                    Search your career opportunity over <span class="fw-bold">12,800</span> jobs
+                                    Search your career opportunity over <span class="fw-bold">12,800</span> Companies
                                 </span>
                             </div>
                             <div class="card mb-3 border-0 bg-white shadow-sm rounded-4">
@@ -17,10 +17,10 @@
                                     <div class="d-flex align-items-center">
                                         <div class="input-group">
                                             <span class="input-group-text border-0" id="basic-addon1">
-                                                <i class="fa-solid fa-briefcase"></i>
+                                                <i class="fa-solid fa-search"></i>
                                             </span>
                                             <input type="text" class="form-control border-0 search-job-input"
-                                                placeholder="Job Title">
+                                                placeholder="Company Name or Employer">
                                         </div>
                                         <div class="vr mx-1"></div>
 
@@ -61,5 +61,5 @@
     </section>
 
     <!-- jobs list -->
-    <job-index :types="{{ $types }}" />
+    <employer-index />
 @endsection

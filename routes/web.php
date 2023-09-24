@@ -31,5 +31,9 @@ Route::post('/login',[AuthController::class,'customLogin'])->name('login.store')
 Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');
 
 
+// Employers
+Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('home.employers');
+
+
 // employee profile
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

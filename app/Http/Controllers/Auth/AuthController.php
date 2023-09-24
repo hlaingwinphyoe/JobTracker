@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -60,11 +61,13 @@ class AuthController extends Controller
         }
 
         Auth::login($user);
+        Session::regenerate();
         return redirect()->route('home.index')->with(['message', 'Login Successfull']);
     }
 
     public function logout()
     {
+        Session::flush();
         Auth::logout();
 
         return redirect()->route('home.index');

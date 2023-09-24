@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             StatusSeeder::class,
             FAQTypeSeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }

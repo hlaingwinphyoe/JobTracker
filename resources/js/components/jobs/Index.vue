@@ -2,8 +2,8 @@
   <section class="container mt-5">
     <div class="row">
       <div class="col-md-4 col-lg-3">
-        <div class="position-sticky" style="top: 5.5em;">
-          <div class="card border-0 rounded-5 bg-white shadow-sm">
+        <div class="position-sticky" style="top: 5.5em">
+          <div class="card border-0 rounded-5 bg-primary-light shadow-sm">
             <div class="card-body p-4">
               <h5 class="fw-bold">Type Of Jobs</h5>
               <div class="my-3">
@@ -98,7 +98,9 @@
               <option value="desc">Newest Jobs</option>
               <option value="asc">Oldest Jobs</option>
             </select>
-            <button class="btn btn-danger text-nowrap"><i class="fa-solid fa-rotate"></i> Reset</button>
+            <button class="btn btn-danger text-nowrap">
+              <i class="fa-solid fa-rotate"></i> Reset
+            </button>
           </div>
         </div>
         <div class="row gy-4 mt-2">
@@ -120,11 +122,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 10px;
-}
-</style>

@@ -1,5 +1,5 @@
-<section class="container home" id="home">
-    <div class="row g-5 align-items-center vh-100">
+<section class="container-fluid home" id="home">
+    <div class="row g-5 px-5 align-items-center vh-100 bg-primary-light">
         <div class="col-md-6">
             <p class="h4 text-uppercase">
                 <svg xmlns="http://www.w3.org/2000/svg"
