@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -60,6 +61,11 @@ class User extends Authenticatable
     public function jobs(): HasMany
     {
         return $this->hasMany(JobPost::class);
+    }
+
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
     }
 
     public function job_posts(): BelongsToMany

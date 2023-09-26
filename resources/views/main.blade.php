@@ -11,8 +11,10 @@
     @include('pages.latestJobs')
 
     <!-- Know About User -->
-    <employer></employer>
+    @guest
+        <employer></employer>
+    @endguest
 
     <!-- Footer Section -->
-    @include('pages.footer')
+    @include('layouts.footer')
 @endsection

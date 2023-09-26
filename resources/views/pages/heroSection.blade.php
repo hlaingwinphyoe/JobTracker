@@ -22,7 +22,7 @@
                 </svg>
                 Best Job Place
             </p>
-            <h1 class="text-wrap display-1 fw-bold">The Easiest Way to Get Your New Job</h1>
+            <h1 class="text-wrap display-1 fw-bold home-title">The Easiest Way to Get Your New Job</h1>
             <h4 class="my-4 text-secondary">Find your dream job today!</h4>
             <div class="card border-0 bg-white shadow-sm rounded-5">
                 <div class="card-body">

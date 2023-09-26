@@ -7,7 +7,7 @@ p {
   margin-bottom: 0px !important;
 }
 
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }
 
@@ -182,4 +182,37 @@ p {
   padding: 0 2em 2em;
   margin: 0;
   color: #d7bdca;
+}
+
+// dropdown{
+.dropdown-item:hover {
+  background-color: $secondary-light !important;
+}
+
+// letter spacing
+.tracking-wide {
+  letter-spacing: 0.05em;
+}
+
+.bg-profile {
+  background-image: url("../../public/bg_profile.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  background-origin: padding-box;
+  background-attachment: fixed;
+  height: 50vh;
+}
+
+.profile-card {
+  position: absolute;
+  top: 180px;
+  z-index: 40;
+}
+
+.profile-image {
+  position: absolute;
+  top: -50px;
+  left: 130px;
+  border-radius: 20px;
 }
