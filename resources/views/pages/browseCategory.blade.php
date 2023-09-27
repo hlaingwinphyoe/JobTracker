@@ -11,20 +11,18 @@
                     </button>
                 </div>
                 <div class="row mt-4">
-                    @for ($i = 0; $i < 8; $i++)
-                        <div class="col-6 col-md-4 col-lg-3">
-                            <div class="card mb-4">
-                                @foreach ($categories as $category)
-                                <div @if ($loop->even)class="bg-info"@endif>
-                                    <div class="card-body text-center ">
-                                        <h4 class="my-2">{{$category->name}}</h4>
-                                        <span class="text-secondary">{{$category->slug}}</span>
-                                    </div>   
+                    @foreach ($categories as $category)
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card mb-4">
+                            <div>
+                                <div class="card-body text-center ">
+                                    <h4 class="my-2">{{$category->name}}</h4>
+                                    <span class="text-secondary">{{$category->slug}}</span>
                                 </div>   
-                                @endforeach
-                            </div>
+                            </div>   
                         </div>
-                    @endfor
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
