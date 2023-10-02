@@ -21,9 +21,12 @@
             <!-- Page Navigation -->
             @include('layouts.navigation')
             <!-- Page Content -->
-            <main>
+            <main class="mb-4">
                 @yield('content')
             </main>
+
+            <!-- Footer Section -->
+            @include('layouts.footer')
         </div>
     </div>
 

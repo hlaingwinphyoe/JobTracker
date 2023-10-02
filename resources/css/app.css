@@ -1,3 +1,13 @@
+@layer components {
+  .container {
+    @apply minsm:max-w-[640px] minmd:max-w-[768px] minlg:max-w-[1170px] minxl:max-w-[1170px] min2xl:max-w-[1600px];
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}

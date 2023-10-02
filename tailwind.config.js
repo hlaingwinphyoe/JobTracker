@@ -41,6 +41,28 @@ export default {
 
       "toast-success": "#00cccc",
     },
+    screens: {
+      sm: "640px",
+      // => @media (min-width: 640px) { ... }
+
+      md: "768px",
+      // => @media (min-width: 768px) { ... }
+
+      lg: "1024px",
+      // => @media (min-width: 1024px) { ... }
+
+      xl: "1280px",
+      // => @media (min-width: 1280px) { ... }
+
+      "2xl": "1536px",
+      // => @media (min-width: 1536px) { ... }
+
+      minsm: { min: "641px" },
+      minmd: { min: "769px" },
+      minlg: { min: "1025px" },
+      minxl: { min: "1281px" },
+      min2xl: { min: "1537px" },
+    },
     container: {
       padding: "1rem",
     },
