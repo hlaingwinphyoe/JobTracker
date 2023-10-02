@@ -19,6 +19,11 @@ class Type extends Model
         return $this->hasMany(JobPost::class);
     }
 
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'type_id', 'id');
+    }
+
     // scope function
 
     public function scopeIsType($q, $type)

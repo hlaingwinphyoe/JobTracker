@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -28,6 +29,11 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
+        'profile',
+        'company_name',
+        'company_type',
+        'desc',
+        'region_id',
         'password',
         'type_id'
     ];
@@ -52,19 +58,34 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    // public function canAccessFilament(): bool
+    // {
+    //     return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
+    // }
+
     // public function canAccessPanel(Panel $panel): bool
     // {
     //     return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
     // }
 
-    public function jobs(): HasMany
+    public function jobs(): HasMany  // employer create jobs
     {
-        return $this->hasMany(JobPost::class);
+        return $this->hasMany(JobPost::class, 'user_id', 'id');
     }
 
-    public function job_posts(): BelongsToMany
+    public function job_posts(): BelongsToMany  // employee's favourite posts
     {
         return $this->belongsToMany(JobPost::class, 'user_job_posts', 'user_id', 'job_post_id');
+    }
+
+    public function applied_jobs(): HasMany  // employee applied jobs
+    {
+        return $this->hasMany(AppliedJob::class, 'user_id', 'id');
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(Type::class);
     }
 
     public function scopeNotAdmin($query)
@@ -78,6 +99,13 @@ class User extends Authenticatable
     {
         $query->whereHas('roles', function ($q) {
             $q->whereIn('slug', ['admin', 'developer']);
+        });
+    }
+
+    public function scopeIsType($query, $type)
+    {
+        $query->whereHas('type', function ($q) use($type) {
+            $q->where('slug', $type);
         });
     }
 
