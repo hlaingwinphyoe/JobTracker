@@ -9,19 +9,11 @@ use App\Models\User;
 class CategoryPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return $user->can('view-any Category');
-    }
-
-    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Category $category): bool
     {
-        return $user->can('view Category');
+        return $user->can('Access Category');
     }
 
     /**
@@ -29,7 +21,7 @@ class CategoryPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create Category');
+        return $user->can('Write Category');
     }
 
     /**
@@ -37,7 +29,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category): bool
     {
-        return $user->can('update Category');
+        return $user->can('Edit Category');
     }
 
     /**
@@ -45,22 +37,6 @@ class CategoryPolicy
      */
     public function delete(User $user, Category $category): bool
     {
-        return $user->can('delete Category');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Category $category): bool
-    {
-        return $user->can('restore Category');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Category $category): bool
-    {
-        return $user->can('force-delete Category');
+        return $user->can('Delete Category');
     }
 }

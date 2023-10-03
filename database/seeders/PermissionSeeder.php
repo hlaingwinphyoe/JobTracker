@@ -17,11 +17,15 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             'employee' => ['Access Employee','Write Employee','Edit Employee','Delete Employee'],
+            'employer' => ['Access Employer','Write Employer','Edit Employer','Delete Employer'],
             'job' => ['Access Job','Write Job','Edit Job','Delete Job'],
             'category' => ['Access Category','Write Category','Edit Category','Delete Category'],
             'type' => ['Access Type','Write Type','Edit Type','Delete Type'],
             'role' => ['Access Role','Write Role','Edit Role','Delete Role'],
             'user' => ['Access User','Write User','Edit User','Delete User'],
+            'faq' => ['Access FAQ','Write FAQ','Edit FAQ','Delete FAQ'],
+            'terms and conditions' => ['Access Terms and Conditions','Write Terms and Conditions','Edit Terms and Conditions','Delete Terms and Conditions'],
+            'privacy policy' => ['Access Privacy Policy','Write Privacy Policy','Edit Privacy Policy','Delete Privacy Policy'],
         ];
 
         foreach ($permissions as $index => $perm) {
@@ -29,7 +33,8 @@ class PermissionSeeder extends Seeder
                 $permission = Permission::create([
                     // 'slug' => Str::slug($name),
                     'name' => $name,
-                    'type' => $index
+                    'type' => $index,
+                    'guard_name' => 'web',
                 ]);
             }
         }

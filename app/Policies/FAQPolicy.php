@@ -9,19 +9,11 @@ use App\Models\User;
 class FAQPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return $user->can('view-any FAQ');
-    }
-
-    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, FAQ $faq): bool
     {
-        return $user->can('view FAQ');
+        return $user->can('Access FAQ');
     }
 
     /**
@@ -29,7 +21,7 @@ class FAQPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create FAQ');
+        return $user->can('Write FAQ');
     }
 
     /**
@@ -37,7 +29,7 @@ class FAQPolicy
      */
     public function update(User $user, FAQ $faq): bool
     {
-        return $user->can('update FAQ');
+        return $user->can('Edit FAQ');
     }
 
     /**
@@ -45,7 +37,7 @@ class FAQPolicy
      */
     public function delete(User $user, FAQ $faq): bool
     {
-        return $user->can('delete FAQ');
+        return $user->can('Delete FAQ');
     }
 
     /**
