@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         $regions = Region::all();
-        $categories = Category::latest()->get()->take(8);
+        $categories = Category::latest()->get()->take(7);
         $types = Type::isType('job')->latest()->get();
         return view('main', compact('regions', 'types','categories'));
     }

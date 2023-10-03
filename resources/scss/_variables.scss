@@ -1,0 +1,16 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: "Raleway", sans-serif;
+
+$primary: #07a4b5;
+
+// $primary: #42b883;
+
+$primary-light: #F0F8FF;
+$secondary-light: #E5E4E2;
+
+.bg-primary-light {
+  background-color: $primary-light !important;
+}

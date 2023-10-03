@@ -71,10 +71,7 @@
               <option value="asc">Name Ascending</option>
             </select>
           </span>
-          <a
-            href="/employer-lists"
-            class="p-2.5 bg-red-500 rounded-lg ml-2 text-white"
-          >
+          <a href="/employer-lists" class="p-2.5 bg-red-500 rounded-lg ml-2 text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="icon icon-tabler icon-tabler-refresh"
@@ -127,8 +124,8 @@ export default {
     Carousel,
     Navigation,
     Slide,
-    EmployerCard,
-  },
+    EmployerCard
+},
   props: ["categories"],
   setup() {
     const state = reactive({
@@ -175,4 +172,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
