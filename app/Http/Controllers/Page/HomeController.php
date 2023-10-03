@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         $regions = Region::all();
-        $categories = Category::latest()->get()->take(8);
+        $categories = Category::latest()->get()->take(7);
         $types = Type::isType('job')->latest()->get();
         return view('main', compact('regions', 'types','categories'));
     }
@@ -33,6 +33,7 @@ class HomeController extends Controller
         $employers = User::where('type_id', $employerType->id)->paginate(20);
         $regions = Region::all();
         $categories = Category::latest()->get();
-        return view('pages.employers.index', compact(['regions', 'categories']));
+        $types = Type::isType('job')->latest()->get();
+        return view('pages.employers.index', compact('regions', 'categories','types','employers'));
     }
 }

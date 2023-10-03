@@ -1,20 +1,21 @@
-<section class="px-2 py-32 md:px-0">
-    <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
+<section class="px-2 md:px-0" id="home">
+    <div class="container flex items-center justify-center mx-auto lg:h-[95vh]">
         <div class="flex flex-wrap items-center sm:-mx-3">
             <div class="w-full md:w-1/2 md:px-3">
                 <div
-                    class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
+                    class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg 2xl:max-w-xl md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                     <h1
-                        class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl">
+                        class="text-4xl font-extrabold tracking-wide text-gray-900 sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl">
                         <span class="block xl:inline">Let's Get Your</span>
                         <span
                             class="block text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-primary-400 to-tertiary-500 xl:inline">
                             Dream Jobs </span>
                         <span>With Us.</span>
                     </h1>
-                    <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-md md:max-w-3xl">Find your dream job with our site. There are lot of trusted company advertise their for employees.
+                    <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-lg md:max-w-3xl">Find your dream job
+                        with our site. There are lot of trusted company advertise their for employees.
                     </p>
-                    <form method="GET">
+                    <form method="GET" class=" z-10">
                         <div class="relative rounded-full shadow-sm">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5">
                                 <span class="text-gray-500 sm:text-sm">
@@ -51,9 +52,8 @@
                 </div>
             </div>
             <div class="w-full md:w-1/2">
-                <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
-                    <img
-                        src="https://images.unsplash.com/photo-1498049860654-af1a5c566876?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80">
+                <div class="w-full h-auto overflow-hidden rounded-md">
+                    <img src="/images/home.jpg" alt="home.jpg" class="h-full">
                 </div>
             </div>
         </div>

@@ -1,10 +1,10 @@
-<section class="w-full px-8 text-gray-700 bg-white backdrop-blur-lg sticky top-0">
-    <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
+<section class="w-full px-8 text-secondary-700 bg-white bg-opacity-90 backdrop-blur-sm sticky top-0 z-50">
+    <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-9xl">
         <div class="relative flex flex-col md:flex-row">
             <img src="{{ asset('logo-notext.svg') }}" class="h-8 mr-1.5" alt="">
             <a href="{{ route("home.index") }}"
-                class="flex items-center mb-5 font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
-                <span class="mx-auto text-xl font-black leading-none text-gray-900 select-none">{{ config('app.name') }}<span
+                class="flex items-center mb-5 font-medium text-secondary-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
+                <span class="mx-auto text-xl font-black leading-none text-secondary-900 select-none">{{ config('app.name') }}<span
                         class="text-primary-600">.</span></span>
             </a>
             <nav
@@ -12,7 +12,7 @@
                 <x-nav-link title="Home" link="{{ route('home.index') }}" />
                 <x-nav-link title="Browse Jobs" link="{{ route('home.jobs') }}" />
                 <x-nav-link title="Employers" link="{{ route('home.employers') }}" />
-                <x-nav-link title="Blogs" />
+                {{-- <x-nav-link title="Blogs" /> --}}
             </nav>
         </div>
 
