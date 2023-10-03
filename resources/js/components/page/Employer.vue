@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
   <section class="container mx-auto lg:px-12 mt-8 mb-16 relative">
-=======
-  <section class="container mx-auto mt-8 mb-16 relative">
->>>>>>> 92c78d3e2bb8d5c800be1f208e7b199335604ed4
     <div
       class="bg-tertiary-400 rounded-ss-[5rem] rounded-ee-[5rem] px-8 h-[28rem] grid grid-cols-2 gap-4 z-30 drop-shadow-md relative"
     >
