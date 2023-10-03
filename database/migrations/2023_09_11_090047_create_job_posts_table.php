@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('status_id')->constrained()->cascadeOnDelete();
             $table->foreignId('region_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->boolean('disabled')->default(0);
             $table->timestamps();
         });
     }

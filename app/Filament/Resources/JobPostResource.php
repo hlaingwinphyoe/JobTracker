@@ -3,6 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\JobPostResource\Pages;
+use App\Filament\Resources\JobPostResource\Pages\CreateJobPost;
+use App\Filament\Resources\JobPostResource\Pages\EditJobPost;
+use App\Filament\Resources\JobPostResource\Pages\ListJobPosts;
+use App\Filament\Resources\JobPostResource\Pages\ViewJobPost;
 use App\Filament\Resources\JobPostResource\RelationManagers;
 use App\Models\Category;
 use App\Models\JobPost;
@@ -41,6 +45,12 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -179,7 +189,7 @@ class JobPostResource extends Resource
                 TextColumn::make("category.name")->toggleable(),
                 // ToggleColumn::make('status.title'),
                 TextColumn::make("region.name")->toggleable(),
-                TextColumn::make("user.name")->toggleable(),
+                TextColumn::make("user.name")->label('Created By')->toggleable(),
                 TextColumn::make('status.title')
                     ->badge()
                     ->icon(fn (string $state): string => match ($state) {
@@ -191,6 +201,7 @@ class JobPostResource extends Resource
                         'Closed' => 'danger',
                     })->toggleable(),
                 TextColumn::make("created_at")->label("Published")->since()->sortable(),
+                TextColumn::make("applied_jobs_count")->counts('applied_jobs')->label('Applied Employers'),
             ])
             ->filters([
                 SelectFilter::make("type_id")
@@ -249,17 +260,17 @@ class JobPostResource extends Resource
                     ->label('Filter'),
             )
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                ViewAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                CreateAction::make(),
             ]);
     }
 
@@ -314,10 +325,10 @@ class JobPostResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJobPosts::route('/'),
-            'create' => Pages\CreateJobPost::route('/create'),
-            'edit' => Pages\EditJobPost::route('/{record}/edit'),
-            'view' => Pages\ViewJobPost::route('/{record}'),
+            'index' => ListJobPosts::route('/'),
+            'create' => CreateJobPost::route('/create'),
+            'edit' => EditJobPost::route('/{record}/edit'),
+            'view' => ViewJobPost::route('/{record}'),
         ];
     }
 }

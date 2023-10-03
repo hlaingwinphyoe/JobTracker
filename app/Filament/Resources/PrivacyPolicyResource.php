@@ -3,9 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PrivacyPolicyResource\Pages;
+use App\Filament\Resources\PrivacyPolicyResource\Pages\CreatePrivacyPolicy;
+use App\Filament\Resources\PrivacyPolicyResource\Pages\EditPrivacyPolicy;
+use App\Filament\Resources\PrivacyPolicyResource\Pages\ListPrivacyPolicies;
 use App\Filament\Resources\PrivacyPolicyResource\RelationManagers;
 use App\Models\FAQ;
 use Filament\Forms;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -13,6 +18,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -49,24 +57,24 @@ class PrivacyPolicyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                 ->searchable(),
-                Tables\Columns\TextColumn::make('desc'),
-                Tables\Columns\TextColumn::make('faq_type.name'),
+                TextColumn::make('desc'),
+                TextColumn::make('faq_type.name'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                CreateAction::make(),
             ]);
     }
 
@@ -85,9 +93,9 @@ class PrivacyPolicyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPrivacyPolicies::route('/'),
-            'create' => Pages\CreatePrivacyPolicy::route('/create'),
-            'edit' => Pages\EditPrivacyPolicy::route('/{record}/edit'),
+            'index' => ListPrivacyPolicies::route('/'),
+            'create' => CreatePrivacyPolicy::route('/create'),
+            'edit' => EditPrivacyPolicy::route('/{record}/edit'),
         ];
     }    
 }
