@@ -3,6 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FAQResource\Pages;
+use App\Filament\Resources\FAQResource\Pages\CreateFAQ;
+use App\Filament\Resources\FAQResource\Pages\EditFAQ;
+use App\Filament\Resources\FAQResource\Pages\ListFAQS;
 use App\Filament\Resources\FAQResource\RelationManagers;
 use App\Models\FAQ;
 use Filament\Forms;
@@ -13,6 +16,11 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -26,7 +34,6 @@ class FAQResource extends Resource
     protected static ?string $navigationGroup = 'Page Settings';
 
     protected static ?int $navigationSort = 1;
-
 
     public static function form(Form $form): Form
     {
@@ -49,24 +56,24 @@ class FAQResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                 ->searchable(),
-                Tables\Columns\TextColumn::make('desc'),
-                Tables\Columns\TextColumn::make('faq_type.name'),
+                TextColumn::make('desc'),
+                TextColumn::make('faq_type.name'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                CreateAction::make(),
             ]);
     }
 
@@ -85,9 +92,9 @@ class FAQResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFAQS::route('/'),
-            'create' => Pages\CreateFAQ::route('/create'),
-            'edit' => Pages\EditFAQ::route('/{record}/edit'),
+            'index' => ListFAQS::route('/'),
+            'create' => CreateFAQ::route('/create'),
+            'edit' => EditFAQ::route('/{record}/edit'),
         ];
     }    
 }

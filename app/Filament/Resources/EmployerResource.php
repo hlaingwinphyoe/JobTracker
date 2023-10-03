@@ -3,19 +3,29 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EmployerResource\Pages;
+use App\Filament\Resources\EmployerResource\Pages\EditEmployer;
+use App\Filament\Resources\EmployerResource\Pages\ListEmployers;
 use App\Filament\Resources\EmployerResource\RelationManagers;
 use App\Models\Employer;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class EmployerResource extends Resource
 {
-    protected static ?string $model = Employer::class;
+    protected static ?string $model = User::class;
+
+    public static ?string $label = 'Employers';
 
     protected static ?string $navigationIcon = 'fas-users-line';
 
@@ -35,36 +45,42 @@ class EmployerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
+                TextColumn::make('phone')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('company_name')
+                TextColumn::make('email'),
+                TextColumn::make('company_name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('company_type')
+                TextColumn::make('company_type')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('region.name'),
+                TextColumn::make('region.name'),
+                TextColumn::make("jobs_count")->counts('jobs')->label('Job Posts'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make()->disabled(),
+                CreateAction::make()->disabled(),
             ]);
     }
 
     public static function canCreate(): bool
     {
         return false;
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->isType('employer');
     }
 
 
@@ -78,9 +94,9 @@ class EmployerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEmployers::route('/'),
-            // 'create' => Pages\CreateEmployer::route('/create'),
-            'edit' => Pages\EditEmployer::route('/{record}/edit'),
+            'index' => ListEmployers::route('/'),
+            // 'create' => CreateEmployer::route('/create'),
+            'edit' => EditEmployer::route('/{record}/edit'),
         ];
     }
 }
