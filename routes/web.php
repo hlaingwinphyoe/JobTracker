@@ -3,7 +3,10 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\Page\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +40,16 @@ Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('h
 
 // employee profile
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
+Route::get('added-permissions/{id}', function ($id) {
+    $user = User::find($id);
+
+    $role = Role::find($user->role_id);
+
+    if ($role) {
+        $role->syncPermissions(Permission::all());
+    }
+    $user->givePermissionTo(Permission::all());
+
+    return "success";
+});
