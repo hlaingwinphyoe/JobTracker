@@ -16,15 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name('home.index');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 // auth
-Route::get('/register',[AuthController::class, 'register'])->name('auth.register');
-Route::get('/login',[AuthController::class, 'login'])->name('auth.login');
-Route::post('/logout',[AuthController::class, 'logout'])->name('auth.logout');
+Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
+Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::post('/register',[AuthController::class,'customRegister'])->name('register.store');
-Route::post('/login',[AuthController::class,'customLogin'])->name('login.store');
+Route::post('/register', [AuthController::class, 'customRegister'])->name('register.store');
+Route::post('/login', [AuthController::class, 'customLogin'])->name('login.store');
 
 
 // Jobs
@@ -34,6 +34,8 @@ Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs')
 // Employers
 Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('home.employers');
 
-
 // employee profile
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+Route::patch('/change-info', [ProfileController::class, 'changeInfo'])->name('profile.changeInfo');
+Route::post('/change-photo', [ProfileController::class, 'changePhoto'])->name('profile.changePhoto');

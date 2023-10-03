@@ -11,19 +11,23 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 @yield('style')
 
 <body>
     <div id="job-app">
-        <!-- Header Content -->
-        @include('layouts.header')
+        <div class="min-h-screen bg-gray">
+            <!-- Page Navigation -->
+            @include('layouts.header')
+            <!-- Page Content -->
+            <main class="mb-4">
+                @yield('content')
+            </main>
 
-        <!-- Main Content -->
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <!-- Footer Section -->
+            @include('layouts.footer')
+        </div>
     </div>
 
     {{-- @if (session('logout'))

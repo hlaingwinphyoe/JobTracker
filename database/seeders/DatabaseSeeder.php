@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             StatusSeeder::class,
             FAQTypeSeeder::class,
             CategorySeeder::class,
+            JobPostSeeder::class,
         ]);
     }
 }

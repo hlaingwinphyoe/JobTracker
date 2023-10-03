@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Region;
+use App\Models\Type;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,6 +19,17 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $employer = Type::isType('user')->where('name','employer')->first();
+        // return [
+        //     'name' => fake()->name(),
+        //     'email' => fake()->unique()->safeEmail(),
+        //     'phone' => fake()->unique()->phoneNumber(),
+        //     'email_verified_at' => now(),
+        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        //     'remember_token' => Str::random(10),
+        //     'type_id' => $employee->id,
+        // ];
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
@@ -24,7 +37,11 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            // 'type_id' => 
+            'company_name' => fake()->company(),
+            'company_type' => fake()->text(15),
+            'region_id' => Region::all()->random()->id,
+            'desc' => fake()->paragraph(),
+            'type_id' => $employer->id
         ];
     }
 

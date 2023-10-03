@@ -18,7 +18,7 @@ class StatusSeeder extends Seeder
             'sex' => ['Male', 'Female'],
             'time' => ['Hour', 'Day', 'Month', 'Year'],
             'status' => ['Pending', 'Approved', 'Rejected'],
-            'job-status' => ['Available', 'Closed']
+            'job_status' => ['Available', 'Closed']
         ];
 
         foreach ($names as $index => $name_ary) {
