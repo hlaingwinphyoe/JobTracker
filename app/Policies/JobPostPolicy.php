@@ -9,19 +9,11 @@ use App\Models\User;
 class JobPostPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return $user->can('view-any JobPost');
-    }
-
-    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, JobPost $jobpost): bool
     {
-        return $user->can('view JobPost');
+        return $user->can('Access Job');
     }
 
     /**
@@ -29,7 +21,7 @@ class JobPostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create JobPost');
+        return $user->can('Write Job');
     }
 
     /**
@@ -37,7 +29,7 @@ class JobPostPolicy
      */
     public function update(User $user, JobPost $jobpost): bool
     {
-        return $user->can('update JobPost');
+        return $user->can('Edit Job');
     }
 
     /**
@@ -45,7 +37,7 @@ class JobPostPolicy
      */
     public function delete(User $user, JobPost $jobpost): bool
     {
-        return $user->can('delete JobPost');
+        return $user->can('Delete Job');
     }
 
     /**
@@ -53,7 +45,7 @@ class JobPostPolicy
      */
     public function restore(User $user, JobPost $jobpost): bool
     {
-        return $user->can('restore JobPost');
+        return $user->can('restore Job');
     }
 
     /**
@@ -61,6 +53,6 @@ class JobPostPolicy
      */
     public function forceDelete(User $user, JobPost $jobpost): bool
     {
-        return $user->can('force-delete JobPost');
+        return $user->can('force-delete Job');
     }
 }

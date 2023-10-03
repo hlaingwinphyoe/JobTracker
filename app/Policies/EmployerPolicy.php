@@ -9,19 +9,11 @@ use App\Models\User;
 class EmployerPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return $user->can('view-any Employer');
-    }
-
-    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Employer $employer): bool
     {
-        return $user->can('view Employer');
+        return $user->can('Access Employer');
     }
 
     /**
@@ -29,7 +21,7 @@ class EmployerPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create Employer');
+        return $user->can('Write Employer');
     }
 
     /**
@@ -37,7 +29,7 @@ class EmployerPolicy
      */
     public function update(User $user, Employer $employer): bool
     {
-        return $user->can('update Employer');
+        return $user->can('Edit Employer');
     }
 
     /**
@@ -45,7 +37,7 @@ class EmployerPolicy
      */
     public function delete(User $user, Employer $employer): bool
     {
-        return $user->can('delete Employer');
+        return $user->can('Delete Employer');
     }
 
     /**

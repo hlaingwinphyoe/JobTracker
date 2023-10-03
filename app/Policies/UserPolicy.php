@@ -9,19 +9,11 @@ use App\Models\User;
 class UserPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return $user->can('view-any User');
-    }
-
-    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, User $model): bool
     {
-        return $user->can('view User');
+        return $user->can('Access User');
     }
 
     /**
@@ -29,7 +21,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create User');
+        return $user->can('Write User');
     }
 
     /**
@@ -37,7 +29,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->can('update User');
+        return $user->can('Edit User');
     }
 
     /**
@@ -45,7 +37,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->can('delete User');
+        return $user->can('Delete User');
     }
 
     /**
