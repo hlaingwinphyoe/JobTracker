@@ -27,7 +27,7 @@ class EmployerResource extends Resource
 
     public static ?string $label = 'Employers';
 
-    protected static ?string $navigationIcon = 'fas-users-line';
+    protected static ?string $navigationIcon = 'fas-user-tie';
 
     protected static ?string $navigationGroup = 'Resource Settings';
 

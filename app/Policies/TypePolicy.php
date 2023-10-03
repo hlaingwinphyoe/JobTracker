@@ -13,7 +13,7 @@ class TypePolicy
      */
     public function view(User $user, Type $type): bool
     {
-        return $user->can('Access Type');
+        return $user->hasDirectPermission('Access Type');
     }
 
     /**
@@ -21,7 +21,7 @@ class TypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Write Type');
+        return $user->hasDirectPermission('Write Type');
     }
 
     /**
@@ -29,7 +29,7 @@ class TypePolicy
      */
     public function update(User $user, Type $type): bool
     {
-        return $user->can('Edit Type');
+        return $user->hasDirectPermission('Edit Type');
     }
 
     /**
@@ -37,22 +37,6 @@ class TypePolicy
      */
     public function delete(User $user, Type $type): bool
     {
-        return $user->can('Delete Type');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Type $type): bool
-    {
-        return $user->can('restore Type');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Type $type): bool
-    {
-        return $user->can('force-delete Type');
+        return $user->hasDirectPermission('Delete Type');
     }
 }

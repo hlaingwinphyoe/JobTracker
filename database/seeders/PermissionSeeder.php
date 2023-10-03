@@ -33,7 +33,7 @@ class PermissionSeeder extends Seeder
                 $permission = Permission::create([
                     // 'slug' => Str::slug($name),
                     'name' => $name,
-                    'type' => $index,
+                    // 'type' => $index,
                     'guard_name' => 'web',
                 ]);
             }

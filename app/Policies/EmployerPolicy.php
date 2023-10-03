@@ -13,7 +13,7 @@ class EmployerPolicy
      */
     public function view(User $user, Employer $employer): bool
     {
-        return $user->can('Access Employer');
+        return $user->hasDirectPermission('Access Employer');
     }
 
     /**
@@ -21,7 +21,7 @@ class EmployerPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Write Employer');
+        return $user->hasDirectPermission('Write Employer');
     }
 
     /**
@@ -29,7 +29,7 @@ class EmployerPolicy
      */
     public function update(User $user, Employer $employer): bool
     {
-        return $user->can('Edit Employer');
+        return $user->hasDirectPermission('Edit Employer');
     }
 
     /**
@@ -37,22 +37,6 @@ class EmployerPolicy
      */
     public function delete(User $user, Employer $employer): bool
     {
-        return $user->can('Delete Employer');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Employer $employer): bool
-    {
-        return $user->can('restore Employer');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Employer $employer): bool
-    {
-        return $user->can('force-delete Employer');
+        return $user->hasDirectPermission('Delete Employer');
     }
 }

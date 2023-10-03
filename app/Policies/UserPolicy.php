@@ -13,7 +13,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->can('Access User');
+        return $user->hasDirectPermission('Access User');
     }
 
     /**
@@ -21,7 +21,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Write User');
+        return $user->hasDirectPermission('Write User');
     }
 
     /**
@@ -29,7 +29,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->can('Edit User');
+        return $user->hasDirectPermission('Edit User');
     }
 
     /**
@@ -37,22 +37,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->can('Delete User');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, User $model): bool
-    {
-        return $user->can('restore User');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, User $model): bool
-    {
-        return $user->can('force-delete User');
+        return $user->hasDirectPermission('Delete User');
     }
 }

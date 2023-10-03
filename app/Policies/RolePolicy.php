@@ -13,8 +13,8 @@ class RolePolicy
      */
     public function view(User $user, Role $role): bool
     {
-        // return $user->can('Access Role');
-        return $user->can('Access Role');
+        // return $user->hasDirectPermission('Access Role');
+        return $user->hasDirectPermission('Access Role');
     }
 
     /**
@@ -22,8 +22,8 @@ class RolePolicy
      */
     public function create(User $user): bool
     {
-        // return $user->can('Write Role');
-        return $user->can('Write Role');
+        // return $user->hasDirectPermission('Write Role');
+        return $user->hasDirectPermission('Write Role');
     }
 
     /**
@@ -31,7 +31,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role): bool
     {
-        return $user->can('Edit Role');
+        return $user->hasDirectPermission('Edit Role');
     }
 
     /**
@@ -39,6 +39,6 @@ class RolePolicy
      */
     public function delete(User $user, Role $role): bool
     {
-        return $user->can('Delete Role');
+        return $user->hasDirectPermission('Delete Role');
     }
 }
