@@ -9,19 +9,11 @@ use App\Models\User;
 class AppliedJobPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return $user->can('view-any AppliedJob');
-    }
-
-    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, AppliedJob $appliedjob): bool
     {
-        return $user->can('view AppliedJob');
+        return $user->can('Access AppliedJob');
     }
 
     /**
@@ -29,7 +21,7 @@ class AppliedJobPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create AppliedJob');
+        return $user->can('Write AppliedJob');
     }
 
     /**
@@ -37,7 +29,7 @@ class AppliedJobPolicy
      */
     public function update(User $user, AppliedJob $appliedjob): bool
     {
-        return $user->can('update AppliedJob');
+        return $user->can('Edit AppliedJob');
     }
 
     /**
@@ -45,7 +37,7 @@ class AppliedJobPolicy
      */
     public function delete(User $user, AppliedJob $appliedjob): bool
     {
-        return $user->can('delete AppliedJob');
+        return $user->can('Delete AppliedJob');
     }
 
     /**

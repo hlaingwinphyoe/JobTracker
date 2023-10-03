@@ -9,19 +9,11 @@ use App\Models\User;
 class TypePolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return $user->can('view-any Type');
-    }
-
-    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Type $type): bool
     {
-        return $user->can('view Type');
+        return $user->can('Access Type');
     }
 
     /**
@@ -29,7 +21,7 @@ class TypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create Type');
+        return $user->can('Write Type');
     }
 
     /**
@@ -37,7 +29,7 @@ class TypePolicy
      */
     public function update(User $user, Type $type): bool
     {
-        return $user->can('update Type');
+        return $user->can('Edit Type');
     }
 
     /**
@@ -45,7 +37,7 @@ class TypePolicy
      */
     public function delete(User $user, Type $type): bool
     {
-        return $user->can('delete Type');
+        return $user->can('Delete Type');
     }
 
     /**

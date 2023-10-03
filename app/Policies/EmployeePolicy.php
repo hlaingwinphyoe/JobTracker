@@ -9,14 +9,6 @@ use App\Models\User;
 class EmployeePolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    // public function viewAny(User $user): bool
-    // {
-    //     return $user->can('view-any Employee');
-    // }
-
-    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Employee $employee): bool
