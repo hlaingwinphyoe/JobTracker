@@ -28,16 +28,15 @@ class JobPostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $title = fake()->unique()->title(),
+            'title' => $title = fake()->unique()->jobTitle(),
             'slug' => Str::slug($title),
-            'salary' => fake()->random_int(10,5000),
-            'description' => fake()->realText(),
-            'image' => $this->createImage(),
+            'salary' => fake()->numberBetween(10, 5000),
+            'desc' => fake()->realText(),
             'type_id' => Type::isType('job')->get()->random()->id,
             'category_id' => Category::all()->random()->id,
             'status_id' => Status::isType('job_status')->get()->random()->id,
             'region_id' => Region::all()->random()->id,
-            'user_id' => User::notAdmin()->get()->random()->id,
+            'user_id' => User::all()->random()->id,
             'created_at' => fake()->dateTimeBetween('-1 year', '-6 month'),
             'updated_at' => fake()->dateTimeBetween('-5 month', 'now'),
         ];

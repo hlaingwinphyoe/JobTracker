@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(JobPost::class, 'user_id', 'id');
     }
 
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
+    }
+
     public function job_posts(): BelongsToMany  // employee's favourite posts
     {
         return $this->belongsToMany(JobPost::class, 'user_job_posts', 'user_id', 'job_post_id');

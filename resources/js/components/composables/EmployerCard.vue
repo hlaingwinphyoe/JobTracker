@@ -1,36 +1,65 @@
 <template>
-  <div class="card border-0 rounded-4 bg-white shadow-sm">
-    <div class="card-body p-4">
-      <img
-        src="https://placehold.co/600x600"
-        class="employer-profile mx-auto d-block"
-        alt=""
-      />
-      <div class="text-center my-3">
-        <a href="javascript:void(0)" class="text-decoratin-none">
-          <h5 class="text-primary fw-bold">Jadon Ardam</h5>
-        </a>
-        <small class="text-secondary text-opacity-75"
-          >Startup Company Ltd.</small
+  <div class="bg-white border border-gray-200 rounded-lg shadow px-4 py-10">
+    <img
+      src="https://placehold.co/600x600"
+      class="employer-profile mx-auto block"
+      alt=""
+    />
+    <div class="text-center my-3">
+      <a href="javascript:void(0)" class="hover:underline">
+        <h5 class="font-bold">Jadon Ardam</h5>
+      </a>
+      <small class="text-gray-500 text-opacity-75">Startup Company Ltd.</small>
+    </div>
+    <p class="flex items-center justify-between my-4">
+      <span class="text-sm text-gray-500 mb-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-location inline-flex items-center mb-[3px]"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-      </div>
-      <p
-        class="d-flex flex-column align-items-center justify-content-between my-3"
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path
+            d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"
+          />
+        </svg>
+        Mandalay
+      </span>
+      <span class="text-sm text-gray-500 mb-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-briefcase inline-flex items-center mb-[3px]"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path
+            d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
+          />
+          <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" />
+          <path d="M12 12l0 .01" />
+          <path d="M3 13a20 20 0 0 0 18 0" />
+        </svg>
+        Software Company
+      </span>
+    </p>
+    <div class="text-center">
+      <a href="javascript:void(0)" class="border-2 border-primary-400 hover:bg-primary-500 hover:text-white hover:border-primary-500 p-3 rounded-lg"
+        >12 Open Jobs</a
       >
-        <small class="mb-2">
-          <i class="fa-solid fa-earth-asia"></i>
-          Mandalay
-        </small>
-        <small>
-          <i class="fa-solid fa-briefcase"></i>
-          Software House
-        </small>
-      </p>
-      <div class="text-center mb-2">
-        <a href="javascript:void(0)" class="btn btn-outline-primary"
-          >12 Open Jobs</a
-        >
-      </div>
     </div>
   </div>
 </template>

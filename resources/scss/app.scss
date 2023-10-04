@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap");
 
 // Variables
 @import "variables";
@@ -8,16 +8,28 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
-@import "./custom_bootstrap_styles.scss";
+@import "./custom.scss";
 
 // bubble css
 @import "./bubble_bg.scss";
 
-.logo{
-    width: 100px;
-    height: 100px;
+.logo {
+  width: 100px;
+  height: 100px;
 }
 
-html{
-    scroll-behavior: smooth;
+.header-logo{
+  width: 50px;
+  height: 50px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.home-title {
+  background: #07a4b5;
+  background: linear-gradient(to bottom right, #07a4b5 0%, #000000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

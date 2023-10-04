@@ -33,8 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->font("Montserrat")
             ->colors([
-                'primary' => "#07A4B5",
-                // 'primary' => "#019267"
+                'primary' => "#27A26F",
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -60,6 +59,6 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->sidebarCollapsibleOnDesktop();
+            ->sidebarFullyCollapsibleOnDesktop();
     }
 }

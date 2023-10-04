@@ -33,5 +33,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('09400123456'),
             'type_id' => $developer->id,
         ])->assignRole('Developer')->givePermissionTo(Permission::all());
+
+        User::factory()->count(10)->create();
     }
 }
