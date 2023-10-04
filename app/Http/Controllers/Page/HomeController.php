@@ -15,16 +15,16 @@ class HomeController extends Controller
     public function index()
     {
         $regions = Region::all();
-        $categories = Category::latest()->get()->take(8);
-        $types = Type::isType('job')->latest()->get();
+        $categories = Category::inRandomOrder()->get()->take(8);
+        $types = Type::isType('job')->orderBy('id')->get();
         return view('main', compact('regions', 'types','categories'));
     }
 
     public function jobLists(Request $request)
     {
         $regions = Region::all();
-        $categories = Category::latest()->get();
-        $types = Type::isType('job')->latest()->get();
+        $categories = Category::orderBy('id')->get();
+        $types = Type::isType('job')->orderBy('id')->get();
         return view('pages.jobs.index', compact('regions', 'categories', 'types'));
     }
 
@@ -33,9 +33,9 @@ class HomeController extends Controller
         $employerType = Type::isType('user')->where('name', 'employer')->first();
         $employers = User::where('type_id', $employerType->id)->paginate(20);
         $regions = Region::all();
-        $types = Type::isType('job')->latest()->get();
-        $categories = Category::latest()->get();
-        $types = Type::isType('job')->latest()->get();
+        $types = Type::isType('job')->orderBy('id')->get();
+        $categories = Category::orderBy('id')->get();
+        $types = Type::isType('job')->orderBy('id')->get();
         return view('pages.employers.index', compact('regions', 'categories','types','employers'));
     }
 }
