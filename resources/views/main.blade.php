@@ -5,10 +5,10 @@
     @include('pages.home')
 
     <!-- Browse Category Section -->
-    {{-- @include('pages.browseCategory') --}}
+    @include('pages.browseCategory')
 
     <!-- Latest Job Section -->
-    {{-- @include('pages.latestJobs') --}}
+    @include('pages.latestJobs')
 
     <!-- Know About User -->
     @guest
