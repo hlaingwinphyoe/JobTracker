@@ -9,12 +9,10 @@ use Spatie\Permission\Models\Permission;
 
 class FAQPolicy
 {
-    // public function viewAny(User $user): bool
-    // {
-    //     // return $user->hasRole('Admin');
-    //     // return $user->hasAnyPermission(['Access FAQ', 'Write FAQ', 'Edit FAQ', 'Delete FAQ']);
-    //     return $user->hasDirectPermission('Write FAQ');
-    // }
+    public function viewAny(User $user): bool
+    {
+        return $user->hasAnyPermission(['Access FAQ', 'Write FAQ', 'Edit FAQ', 'Delete FAQ']);
+    }
 
     /**
      * Determine whether the user can view the model.

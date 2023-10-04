@@ -8,6 +8,11 @@ use App\Models\User;
 
 class CategoryPolicy
 {
+    public function viewAny(User $user): bool
+    {
+        // return $user->hasAnyPermission(['Access Category', 'Write Category', 'Edit Category', 'Delete Category']);
+        return $user->hasAnyPermission(['Access Category', 'Write Category', 'Edit Category', 'Delete Category']);
+    }
     /**
      * Determine whether the user can view the model.
      */

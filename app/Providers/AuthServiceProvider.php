@@ -16,14 +16,14 @@ use App\Policies\PermissionPolicy;
 use App\Policies\TypePolicy;
 use App\Policies\UserPolicy;
 // use App\Policies\EmployeePolicy;
-// use App\Policies\RolePolicy;
+use App\Policies\RolePolicy;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Access\Gate as AccessGate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate as FacadesGate;
 use Spatie\Permission\Models\Permission;
 
-// use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Role;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -40,10 +40,8 @@ class AuthServiceProvider extends ServiceProvider
         JobPost::class => JobPostPolicy::class,
         Category::class       => CategoryPolicy::class,
         Type::class       => TypePolicy::class,
-        
+
         FAQ::class       => FAQPolicy::class,
-        // CustomPage::class => CustomPagePolicy::class,
-        // SettingsPage::class => SettingsPagePolicy::class
     ];
 
     /**

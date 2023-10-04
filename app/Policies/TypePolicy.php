@@ -8,6 +8,10 @@ use App\Models\User;
 
 class TypePolicy
 {
+    public function viewAny(User $user): bool
+    {
+        return $user->hasAnyPermission(['Access Type', 'Write Type', 'Edit Type', 'Delete Type']);
+    }
     /**
      * Determine whether the user can view the model.
      */

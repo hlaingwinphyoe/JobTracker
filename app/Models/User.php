@@ -17,8 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable , HasRoles;
-
+    use HasApiTokens, HasFactory, Notifiable  , HasRoles;
     /**
      * The attributes that are mass assignable.
      *
@@ -81,11 +80,6 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Type::class);
     }
-
-    // public function canAccessFilamente(): bool
-    // {
-    //     return $this->hasRole('Admin');
-    // }
 
     public function scopeNotAdmin($query)
     {

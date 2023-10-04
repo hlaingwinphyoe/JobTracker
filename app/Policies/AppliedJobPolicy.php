@@ -8,6 +8,11 @@ use App\Models\User;
 
 class AppliedJobPolicy
 {
+    public function viewAny(User $user): bool
+    {
+        return $user->hasAnyPermission(['Access AppliedJob', 'Write AppliedJob', 'Edit AppliedJob', 'Delete AppliedJob']);
+    }
+
     /**
      * Determine whether the user can view the model.
      */

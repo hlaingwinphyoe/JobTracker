@@ -34,6 +34,19 @@ class UserSeeder extends Seeder
             'type_id' => $developer->id,
         ])->assignRole('Developer')->givePermissionTo(Permission::all());
 
+        $operator = User::create([
+            'name' => 'operator',
+            'phone' => '09123456789',
+            'email' => 'operator1@example.com',
+            'password' => bcrypt('09123456789@operator'),
+            'type_id' => $admin->id,
+        ])->assignRole('Operator');
+
+        $operator_role = Role::where('name', 'Operator')->first();
+        foreach($operator_role->permissions as $permission) {
+            $operator->givePermissionTo($permission);
+        }
+
         $employers = User::factory()->count(80)->create();
 
         foreach($employers as $employer) {
@@ -44,20 +57,6 @@ class UserSeeder extends Seeder
             foreach($empr_role->permissions as $permission) {
                 $employer->givePermissionTo($permission);
             }
-        }
-
-        $operator = User::create([
-            'name' => 'operator',
-            'phone' => '09123456789',
-            'email' => 'operator1@example.com',
-            'password' => bcrypt('09123456789@operator'),
-            'type_id' => $admin->id,
-        ])->assignRole('Operator');
-
-        $operator = Role::where('name', 'Operator')->first();
-
-        foreach($operator->permissions as $permission) {
-            $operator->givePermissionTo($permission);
         }
     }
 }

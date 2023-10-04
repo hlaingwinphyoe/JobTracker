@@ -7,6 +7,10 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionPolicy
 {
+    public function viewAny(User $user): bool
+    {
+        return $user->hasAnyPermission(['Access Permission', 'Write Permission', 'Edit Permission', 'Delete Permission']);
+    }
    /**
      * Determine whether the user can view the model.
      */

@@ -8,13 +8,17 @@ use Spatie\Permission\Models\Role;
 
 class RolePolicy
 {
+    public function viewAny(User $user): bool
+    {
+        // return $user->hasDirectPermission('Access Role');
+        return $user->hasAnyPermission(['Access Role', 'Write Role', 'Edit Role', 'Delete Role']);
+    }
     /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Role $role): bool
     {
-        // return $user->hasDirectPermission('Access Role');
-        return $user->hasDirectPermission('Access Role');
+        return $user->can('Access Role');
     }
 
     /**
@@ -22,8 +26,7 @@ class RolePolicy
      */
     public function create(User $user): bool
     {
-        // return $user->hasDirectPermission('Write Role');
-        return $user->hasDirectPermission('Write Role');
+        return $user->can('Write Role');
     }
 
     /**
@@ -31,7 +34,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role): bool
     {
-        return $user->hasDirectPermission('Edit Role');
+        return $user->can('Edit Role');
     }
 
     /**
@@ -39,6 +42,6 @@ class RolePolicy
      */
     public function delete(User $user, Role $role): bool
     {
-        return $user->hasDirectPermission('Delete Role');
+        return $user->can('Delete Role');
     }
 }

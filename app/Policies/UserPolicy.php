@@ -8,6 +8,10 @@ use App\Models\User;
 
 class UserPolicy
 {
+    public function viewAny(User $user): bool
+    {
+        return $user->hasAnyPermission(['Access User', 'Write User', 'Edit User', 'Delete User']);
+    }
     /**
      * Determine whether the user can view the model.
      */
