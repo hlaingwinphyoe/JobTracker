@@ -98,16 +98,18 @@
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-center relative">
-            <a href="#home" class="absolute bottom-[34px] bg-primary-500 p-2 rounded-full text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-up"
-                    width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M12 5l0 14" />
-                    <path d="M16 9l-4 -4" />
-                    <path d="M8 9l4 -4" />
-                </svg>
-            </a>
+            @if (request()->routeIs('home.index'))
+                <a href="#home" class="absolute bottom-[34px] bg-primary-500 p-2 rounded-full text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-up"
+                        width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 5l0 14" />
+                        <path d="M16 9l-4 -4" />
+                        <path d="M8 9l4 -4" />
+                    </svg>
+                </a>
+            @endif
             <span class="text-sm text-gray-500 sm:text-center">&copy; 2023 <a href={{ route('home.index') }}"
                     class="hover:underline">{{ config('app.name') }}</a>. All Rights
                 Reserved.

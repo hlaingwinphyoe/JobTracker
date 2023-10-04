@@ -54,4 +54,19 @@ class JobPost extends Model
     {
         return $this->hasMany(AppliedJob::class, 'job_id', 'id');
     }
+    
+    // scope function
+    public function scopeFilterOn($query)
+    {
+        if(request('category_id'))
+        {
+            $query->whereHas('category', function ($q) {
+                $q->where('slug',request('category_id'));
+            });
+        }
+
+        if (request('sortSalary')) {
+            $query->orderBy('salary',request('sortSalary'));
+        }
+    }
 }

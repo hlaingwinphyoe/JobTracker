@@ -12,7 +12,7 @@ class Category extends Model
 
     protected $guarded = [];
 
-    public function job_post(): HasMany
+    public function job_posts(): HasMany
     {
         return $this->hasMany(JobPost::class);
     }

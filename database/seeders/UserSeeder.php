@@ -34,6 +34,6 @@ class UserSeeder extends Seeder
             'type_id' => $developer->id,
         ])->assignRole('Developer')->givePermissionTo(Permission::all());
 
-        User::factory()->count(10)->create();
+        User::factory()->count(80)->create();
     }
 }

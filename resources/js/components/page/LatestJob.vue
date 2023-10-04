@@ -20,8 +20,8 @@
     </li>
   </ul>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
-    <div class="" v-for="i in 12" :key="i">
-      <Card />
+    <div class="" v-for="jobPost in jobPosts" :key="jobPost.id">
+      <Card :jobPost="jobPost" />
     </div>
   </div>
 
@@ -36,12 +36,31 @@
 </template>
 
 <script>
+import { onMounted, reactive, toRefs } from 'vue';
 import Card from "../composables/Card.vue";
 export default {
   components: {
     Card,
   },
   props: ["types"],
+  setup() {
+    const state = reactive({
+      jobPosts: [],
+      param: {
+        page: 1,
+        page_size: 9,
+      }
+    });
+
+    onMounted(() => {
+      axios.get('/wapi/get-jobs',{ params : state.param}).then((res) => {
+        state.jobPosts = res.data.data
+      })
+    })
+    return {
+      ...toRefs(state),
+    };
+  }
 };
 </script>
 
