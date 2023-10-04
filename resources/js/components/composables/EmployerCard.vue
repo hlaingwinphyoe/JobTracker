@@ -7,9 +7,9 @@
     />
     <div class="text-center my-3">
       <a href="javascript:void(0)" class="hover:underline">
-        <h5 class="font-bold">Jadon Ardam</h5>
+        <h5 class="font-bold">{{ employee.name }}</h5>
       </a>
-      <small class="text-gray-500 text-opacity-75">Startup Company Ltd.</small>
+      <small class="text-gray-500 text-opacity-75">{{ employee.company }}</small>
     </div>
     <p class="flex items-center justify-between my-4">
       <span class="text-sm text-gray-500 mb-3">
@@ -30,7 +30,7 @@
             d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"
           />
         </svg>
-        Mandalay
+        {{ employee.region_name }}
       </span>
       <span class="text-sm text-gray-500 mb-3">
         <svg
@@ -53,19 +53,24 @@
           <path d="M12 12l0 .01" />
           <path d="M3 13a20 20 0 0 0 18 0" />
         </svg>
-        Software Company
+        {{ employee.industry }}
       </span>
     </p>
     <div class="text-center">
       <a href="javascript:void(0)" class="border-2 border-primary-400 hover:bg-primary-500 hover:text-white hover:border-primary-500 p-3 rounded-lg"
-        >12 Open Jobs</a
+        >{{ employee.job_count }} Open Jobs</a
       >
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['employee'],
+  setup() {
+
+  }
+};
 </script>
 
 <style scoped>

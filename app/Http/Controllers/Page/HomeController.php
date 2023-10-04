@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\JobPost;
 use App\Models\Region;
 use App\Models\Type;
 use App\Models\User;
@@ -14,7 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $regions = Region::all();
-        $categories = Category::latest()->get()->take(7);
+        $categories = Category::latest()->get()->take(8);
         $types = Type::isType('job')->latest()->get();
         return view('main', compact('regions', 'types','categories'));
     }
@@ -34,6 +35,6 @@ class HomeController extends Controller
         $regions = Region::all();
         $types = Type::isType('job')->latest()->get();
         $categories = Category::latest()->get();
-        return view('pages.employers.index', compact(['regions', 'categories','types']));
+        return view('pages.employers.index', compact('regions', 'categories','types'));
     }
 }
