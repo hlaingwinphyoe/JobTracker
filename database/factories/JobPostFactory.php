@@ -36,7 +36,8 @@ class JobPostFactory extends Factory
             'category_id' => Category::all()->random()->id,
             'status_id' => Status::isType('job_status')->get()->random()->id,
             'region_id' => Region::all()->random()->id,
-            'user_id' => User::all()->random()->id,
+            // 'user_id' => User::all()->random()->id,
+            'user_id' => User::employer()->get()->random()->id,
             'created_at' => fake()->dateTimeBetween('-1 year', '-6 month'),
             'updated_at' => fake()->dateTimeBetween('-5 month', 'now'),
         ];

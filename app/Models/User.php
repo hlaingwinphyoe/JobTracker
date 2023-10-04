@@ -87,19 +87,26 @@ class User extends Authenticatable
     //     return $this->hasRole('Admin');
     // }
 
-    // public function scopeNotAdmin($query)
-    // {
-    //     $query->whereHas('roles', function ($q) {
-    //         $q->whereNotIn('slug', ['admin', 'developer']);
-    //     });
-    // }
+    public function scopeNotAdmin($query)
+    {
+        $query->whereHas('roles', function ($q) {
+            $q->whereNotIn('name', ['Admin', 'Developer']);
+        });
+    }
 
-    // public function scopeAdmin($query)
-    // {
-    //     $query->whereHas('roles', function ($q) {
-    //         $q->whereIn('slug', ['admin', 'developer']);
-    //     });
-    // }
+    public function scopeAdmin($query)
+    {
+        $query->whereHas('roles', function ($q) {
+            $q->whereIn('name', ['Admin', 'Developer']);
+        });
+    }
+
+    public function scopeEmployer($query)
+    {
+        $query->whereHas('roles', function ($q) {
+            $q->whereIn('name', ['Employer']);
+        });
+    }
 
     public function scopeIsType($query, $type)
     {
@@ -118,10 +125,10 @@ class User extends Authenticatable
             $query->orderBy('name',request('sort'));
         }
 
-        // if (request('role')) {
-        //     $query->whereHas('roles', function ($q) {
-        //         $q->where('slug', request('role'));
-        //     });
-        // }
+        if (request('role')) {
+            $query->whereHas('roles', function ($q) {
+                $q->where('name', request('role'));
+            });
+        }
     }
 }
