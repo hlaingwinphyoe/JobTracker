@@ -23,6 +23,7 @@ class PermissionSeeder extends Seeder
             'type' => ['Access Type','Write Type','Edit Type','Delete Type'],
             'role' => ['Access Role','Write Role','Edit Role','Delete Role'],
             'user' => ['Access User','Write User','Edit User','Delete User'],
+            'permission' => ['Access Permission','Write Permission','Edit Permission','Delete Permission'],
             'faq' => ['Access FAQ','Write FAQ','Edit FAQ','Delete FAQ'],
             'terms and conditions' => ['Access Terms and Conditions','Write Terms and Conditions','Edit Terms and Conditions','Delete Terms and Conditions'],
             'privacy policy' => ['Access Privacy Policy','Write Privacy Policy','Edit Privacy Policy','Delete Privacy Policy'],
