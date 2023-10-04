@@ -11,14 +11,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasSuperAdmin;
+    use HasApiTokens, HasFactory, Notifiable , HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +28,11 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
+        'profile',
+        'company_name',
+        'company_type',
+        'desc',
+        'region_id',
         'password',
         'type_id'
     ];
@@ -53,14 +57,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // public function canAccessPanel(Panel $panel): bool
-    // {
-    //     return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
-    // }
-
-    public function jobs(): HasMany
+    public function jobs(): HasMany  // employer create jobs
     {
-        return $this->hasMany(JobPost::class);
+        return $this->hasMany(JobPost::class, 'user_id', 'id');
     }
 
     public function region(): BelongsTo
@@ -68,22 +67,44 @@ class User extends Authenticatable
         return $this->belongsTo(Region::class);
     }
 
-    public function job_posts(): BelongsToMany
+    public function job_posts(): BelongsToMany  // employee's favourite posts
     {
         return $this->belongsToMany(JobPost::class, 'user_job_posts', 'user_id', 'job_post_id');
     }
 
-    public function scopeNotAdmin($query)
+    public function applied_jobs(): HasMany  // employee applied jobs
     {
-        $query->whereHas('roles', function ($q) {
-            $q->whereNotIn('slug', ['admin', 'developer']);
-        });
+        return $this->hasMany(AppliedJob::class, 'user_id', 'id');
     }
 
-    public function scopeAdmin($query)
+    public function type(): BelongsTo
     {
-        $query->whereHas('roles', function ($q) {
-            $q->whereIn('slug', ['admin', 'developer']);
+        return $this->belongsTo(Type::class);
+    }
+
+    // public function canAccessFilamente(): bool
+    // {
+    //     return $this->hasRole('Admin');
+    // }
+
+    // public function scopeNotAdmin($query)
+    // {
+    //     $query->whereHas('roles', function ($q) {
+    //         $q->whereNotIn('slug', ['admin', 'developer']);
+    //     });
+    // }
+
+    // public function scopeAdmin($query)
+    // {
+    //     $query->whereHas('roles', function ($q) {
+    //         $q->whereIn('slug', ['admin', 'developer']);
+    //     });
+    // }
+
+    public function scopeIsType($query, $type)
+    {
+        $query->whereHas('type', function ($q) use($type) {
+            $q->where('slug', $type);
         });
     }
 
@@ -97,10 +118,10 @@ class User extends Authenticatable
             $query->orderBy('name',request('sort'));
         }
 
-        if (request('role')) {
-            $query->whereHas('roles', function ($q) {
-                $q->where('slug', request('role'));
-            });
-        }
+        // if (request('role')) {
+        //     $query->whereHas('roles', function ($q) {
+        //         $q->where('slug', request('role'));
+        //     });
+        // }
     }
 }

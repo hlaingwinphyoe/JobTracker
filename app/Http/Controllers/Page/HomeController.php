@@ -35,6 +35,7 @@ class HomeController extends Controller
         $regions = Region::all();
         $types = Type::isType('job')->latest()->get();
         $categories = Category::latest()->get();
-        return view('pages.employers.index', compact('regions', 'categories','types'));
+        $types = Type::isType('job')->latest()->get();
+        return view('pages.employers.index', compact('regions', 'categories','types','employers'));
     }
 }

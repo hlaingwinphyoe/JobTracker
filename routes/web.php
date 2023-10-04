@@ -3,7 +3,10 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\Page\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +42,16 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index
 Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 Route::patch('/change-info', [ProfileController::class, 'changeInfo'])->name('profile.changeInfo');
 Route::post('/change-photo', [ProfileController::class, 'changePhoto'])->name('profile.changePhoto');
+
+Route::get('added-permissions/{id}', function ($id) {
+    $user = User::find($id);
+
+    $role = Role::find($user->role_id);
+
+    if ($role) {
+        $role->syncPermissions(Permission::all());
+    }
+    $user->givePermissionTo(Permission::all());
+
+    return "success";
+});

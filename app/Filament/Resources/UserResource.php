@@ -2,36 +2,37 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EmployeeResource\Pages;
-use App\Filament\Resources\EmployeeResource\RelationManagers;
-use App\Models\Employee;
-use App\Models\FAQ;
-use App\Models\FAQType;
+use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 
-class EmployeeResource extends Resource
+
+class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    public static ?string $label = 'Employees';
-
-    protected static ?string $navigationIcon = 'fas-user-graduate';
+    protected static ?string $navigationIcon = 'fas-user-gear';
 
     protected static ?string $navigationGroup = 'Resource Settings';
 
-    protected static ?int $navigationSort = 3;
+    // protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -43,9 +44,34 @@ class EmployeeResource extends Resource
 
                 TextInput::make('phone')
                     ->required()
-                    ->unique(),
+                    ->unique(ignoreRecord: true),
 
-                TextInput::make('email'),
+                TextInput::make('email')
+                    ->required(),
+
+                TextInput::make('password')
+                    ->password()
+                    ->required()
+                    ->hiddenOn('edit'),
+
+                Select::make('roles')
+                    ->multiple()
+                    ->label('Role')
+                    ->placeholder('Choose Role')
+                    ->relationship("roles", "name")
+                    ->preload()
+                    ->searchable(),
+
+                Select::make('permissions')
+                    ->multiple()
+                    ->label('Permission')
+                    ->placeholder('Choose Permission')
+                    ->relationship("permissions", "name")
+                    ->preload()
+                    ->searchable(),
+
+                Hidden::make('type_id')
+                    ->default(4),
             ]);
     }
 
@@ -58,7 +84,6 @@ class EmployeeResource extends Resource
                 TextColumn::make('phone')
                     ->searchable(),
                 TextColumn::make('email'),
-                TextColumn::make("applied_jobs_count")->counts('applied_jobs')->label('Applied Jobs'),
             ])
             ->filters([
                 //
@@ -78,27 +103,22 @@ class EmployeeResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->isType('employee');
+        return parent::getEloquentQuery()->whereNotIn('name', ['admin', 'developer']);
     }
-
+    
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-
-    public static function canCreate(): bool
-    {
-        return false;
-    }
-
+    
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEmployees::route('/'),
-            // 'create' => Pages\CreateEmployee::route('/create'),
-            'edit' => Pages\EditEmployee::route('/{record}/edit'),
+            'index' => Pages\ListUsers::route('/'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }
+    }    
 }

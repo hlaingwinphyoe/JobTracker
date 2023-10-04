@@ -23,8 +23,8 @@ class RoleSeeder extends Seeder
         $admin->syncPermissions(Permission::all());
         $developer->syncPermissions(Permission::all());
 
-        $permissions = Permission::where('type', 'job')->get();
-        $employer->syncPermissions($permissions->pluck('name'));
+        // $permissions = Permission::where('type', 'job')->get();
+        // $employer->syncPermissions($permissions->pluck('name'));
 
         
     }
