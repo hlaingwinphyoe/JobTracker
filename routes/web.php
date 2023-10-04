@@ -55,3 +55,12 @@ Route::get('added-permissions/{id}', function ($id) {
 
     return "success";
 });
+
+
+Route::get('test', function() {
+    // $user = User::employer()->get();
+    $user = User::whereHas('roles', function ($q) {
+        $q->where('name', 'Employer');
+    })->get();
+    dd($user);
+});

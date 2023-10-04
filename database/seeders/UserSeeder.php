@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -34,6 +35,16 @@ class UserSeeder extends Seeder
             'type_id' => $developer->id,
         ])->assignRole('Developer')->givePermissionTo(Permission::all());
 
-        User::factory()->count(80)->create();
+        $employers = User::factory()->count(80)->create();
+
+        foreach($employers as $employer) {
+            $employer->assignRole('Employer');
+
+            $empr_role = Role::where('name', 'Employer')->first();
+
+            foreach($empr_role->permissions as $permission) {
+                $employer->givePermissionTo($permission);
+            }
+        }
     }
 }
