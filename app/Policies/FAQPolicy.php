@@ -5,15 +5,23 @@ namespace App\Policies;
 use Illuminate\Auth\Access\Response;
 use App\Models\FAQ;
 use App\Models\User;
+use Spatie\Permission\Models\Permission;
 
 class FAQPolicy
 {
+    // public function viewAny(User $user): bool
+    // {
+    //     // return $user->hasRole('Admin');
+    //     // return $user->hasAnyPermission(['Access FAQ', 'Write FAQ', 'Edit FAQ', 'Delete FAQ']);
+    //     return $user->hasDirectPermission('Write FAQ');
+    // }
+
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, FAQ $faq): bool
+    public function view(User $user): bool
     {
-        return $user->can('Access FAQ');
+        return $user->hasDirectPermission('Access FAQ');
     }
 
     /**
@@ -21,38 +29,22 @@ class FAQPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Write FAQ');
+        return $user->hasDirectPermission('Write FAQ');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, FAQ $faq): bool
+    public function update(User $user): bool
     {
-        return $user->can('Edit FAQ');
+        return $user->hasDirectPermission('Edit FAQ');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, FAQ $faq): bool
+    public function delete(User $user): bool
     {
-        return $user->can('Delete FAQ');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, FAQ $faq): bool
-    {
-        return $user->can('restore FAQ');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, FAQ $faq): bool
-    {
-        return $user->can('force-delete FAQ');
+        return $user->hasDirectPermission('Delete FAQ');
     }
 }

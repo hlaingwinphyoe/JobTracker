@@ -13,7 +13,7 @@ class AppliedJobPolicy
      */
     public function view(User $user, AppliedJob $appliedjob): bool
     {
-        return $user->can('Access AppliedJob');
+        return $user->hasDirectPermission('Access AppliedJob');
     }
 
     /**
@@ -21,7 +21,7 @@ class AppliedJobPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Write AppliedJob');
+        return $user->hasDirectPermission('Write AppliedJob');
     }
 
     /**
@@ -29,7 +29,7 @@ class AppliedJobPolicy
      */
     public function update(User $user, AppliedJob $appliedjob): bool
     {
-        return $user->can('Edit AppliedJob');
+        return $user->hasDirectPermission('Edit AppliedJob');
     }
 
     /**
@@ -37,22 +37,6 @@ class AppliedJobPolicy
      */
     public function delete(User $user, AppliedJob $appliedjob): bool
     {
-        return $user->can('Delete AppliedJob');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, AppliedJob $appliedjob): bool
-    {
-        return $user->can('restore AppliedJob');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, AppliedJob $appliedjob): bool
-    {
-        return $user->can('force-delete AppliedJob');
+        return $user->hasDirectPermission('Delete AppliedJob');
     }
 }

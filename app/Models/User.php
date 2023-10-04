@@ -11,14 +11,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasSuperAdmin;
+    use HasApiTokens, HasFactory, Notifiable , HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -58,16 +57,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // public function canAccessFilament(): bool
-    // {
-    //     return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
-    // }
-
-    // public function canAccessPanel(Panel $panel): bool
-    // {
-    //     return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
-    // }
-
     public function jobs(): HasMany  // employer create jobs
     {
         return $this->hasMany(JobPost::class, 'user_id', 'id');
@@ -93,19 +82,24 @@ class User extends Authenticatable
         return $this->belongsTo(Type::class);
     }
 
-    public function scopeNotAdmin($query)
-    {
-        $query->whereHas('roles', function ($q) {
-            $q->whereNotIn('slug', ['admin', 'developer']);
-        });
-    }
+    // public function canAccessFilamente(): bool
+    // {
+    //     return $this->hasRole('Admin');
+    // }
 
-    public function scopeAdmin($query)
-    {
-        $query->whereHas('roles', function ($q) {
-            $q->whereIn('slug', ['admin', 'developer']);
-        });
-    }
+    // public function scopeNotAdmin($query)
+    // {
+    //     $query->whereHas('roles', function ($q) {
+    //         $q->whereNotIn('slug', ['admin', 'developer']);
+    //     });
+    // }
+
+    // public function scopeAdmin($query)
+    // {
+    //     $query->whereHas('roles', function ($q) {
+    //         $q->whereIn('slug', ['admin', 'developer']);
+    //     });
+    // }
 
     public function scopeIsType($query, $type)
     {
@@ -120,10 +114,10 @@ class User extends Authenticatable
             $query->where('name', 'like', '%' . request('q') . '%');
         }
 
-        if (request('role')) {
-            $query->whereHas('roles', function ($q) {
-                $q->where('slug', request('role'));
-            });
-        }
+        // if (request('role')) {
+        //     $query->whereHas('roles', function ($q) {
+        //         $q->where('slug', request('role'));
+        //     });
+        // }
     }
 }

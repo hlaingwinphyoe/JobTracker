@@ -13,7 +13,7 @@ class JobPostPolicy
      */
     public function view(User $user, JobPost $jobpost): bool
     {
-        return $user->can('Access Job');
+        return $user->hasDirectPermission('Access Job');
     }
 
     /**
@@ -21,7 +21,7 @@ class JobPostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Write Job');
+        return $user->hasDirectPermission('Write Job');
     }
 
     /**
@@ -29,7 +29,7 @@ class JobPostPolicy
      */
     public function update(User $user, JobPost $jobpost): bool
     {
-        return $user->can('Edit Job');
+        return $user->hasDirectPermission('Edit Job');
     }
 
     /**
@@ -37,22 +37,6 @@ class JobPostPolicy
      */
     public function delete(User $user, JobPost $jobpost): bool
     {
-        return $user->can('Delete Job');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, JobPost $jobpost): bool
-    {
-        return $user->can('restore Job');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, JobPost $jobpost): bool
-    {
-        return $user->can('force-delete Job');
+        return $user->hasDirectPermission('Delete Job');
     }
 }

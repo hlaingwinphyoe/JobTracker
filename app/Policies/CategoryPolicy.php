@@ -13,7 +13,7 @@ class CategoryPolicy
      */
     public function view(User $user, Category $category): bool
     {
-        return $user->can('Access Category');
+        return $user->hasDirectPermission('Access Category');
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoryPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Write Category');
+        return $user->hasDirectPermission('Write Category');
     }
 
     /**
@@ -29,7 +29,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category): bool
     {
-        return $user->can('Edit Category');
+        return $user->hasDirectPermission('Edit Category');
     }
 
     /**
@@ -37,6 +37,6 @@ class CategoryPolicy
      */
     public function delete(User $user, Category $category): bool
     {
-        return $user->can('Delete Category');
+        return $user->hasDirectPermission('Delete Category');
     }
 }

@@ -13,7 +13,7 @@ class EmployeePolicy
      */
     public function view(User $user, Employee $employee): bool
     {
-        return $user->can('Access Employee');
+        return $user->hasDirectPermission('Access Employee');
     }
 
     /**
@@ -21,7 +21,7 @@ class EmployeePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Write Employee');
+        return $user->hasDirectPermission('Write Employee');
     }
 
     /**
@@ -29,7 +29,7 @@ class EmployeePolicy
      */
     public function update(User $user, Employee $employee): bool
     {
-        return $user->can('Edit Employee');
+        return $user->hasDirectPermission('Edit Employee');
     }
 
     /**
@@ -37,22 +37,6 @@ class EmployeePolicy
      */
     public function delete(User $user, Employee $employee): bool
     {
-        return $user->can('Delete Employee');
+        return $user->hasDirectPermission('Delete Employee');
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    // public function restore(User $user, Employee $employee): bool
-    // {
-    //     return $user->can('restore Employee');
-    // }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    // public function forceDelete(User $user, Employee $employee): bool
-    // {
-    //     return $user->can('force-delete Employee');
-    // }
 }
