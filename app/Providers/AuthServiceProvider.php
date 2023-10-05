@@ -17,6 +17,7 @@ use App\Policies\TypePolicy;
 use App\Policies\UserPolicy;
 // use App\Policies\EmployeePolicy;
 use App\Policies\RolePolicy;
+use App\Policies\TermsAndConditionsPolicy;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Access\Gate as AccessGate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -42,6 +43,7 @@ class AuthServiceProvider extends ServiceProvider
         Type::class       => TypePolicy::class,
 
         FAQ::class       => FAQPolicy::class,
+        FAQ::class       => TermsAndConditionsPolicy::class,
     ];
 
     /**
