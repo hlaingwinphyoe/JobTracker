@@ -92,3 +92,10 @@ html {
       background-size: 650%;
   }
 }
+
+.layout {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  grid-gap: 30px;
+}

@@ -245,7 +245,7 @@
         <div class="h-[2px] bg-gray-300 w-full mt-12 mb-8 relative">
             <h4 class="text-3xl font-semibold tracking-wider absolute -top-5 bg-white pr-4">Related Jobs</h4>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
             @foreach ($relatedJobs as $jobPost)
                 <div class="max-w-sm h-[25rem] bg-white border border-gray-200 rounded-lg shadow">
                     <a href="{{ route('jobs.show', $jobPost->slug) }}">
@@ -254,14 +254,17 @@
                     <div class="p-5">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex gap-1.5 items-center">
-                                <img class="flex-shrink-0 w-8 h-8 rounded-full" src="https://i.imgur.com/7D7I6dI.png"
-                                    alt="" />
+                                <a href="{{ route('employers.show', $jobPost->user_id) }}" class="cursor-pointer">
+                                    <img class="flex-shrink-0 w-8 h-8 rounded-full" src="https://i.imgur.com/7D7I6dI.png"
+                                        alt="" />
+                                </a>
                                 <div class="flex">
-                                    <span class="text-sm">{{ $jobPost->user->name }}</span>
+                                    <a href="{{ route('employers.show', $jobPost->user_id) }}"
+                                        class="text-sm hover:underline">{{ $jobPost->user->name }}</a>
                                 </div>
                             </div>
                             <span>
-                                <a href="#"
+                                <a href=""
                                     class="bg-tertiary-100 hover:bg-tertiary-200 text-tertiary-800 text-xs font-semibold px-2.5 py-1 rounded border border-tertiary-400 whitespace-nowrap">{{ $jobPost->type->name }}</a>
                             </span>
                         </div>

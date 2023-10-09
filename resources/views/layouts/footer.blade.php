@@ -1,13 +1,13 @@
 <footer class="bg-white">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-        <div class="grid grid-cols-3">
+        <div class="grid grid-cols-1 md:grid-cols-3">
             <div class="mb-6 md:mb-0 col-span-1">
-                <a href="{{ route('home.index') }}" class="flex items-center">
+                <a href="{{ route('home.index') }}" class="flex items-center justify-center md:justify-start">
                     <img src="{{ asset('logo-notext.svg') }}" class="h-8 mr-3" alt="Logo" />
                     <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
                 </a>
                 <!--  Social Icons -->
-                <div class="flex mt-8 space-x-6">
+                <div class="flex justify-center md:justify-start mt-8 space-x-6">
                     <a href="javascript:void(0)" class="text-gray-400 hover:text-gray-500">
                         <span class="sr-only">Facebook</span>
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
@@ -97,9 +97,9 @@
             </div>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
-        <div class="sm:flex sm:items-center sm:justify-center relative">
+        <div class="flex items-center justify-center relative">
             @if (request()->routeIs('home.index'))
-                <a href="#home" class="absolute bottom-[34px] bg-primary-500 p-2 rounded-full text-white">
+                <a href="#home" class="absolute bottom-7 md:bottom-[34px] bg-primary-500 p-2 rounded-full text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-up"
                         width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                         fill="none" stroke-linecap="round" stroke-linejoin="round">

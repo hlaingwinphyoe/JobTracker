@@ -1,16 +1,5 @@
 @extends('layouts.app')
 
-@section('style')
-    <style>
-        .layout {
-            display: grid;
-            grid-template-rows: auto auto;
-            grid-template-columns: 15rem minmax(0, 1fr);
-            grid-gap: 30px;
-        }
-    </style>
-@endsection
-
 @section('content')
     <section class="container mx-auto mt-8">
         <div class="layout">

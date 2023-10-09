@@ -23,6 +23,17 @@ class ProfileController extends Controller
         return view('pages.employees.profile.saved-jobs');
     }
 
+    public function editProfile()
+    {
+        $user = Auth::user();
+        return view('pages.employees.profile.edit', compact('user'));
+    }
+
+    public function changePassword()
+    {
+        return view('pages.employees.profile.change-password');
+    }
+
     public function changeInfo(Request $request)
     {
         $user = User::findOrFail(auth()->user()->id);
@@ -33,12 +44,12 @@ class ProfileController extends Controller
             'phone' => 'required|digits:11|unique:users,phone,' . $user->id
         ]);
 
-        $user->update($request->only(['name', 'email', 'phone']));
+        $user->update($request->only(['name', 'email', 'phone','desc']));
 
         return redirect()->back()->with('message', 'Profile Updated.');
     }
 
-    public function changePassword(Request $request)
+    public function updatepassword(Request $request)
     {
         $currentUser = User::findOrFail(Auth::id());
         $request->validate([
@@ -47,7 +58,7 @@ class ProfileController extends Controller
             'new_confirm_password' => 'required_with:new_password|same:new_password|min:8',
         ]);
 
-        if (!$currentUser || !Hash::check($request->password, $currentUser->password)) {
+        if (!$currentUser || !Hash::check($request->current_password, $currentUser->password)) {
             throw ValidationException::withMessages([
                 'credentials' => 'These credentials do not match our records.',
             ]);
