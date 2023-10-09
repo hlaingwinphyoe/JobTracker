@@ -15,4 +15,18 @@ class PageController extends Controller
         
         return view('pages.pages.faq', compact('faqs'));
     }
+
+    public function terms()
+    {
+        $terms = FAQ::isType('terms-and-conditions')->get()->last();
+        
+        return view('pages.pages.terms', compact('terms'));
+    }
+
+    public function policy()
+    {
+        $policy = FAQ::isType('privacy-policy')->get()->last();
+        
+        return view('pages.pages.policy', compact('policy'));
+    }
 }

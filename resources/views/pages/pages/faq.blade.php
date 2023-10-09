@@ -30,7 +30,7 @@
                             <div id="accordion-flush-body-{{ $faq->id }}" class="hidden" aria-labelledby="accordion-flush-heading-{{ $faq->id }}">
                                 <div class="py-5 border-b border-gray-200 dark:border-gray-700">
                                     <p class="mb-2 text-gray-500 dark:text-gray-400">
-                                        {{ $faq->desc }}
+                                        {!! $faq->desc !!}
                                     </p>
                                 </div>
                             </div>

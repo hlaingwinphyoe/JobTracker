@@ -192,10 +192,10 @@ class JobPostResource extends Resource
                 TextColumn::make("user.name")->label('Created By')->toggleable(),
                 TextColumn::make('status.title')
                     ->badge()
-                    ->icon(fn (string $state): string => match ($state) {
-                        'Available' => 'fas-check-circle',
-                        'Closed' => 'fas-x-mark'
-                    })
+                    // ->icon(fn (string $state): string => match ($state) {
+                    //     'Available' => 'fas-check-circle',
+                    //     'Closed' => 'fas-x-mark'
+                    // })
                     ->color(fn (string $state): string => match ($state) {
                         'Available' => 'success',
                         'Closed' => 'danger',
@@ -313,6 +313,17 @@ class JobPostResource extends Resource
                     ])
                     ->collapsible(),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $employer = Type::where('slug', 'employer')->first();
+
+        if(auth()->user()->type->id == $employer->id) {
+            return parent::getEloquentQuery()->where('user_id', auth()->user()->id);
+        }else {
+            return parent::getEloquentQuery();
+        }
     }
 
     public static function getRelations(): array

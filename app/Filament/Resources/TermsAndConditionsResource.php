@@ -23,6 +23,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\ViewAction;
+
 
 class TermsAndConditionsResource extends Resource
 {
@@ -44,10 +48,11 @@ class TermsAndConditionsResource extends Resource
                     ->reactive()
                     ->required()
                     ->maxLength(255),
-                Textarea::make('desc')
-                    ->label('Description')
-                    ->autosize()
-                    ->required(),
+                // Textarea::make('desc')
+                //     ->label('Description')
+                //     ->autosize()
+                //     ->required(),
+                RichEditor::make('desc'),
                 Hidden::make('faq_type_id')
                     ->default(2),
             ]);
@@ -59,14 +64,16 @@ class TermsAndConditionsResource extends Resource
             ->columns([
                 TextColumn::make('title')
                 ->searchable(),
-                TextColumn::make('desc'),
-                TextColumn::make('faq_type.name'),
+                TextColumn::make('desc')
+                ->html(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([

@@ -83,13 +83,13 @@
                         <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Legal</h2>
                         <ul class="text-gray-500 font-medium">
                             <li class="mb-4">
-                                <a href="#" class="hover:underline">FAQs</a>
+                                <a href="{{ route('faq') }}" class="hover:underline">FAQs</a>
                             </li>
                             <li class="mb-4">
-                                <a href="#" class="hover:underline">Privacy Policy</a>
+                                <a href="{{ route('policy') }}" class="hover:underline">Privacy Policy</a>
                             </li>
                             <li>
-                                <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                                <a href="{{ route('terms') }}" class="hover:underline">Terms &amp; Conditions</a>
                             </li>
                         </ul>
                     </div>

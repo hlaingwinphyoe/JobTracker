@@ -43,7 +43,7 @@ class AuthServiceProvider extends ServiceProvider
         Type::class       => TypePolicy::class,
 
         FAQ::class       => FAQPolicy::class,
-        FAQ::class       => TermsAndConditionsPolicy::class,
+        // FAQ::class       => TermsAndConditionsPolicy::class,
     ];
 
     /**

@@ -16,17 +16,17 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'employee' => ['Access Employee','Write Employee','Edit Employee','Delete Employee'],
-            'employer' => ['Access Employer','Write Employer','Edit Employer','Delete Employer'],
-            'job' => ['Access Job','Write Job','Edit Job','Delete Job'],
-            'category' => ['Access Category','Write Category','Edit Category','Delete Category'],
-            'type' => ['Access Type','Write Type','Edit Type','Delete Type'],
-            'role' => ['Access Role','Write Role','Edit Role','Delete Role'],
-            'user' => ['Access User','Write User','Edit User','Delete User'],
-            'permission' => ['Access Permission','Write Permission','Edit Permission','Delete Permission'],
-            'faq' => ['Access FAQ','Write FAQ','Edit FAQ','Delete FAQ'],
-            'terms and conditions' => ['Access Terms and Conditions','Write Terms and Conditions','Edit Terms and Conditions','Delete Terms and Conditions'],
-            'privacy policy' => ['Access Privacy Policy','Write Privacy Policy','Edit Privacy Policy','Delete Privacy Policy'],
+            'employee' => ['Access Employee','Write Employee','View Employee', 'Edit Employee','Delete Employee'],
+            'employer' => ['Access Employer','Write Employer','View Employer', 'Edit Employer','Delete Employer'],
+            'job' => ['Access Job','Write Job','View Job', 'Edit Job','Delete Job'],
+            'category' => ['Access Category','Write Category','View Category', 'Edit Category','Delete Category'],
+            'type' => ['Access Type','Write Type','View Type', 'Edit Type','Delete Type'],
+            'role' => ['Access Role','Write Role','View Role', 'Edit Role','Delete Role'],
+            'user' => ['Access User','Write User','View User', 'Edit User','Delete User'],
+            'permission' => ['Access Permission','Write Permission','View Permission', 'Edit Permission','Delete Permission'],
+            'faq' => ['Access FAQ','Write FAQ','View FAQ', 'Edit FAQ','Delete FAQ'],
+            'terms and conditions' => ['Access Terms and Conditions','Write Terms and Conditions','View Terms and Conditions','Edit Terms and Conditions','Delete Terms and Conditions'],
+            'privacy policy' => ['Access Privacy Policy','Write Privacy Policy','View Privacy Policy','Edit Privacy Policy','Delete Privacy Policy'],
         ];
 
         foreach ($permissions as $index => $perm) {

@@ -8,7 +8,7 @@ class TermsAndConditionsPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyPermission(['Access Terms and Conditions', 'Write Terms and Conditions', 'Edit Terms and Conditions', 'Delete Terms and Conditions']);
+        return $user->hasDirectPermission('Access Terms and Conditions');
     }
 
     /**
@@ -16,7 +16,7 @@ class TermsAndConditionsPolicy
      */
     public function view(User $user): bool
     {
-        return $user->hasDirectPermission('Access Terms and Conditions');
+        return $user->hasDirectPermission('View Terms and Conditions');
     }
 
     /**

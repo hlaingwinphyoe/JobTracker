@@ -45,6 +45,8 @@ Route::patch('/change-info', [ProfileController::class, 'changeInfo'])->name('pr
 Route::post('/change-photo', [ProfileController::class, 'changePhoto'])->name('profile.changePhoto');
 
 Route::get('faq', [PageController::class, 'faq'])->name('faq');
+Route::get('terms', [PageController::class, 'terms'])->name('terms');
+Route::get('policy', [PageController::class, 'policy'])->name('policy');
 
 Route::get('added-permissions/{id}', function ($id) {
     $user = User::find($id);

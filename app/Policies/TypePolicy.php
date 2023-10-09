@@ -10,14 +10,14 @@ class TypePolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyPermission(['Access Type', 'Write Type', 'Edit Type', 'Delete Type']);
+        return $user->hasDirectPermission('Access Type');
     }
     /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Type $type): bool
     {
-        return $user->hasDirectPermission('Access Type');
+        return $user->hasDirectPermission('View Type');
     }
 
     /**

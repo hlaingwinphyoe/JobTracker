@@ -10,14 +10,14 @@ class EmployerPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyPermission(['Access Employer', 'Write Employer', 'Edit Employer', 'Delete Employer']);
+        return $user->hasDirectPermission('Access Employer');
     }
     /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Employer $employer): bool
     {
-        return $user->hasDirectPermission('Access Employer');
+        return $user->hasDirectPermission('View Employer');
     }
 
     /**

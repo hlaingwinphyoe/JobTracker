@@ -24,14 +24,14 @@ class RoleSeeder extends Seeder
         $admin->syncPermissions(Permission::all());
         $developer->syncPermissions(Permission::all());
 
-        $employer->syncPermissions(Permission::whereIn('name', ['Access Job', 'Write Job', 'Edit Job'])->get()->pluck('name'));
+        $employer->syncPermissions(Permission::whereIn('name', ['Access Job', 'Write Job','View Job', 'Edit Job'])->get()->pluck('name'));
 
         $operator->syncPermissions(Permission::whereIn('name', 
-        ['Access Job', 'Write Job', 'Edit Job', 'Delete Job',
-        'Access Category', 'Write Category', 'Edit Category', 'Delete Category',
-        'Access Type', 'Write Type', 'Edit Type', 'Delete Type',
-        'Access FAQ', 'Write FAQ', 'Edit FAQ', 'Delete FAQ',
-        'Access Terms and Conditions', 'Write Terms and Conditions', 'Edit Terms and Conditions', 'Delete Terms and Conditions',
-        'Access Privacy Policy', 'Write Privacy Policy', 'Edit Privacy Policy', 'Delete Privacy Policy',])->get()->pluck('name'));
+        ['Access Job', 'Write Job','View Job', 'Edit Job', 'Delete Job',
+        'Access Category', 'Write Category','View Category', 'Edit Category', 'Delete Category',
+        'Access Type', 'Write Type','View Type', 'Edit Type', 'Delete Type',
+        'Access FAQ', 'Write FAQ','View FAQ', 'Edit FAQ', 'Delete FAQ',
+        'Access Terms and Conditions', 'Write Terms and Conditions', 'View Terms and Conditions', 'Edit Terms and Conditions', 'Delete Terms and Conditions',
+        'Access Privacy Policy', 'Write Privacy Policy','View Privacy Policy', 'Edit Privacy Policy', 'Delete Privacy Policy',])->get()->pluck('name'));
     }
 }

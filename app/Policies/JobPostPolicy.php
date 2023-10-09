@@ -10,14 +10,15 @@ class JobPostPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyPermission(['Access Job', 'Write Job', 'Edit Job', 'Delete Job']);
+        // return $user->hasAnyPermission(['Access Job', 'Write Job', 'Edit Job', 'Delete Job']);
+        return $user->hasDirectPermission('Access Job');
     }
     /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, JobPost $jobpost): bool
     {
-        return $user->hasDirectPermission('Access Job');
+        return $user->hasDirectPermission('View Job');
     }
 
     /**
