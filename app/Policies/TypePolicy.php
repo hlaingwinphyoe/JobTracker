@@ -8,12 +8,16 @@ use App\Models\User;
 
 class TypePolicy
 {
+    public function viewAny(User $user): bool
+    {
+        return $user->hasDirectPermission('Access Type');
+    }
     /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Type $type): bool
     {
-        return $user->hasDirectPermission('Access Type');
+        return $user->hasDirectPermission('View Type');
     }
 
     /**

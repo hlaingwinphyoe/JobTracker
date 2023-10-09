@@ -8,12 +8,16 @@ use App\Models\User;
 
 class UserPolicy
 {
+    public function viewAny(User $user): bool
+    {
+        return $user->hasDirectPermission('Access User');
+    }
     /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, User $model): bool
     {
-        return $user->hasDirectPermission('Access User');
+        return $user->hasDirectPermission('View User');
     }
 
     /**

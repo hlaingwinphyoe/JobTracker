@@ -55,6 +55,15 @@ class JobPost extends Model
         return $this->hasMany(AppliedJob::class, 'job_id', 'id');
     }
 
+    // public function scopegetByUser($query)
+    // {
+    //     $employer = Type::where('slug', 'employer')->first();
+
+    //     $query->whereHas('user', function ($q) use ($employer) {
+    //         $q->where('id', $)
+    //     });
+    // }
+    
     // scope function
     public function scopeFilterOn($query)
     {

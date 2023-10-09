@@ -82,11 +82,6 @@ class User extends Authenticatable
         return $this->belongsTo(Type::class);
     }
 
-    // public function canAccessFilamente(): bool
-    // {
-    //     return $this->hasRole('Admin');
-    // }
-
     public function scopeNotAdmin($query)
     {
         $query->whereHas('roles', function ($q) {

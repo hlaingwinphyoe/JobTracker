@@ -2,28 +2,21 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\Response;
-use App\Models\FAQ;
 use App\Models\User;
-use App\Traits\FAQTrait;
 use Spatie\Permission\Models\Permission;
 
-class FAQPolicy
+class PermissionPolicy
 {
-    // use FAQTrait;
-
     public function viewAny(User $user): bool
     {
-        // return $user->hasAnyPermission(['Access FAQ', 'Write FAQ', 'Edit FAQ', 'Delete FAQ']);
-        return $user->hasDirectPermission('Access FAQ');
+        return $user->hasDirectPermission('Access Permission');
     }
-
-    /**
+   /**
      * Determine whether the user can view the model.
      */
     public function view(User $user): bool
     {
-        return $user->hasDirectPermission('View FAQ');
+        return $user->hasDirectPermission('View Permission');
     }
 
     /**
@@ -31,7 +24,7 @@ class FAQPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasDirectPermission('Write FAQ');
+        return $user->hasDirectPermission('Write Permission');
     }
 
     /**
@@ -39,7 +32,7 @@ class FAQPolicy
      */
     public function update(User $user): bool
     {
-        return $user->hasDirectPermission('Edit FAQ');
+        return $user->hasDirectPermission('Edit Permission');
     }
 
     /**
@@ -47,6 +40,6 @@ class FAQPolicy
      */
     public function delete(User $user): bool
     {
-        return $user->hasDirectPermission('Delete FAQ');
+        return $user->hasDirectPermission('Delete Permission');
     }
 }

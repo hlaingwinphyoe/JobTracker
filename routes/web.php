@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Page\HomeController;
+use App\Http\Controllers\Page\PageController;
 use App\Http\Controllers\Page\ProfileController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,10 @@ Route::prefix('/profile')->name('profile.')->controller(ProfileController::class
     Route::patch('/change-info', 'changeInfo')->name('changeInfo');
     Route::post('/change-photo', 'changePhoto')->name('changePhoto');
 });
+
+Route::get('faq', [PageController::class, 'faq'])->name('faq');
+Route::get('terms', [PageController::class, 'terms'])->name('terms');
+Route::get('policy', [PageController::class, 'policy'])->name('policy');
 
 Route::get('added-permissions/{id}', function ($id) {
     $user = User::find($id);
