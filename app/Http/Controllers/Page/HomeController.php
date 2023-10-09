@@ -17,7 +17,7 @@ class HomeController extends Controller
         $regions = Region::all();
         $categories = Category::inRandomOrder()->get()->take(8);
         $types = Type::isType('job')->orderBy('id')->get();
-        return view('main', compact('regions', 'types','categories'));
+        return view('main', compact('regions', 'types', 'categories'));
     }
 
     public function jobLists(Request $request)
@@ -30,12 +30,24 @@ class HomeController extends Controller
 
     public function employerLists(Request $request)
     {
-        $employerType = Type::isType('user')->where('name', 'employer')->first();
-        $employers = User::where('type_id', $employerType->id)->paginate(20);
         $regions = Region::all();
-        $types = Type::isType('job')->orderBy('id')->get();
         $categories = Category::orderBy('id')->get();
         $types = Type::isType('job')->orderBy('id')->get();
-        return view('pages.employers.index', compact('regions', 'categories','types','employers'));
+        return view('pages.employers.index', compact('regions', 'categories', 'types'));
+    }
+
+    public function jobDetail($slug)
+    {
+        $jobPost = JobPost::with('user', 'category', 'type')->where('slug', $slug)->first();
+
+        $relatedJobs = JobPost::with('user', 'category', 'type')->where('category_id', $jobPost->category_id)->where('id', '!=', $jobPost->id)->inRandomOrder()->get()->take(4);
+        return view('pages.jobs.show', compact('jobPost', 'relatedJobs'));
+    }
+
+    public function employerDetail($id)
+    {
+        $employer = User::with('jobs')->findOrFail($id);
+        $openJobTotal = JobPost::where('user_id', $employer->id)->statusAvailable()->get()->count();
+        return view('pages.employers.show', compact('employer', 'openJobTotal'));
     }
 }

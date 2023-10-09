@@ -54,19 +54,40 @@ class JobPost extends Model
     {
         return $this->hasMany(AppliedJob::class, 'job_id', 'id');
     }
-    
+
     // scope function
     public function scopeFilterOn($query)
     {
-        if(request('category_id'))
-        {
+        if (request('search')) {
+            $query->where('title', 'like', '%' . request('search') . '%');
+        }
+
+        if (request('category')) {
             $query->whereHas('category', function ($q) {
-                $q->where('slug',request('category_id'));
+                $q->where('slug', request('category'));
+            });
+        }
+
+        if (request('type')) {
+            $query->whereHas('type', function ($q) {
+                $q->where('slug', request('type'));
+            });
+        }
+
+        if (request('region')) {
+            $query->whereHas('region', function ($q) {
+                $q->where('slug', request('region'));
             });
         }
 
         if (request('sortSalary')) {
-            $query->orderBy('salary',request('sortSalary'));
+            $query->orderBy('salary', request('sortSalary'));
         }
+    }
+
+    public function scopeStatusAvailable($q)
+    {
+        $available = Status::isType('job_status')->first();
+        $q->where('status_id', $available->id);
     }
 }

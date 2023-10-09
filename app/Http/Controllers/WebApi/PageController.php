@@ -34,11 +34,22 @@ class PageController extends Controller
     public function employerList(Request $request)
     {
         if (isset($request->page_size) && $request->page_size) {
-            $employers = User::filterOn()->orderBy('id', 'DESC')->paginate($request->page_size);
+            $employers = User::employer()->filterOn()->orderBy('id', 'DESC')->paginate($request->page_size);
         } else {
-            $employers = User::filterOn()->orderBy('id', 'DESC')->paginate(20);
+            $employers = User::employer()->filterOn()->orderBy('id', 'DESC')->paginate(20);
         }
 
         return EmployerResource::collection($employers);
+    }
+
+    public function employerJobs(Request $request, $employerId)
+    {
+        if (isset($request->page_size) && $request->page_size) {
+            $jobPosts = JobPost::with('user', 'type', 'region')->filterOn()->statusAvailable()->where('user_id', $employerId)->orderBy('id', 'DESC')->paginate($request->page_size);
+        } else {
+            $jobPosts = JobPost::with('user', 'type', 'region')->filterOn()->statusAvailable()->where('user_id', $employerId)->orderBy('id', 'DESC')->paginate(20);
+        }
+
+        return JobPostResource::collection($jobPosts);
     }
 }

@@ -9,3 +9,4 @@ Route::post('/employer-register', [AuthController::class, 'employerRegister']);
 Route::get('/get-regions', [PageController::class, 'regionList']);
 Route::get('/get-jobs', [PageController::class, 'jobPostList']);
 Route::get('/get-employers', [PageController::class, 'employerList']);
+Route::get('/get-employer-jobs/{employerId}', [PageController::class, 'employerJobs']);

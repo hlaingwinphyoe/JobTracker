@@ -15,7 +15,12 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        return view('pages.employees.profile', compact('user'));
+        return view('pages.employees.profile.index', compact('user'));
+    }
+
+    public function savedJobs()
+    {
+        return view('pages.employees.profile.saved-jobs');
     }
 
     public function changeInfo(Request $request)

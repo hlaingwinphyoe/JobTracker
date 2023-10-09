@@ -65,7 +65,9 @@
         </h1>
         <div class="flex items-center">
           <span class="">
-            <label for="sortSalary" class="text-sm text-gray-500 mr-2"> Salary: </label>
+            <label for="sortSalary" class="text-sm text-gray-500 mr-2">
+              Salary:
+            </label>
             <select
               id="sortSalary"
               name="sortSalary"
@@ -78,31 +80,10 @@
               <option value="asc">High to Low</option>
             </select>
           </span>
-          <button
-          @click.prevent="reset"
-            class="p-2 bg-red-500 rounded-lg ml-2 text-white"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-refresh"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
-              <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
-            </svg>
-          </button>
         </div>
       </div>
       <div>
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
           <div class="" v-for="jobPost in jobPosts" :key="jobPost.id">
             <Card :jobPost="jobPost" />
           </div>
@@ -149,9 +130,10 @@ export default {
         page: 1,
         page_size: 12,
         search: "",
-        category_id: "",
-        type_id: "",
-        sortSalary: ""
+        category: "",
+        type: "",
+        region: "",
+        sortSalary: "",
       },
       settings: {
         itemsToShow: 1,
@@ -174,7 +156,7 @@ export default {
     });
 
     const isActive = (key) => {
-      if (state.param.category_id == key) {
+      if (state.param.category == key) {
         return "active";
       } else {
         return "";
@@ -183,20 +165,12 @@ export default {
 
     const chooseCategory = (key) => {
       state.loading = true;
-      state.param.category_id = key;
+      state.param.category = key;
       state.categoryTitle = key;
       state.param.page = 1;
       state.jobPosts = [];
 
       getJobs();
-
-      // state.providers = [];
-      // state.param.provider_id = "";
-      // state.providerTitle = "";
-
-      // http.game.gameProviders({ category_id: key }).then((res) => {
-      //   state.providers = res.data.data.providers;
-      // });
     };
 
     const refCarousel = ref(null);
@@ -229,23 +203,30 @@ export default {
       }
     };
 
-    const reset = () => {
-      state.param = {
-        page: 1,
-        page_size: 12,
-        search: "",
-        sortSalary: "",
-        category_id: "",
-        type_id: ''
-      };
-      getJobs();
-    };
-
     const filterSort = () => {
       getJobs();
     };
 
+    const getQuery = () => {
+      let params = window.location.href.split("?");
+      if (params.length == 2) {
+        let vars = params[1].split("&");
+        let getVars = {};
+        let tmp = "";
+        vars.forEach(function (v) {
+          tmp = v.split("=");
+          if (tmp.length == 2) getVars[tmp[0]] = tmp[1];
+        });
+        state.param.search = getVars.search;
+        state.param.region = getVars.region;
+        state.param.category = getVars.category;
+        state.param.type = getVars.type;
+        state.categoryTitle = getVars.category ? getVars.category : "All";
+      }
+    };
+
     onMounted(() => {
+      getQuery();
       getJobs();
     });
 
@@ -257,7 +238,6 @@ export default {
       prev,
       seeMore,
       isActive,
-      reset,
       filterSort,
     };
   },

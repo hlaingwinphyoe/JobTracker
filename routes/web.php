@@ -32,16 +32,21 @@ Route::post('/login', [AuthController::class, 'customLogin'])->name('login.store
 
 // Jobs
 Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');
+Route::get('/job-lists/{job}', [HomeController::class, 'jobDetail'])->name('jobs.show');
 
 
 // Employers
 Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('home.employers');
+Route::get('/employer-lists/{employer}', [HomeController::class, 'employerDetail'])->name('employers.show');
 
 // employee profile
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
-Route::patch('/change-info', [ProfileController::class, 'changeInfo'])->name('profile.changeInfo');
-Route::post('/change-photo', [ProfileController::class, 'changePhoto'])->name('profile.changePhoto');
+Route::prefix('/profile')->name('profile.')->controller(ProfileController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/saved-jobs', 'savedJobs')->name('edit');
+    Route::post('/change-password', 'changePassword')->name('changePassword');
+    Route::patch('/change-info', 'changeInfo')->name('changeInfo');
+    Route::post('/change-photo', 'changePhoto')->name('changePhoto');
+});
 
 Route::get('added-permissions/{id}', function ($id) {
     $user = User::find($id);
@@ -57,10 +62,10 @@ Route::get('added-permissions/{id}', function ($id) {
 });
 
 
-Route::get('test', function() {
-    // $user = User::employer()->get();
-    $user = User::whereHas('roles', function ($q) {
-        $q->where('name', 'Employer');
-    })->get();
-    dd($user);
-});
+// Route::get('test', function() {
+// $user = User::employer()->get();
+//     $user = User::whereHas('roles', function ($q) {
+//         $q->where('name', 'Employer');
+//     })->get();
+//     dd($user);
+// });

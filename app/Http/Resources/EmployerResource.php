@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\JobPost;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +15,7 @@ class EmployerResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $jobCount = JobPost::where('user_id',$this->id)->statusAvailable()->count();
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -26,7 +28,7 @@ class EmployerResource extends JsonResource
             'region_name' => $this->region ? $this->region->name : '',
             'job_type' => $this->type ? $this->type->name : '',
             'time' => $this->created_at->diffForHumans(),
-            'job_count' => $this->jobs->count(),
+            'job_count' => $jobCount,
         ];
     }
 }
