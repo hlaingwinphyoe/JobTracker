@@ -3,6 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TermsAndConditionsResource\Pages;
+use App\Filament\Resources\TermsAndConditionsResource\Pages\CreateTermsAndConditions;
+use App\Filament\Resources\TermsAndConditionsResource\Pages\EditTermsAndConditions;
+use App\Filament\Resources\TermsAndConditionsResource\Pages\ListTermsAndConditions;
 use App\Filament\Resources\TermsAndConditionsResource\RelationManagers;
 use App\Models\FAQ;
 use Filament\Forms;
@@ -10,11 +13,20 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\ViewAction;
+
 
 class TermsAndConditionsResource extends Resource
 {
@@ -36,10 +48,11 @@ class TermsAndConditionsResource extends Resource
                     ->reactive()
                     ->required()
                     ->maxLength(255),
-                Textarea::make('desc')
-                    ->label('Description')
-                    ->autosize()
-                    ->required(),
+                // Textarea::make('desc')
+                //     ->label('Description')
+                //     ->autosize()
+                //     ->required(),
+                RichEditor::make('desc'),
                 Hidden::make('faq_type_id')
                     ->default(2),
             ]);
@@ -49,24 +62,26 @@ class TermsAndConditionsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                 ->searchable(),
-                Tables\Columns\TextColumn::make('desc'),
-                Tables\Columns\TextColumn::make('faq_type.name'),
+                TextColumn::make('desc')
+                ->html(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                ViewAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                CreateAction::make(),
             ]);
     }
 
@@ -85,9 +100,9 @@ class TermsAndConditionsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTermsAndConditions::route('/'),
-            'create' => Pages\CreateTermsAndConditions::route('/create'),
-            'edit' => Pages\EditTermsAndConditions::route('/{record}/edit'),
+            'index' => ListTermsAndConditions::route('/'),
+            'create' => CreateTermsAndConditions::route('/create'),
+            'edit' => EditTermsAndConditions::route('/{record}/edit'),
         ];
     }    
 }

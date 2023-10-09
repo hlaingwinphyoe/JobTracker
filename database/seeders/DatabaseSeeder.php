@@ -27,6 +27,10 @@ class DatabaseSeeder extends Seeder
             StatusSeeder::class,
             FAQTypeSeeder::class,
             CategorySeeder::class,
+            JobPostSeeder::class,
+            FAQSeeder::class,
+            TermsandConditionsSeeder::class,
+            PrivacyPolicySeeder::class,
         ]);
     }
 }

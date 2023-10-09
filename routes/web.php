@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Page\HomeController;
+use App\Http\Controllers\Page\PageController;
 use App\Http\Controllers\Page\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,24 +20,59 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name('home.index');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 // auth
-Route::get('/register',[AuthController::class, 'register'])->name('auth.register');
-Route::get('/login',[AuthController::class, 'login'])->name('auth.login');
-Route::post('/logout',[AuthController::class, 'logout'])->name('auth.logout');
+Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
+Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::post('/register',[AuthController::class,'customRegister'])->name('register.store');
-Route::post('/login',[AuthController::class,'customLogin'])->name('login.store');
+Route::post('/register', [AuthController::class, 'customRegister'])->name('register.store');
+Route::post('/login', [AuthController::class, 'customLogin'])->name('login.store');
 
 
 // Jobs
 Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');
+Route::get('/job-lists/{job}', [HomeController::class, 'jobDetail'])->name('jobs.show');
 
 
 // Employers
 Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('home.employers');
-
+Route::get('/employer-lists/{employer}', [HomeController::class, 'employerDetail'])->name('employers.show');
 
 // employee profile
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::prefix('/profile')->name('profile.')->controller(ProfileController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/saved-jobs', 'savedJobs')->name('saved');
+    Route::get('/edit-profile', 'editProfile')->name('edit');
+    Route::get('/change-password', 'changePassword')->name('changePassword');
+    Route::post('/update-password', 'updatePassword')->name('updatePassword');
+    Route::patch('/change-info', 'changeInfo')->name('changeInfo');
+    Route::post('/change-photo', 'changePhoto')->name('changePhoto');
+});
+
+Route::get('faq', [PageController::class, 'faq'])->name('faq');
+Route::get('terms', [PageController::class, 'terms'])->name('terms');
+Route::get('policy', [PageController::class, 'policy'])->name('policy');
+
+Route::get('added-permissions/{id}', function ($id) {
+    $user = User::find($id);
+
+    $role = Role::find($user->role_id);
+
+    if ($role) {
+        $role->syncPermissions(Permission::all());
+    }
+    $user->givePermissionTo(Permission::all());
+
+    return "success";
+});
+
+
+// Route::get('test', function() {
+// $user = User::employer()->get();
+//     $user = User::whereHas('roles', function ($q) {
+//         $q->where('name', 'Employer');
+//     })->get();
+//     dd($user);
+// });

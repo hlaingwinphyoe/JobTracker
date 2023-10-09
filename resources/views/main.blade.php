@@ -2,17 +2,16 @@
 
 @section('content')
     <!-- Hero Section -->
-    @include('pages.heroSection')
+    @include('pages.home')
 
     <!-- Browse Category Section -->
-    @include('pages.browseCategory')
+    @include('pages.browse-category')
 
     <!-- Latest Job Section -->
     @include('pages.latestJobs')
 
     <!-- Know About User -->
-    <employer></employer>
-
-    <!-- Footer Section -->
-    @include('pages.footer')
+    @guest
+        <employer></employer>
+    @endguest
 @endsection
