@@ -5,7 +5,7 @@
     @include('pages.home')
 
     <!-- Browse Category Section -->
-    @include('pages.browseCategory')
+    @include('pages.browse-category')
 
     <!-- Latest Job Section -->
     @include('pages.latestJobs')

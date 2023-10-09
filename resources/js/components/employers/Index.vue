@@ -6,7 +6,9 @@
         <div class="text-gray-500 capitalize">Search Results</div>
         <div class="flex items-center">
           <span class="">
-            <label for="sort" class="text-sm text-gray-500 mr-2"> Order By: </label>
+            <label for="sort" class="text-sm text-gray-500 mr-2">
+              Order By:
+            </label>
             <select
               id="sort"
               name="sort"
@@ -19,32 +21,11 @@
               <option value="asc">Name Ascending</option>
             </select>
           </span>
-          <button
-            @click.prevent="reset"
-            class="p-2 bg-red-500 rounded-lg ml-2 text-white"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-refresh"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
-              <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
-            </svg>
-          </button>
         </div>
       </div>
       <div>
         <div
-          class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8"
+          class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-8"
         >
           <div class="" v-for="employee in employers" :key="employee.id">
             <EmployerCard :employee="employee" />
@@ -88,6 +69,8 @@ export default {
         page: 1,
         page_size: 12,
         search: "",
+        region: "",
+        type: "",
         sort: "",
       },
     });
@@ -114,21 +97,28 @@ export default {
       }
     };
 
-    const reset = () => {
-      state.param = {
-        page: 1,
-        page_size: 12,
-        search: "",
-        sort: "",
-      };
-      getEmployers();
-    };
-
     const filterSort = () => {
       getEmployers();
     };
 
+    const getQuery = () => {
+      let params = window.location.href.split("?");
+      if (params.length == 2) {
+        let vars = params[1].split("&");
+        let getVars = {};
+        let tmp = "";
+        vars.forEach(function (v) {
+          tmp = v.split("=");
+          if (tmp.length == 2) getVars[tmp[0]] = tmp[1];
+        });
+        state.param.search = getVars.search;
+        state.param.region = getVars.region;
+        state.param.type = getVars.type;
+      }
+    };
+
     onMounted(() => {
+      getQuery();
       getEmployers();
     });
 
@@ -136,7 +126,6 @@ export default {
       ...toRefs(state),
       seeMore,
       filterSort,
-      reset,
     };
   },
 };

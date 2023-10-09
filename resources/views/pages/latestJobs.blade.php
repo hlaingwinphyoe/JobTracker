@@ -1,4 +1,4 @@
-<section class="container mx-auto featured-jobs mt-32">
+<section class="w-full gap-6 px-24 mt-28">
     <div class="flex flex-col items-center justify-center mb-12">
         <h1 class="text-5xl font-bold uppercase">
             Featured Jobs

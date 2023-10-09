@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Region;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class AuthController extends Controller
 {
     public function register()
     {
-        return view('auth.register');
+        $regions = Region::all();
+        return view('auth.register', compact('regions'));
     }
 
     public function login()
@@ -30,7 +32,8 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'regex:/[0-9]{11}/', 'digits:11'],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'region' => ['required', 'integer', 'exists:regions,id'],
         ]);
 
         $employee = Type::isType('user')->where('name', 'employee')->first();
@@ -40,12 +43,13 @@ class AuthController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => bcrypt($request->password),
+            'region_id' => $request->region,
             'type_id' => $employee->id,
         ])->assignRole('Employee');
 
         Auth::login($user);
 
-        return redirect()->route('home.index');
+        return redirect()->route('profile.index');
     }
 
     public function customLogin(Request $request)

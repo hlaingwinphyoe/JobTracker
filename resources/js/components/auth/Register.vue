@@ -14,7 +14,7 @@
 
       <div
         class="bg-white rounded-3xl md:p-4 z-50 md:m-4 relative h-auto md:min-h-fit w-full md:max-w-xl"
-        style="min-height: 104vh;"
+        style="min-height: 104vh"
       >
         <div class="p-6 space-y-6 mb-5">
           <div>
@@ -316,9 +316,9 @@
                   <div
                     class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none"
                   >
-                  <svg
+                    <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-triangle-square-circle text-primary-500"
+                      class="icon icon-tabler icon-tabler-building-community text-primary-500"
                       width="17"
                       height="17"
                       viewBox="0 0 24 24"
@@ -329,11 +329,13 @@
                       stroke-linejoin="round"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M12 3l-4 7h8z" />
-                      <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
                       <path
-                        d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"
+                        d="M8 9l5 5v7h-5v-4m0 4h-5v-7l5 -5m1 1v-6a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v17h-8"
                       />
+                      <path d="M13 7l0 .01" />
+                      <path d="M17 7l0 .01" />
+                      <path d="M17 11l0 .01" />
+                      <path d="M17 15l0 .01" />
                     </svg>
                   </div>
 
@@ -342,7 +344,7 @@
                     v-model="form.company_type"
                     type="text"
                     class="bg-transparent caret-gray-500 border text-sm border-gray-400 text-gray-500 rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-9 p-2.5"
-                    placeholder="Company Name"
+                    placeholder="Industry"
                   />
                 </div>
                 <span v-if="errors.company_type" class="text-xs text-red-500">{{

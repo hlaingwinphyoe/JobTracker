@@ -17,7 +17,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable  , HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -104,7 +105,7 @@ class User extends Authenticatable
 
     public function scopeIsType($query, $type)
     {
-        $query->whereHas('type', function ($q) use($type) {
+        $query->whereHas('type', function ($q) use ($type) {
             $q->where('slug', $type);
         });
     }
@@ -112,11 +113,23 @@ class User extends Authenticatable
     public function scopeFilterOn($query)
     {
         if (request('search')) {
-            $query->where('name', 'like', '%' . request('search') . '%');
+            $query->where('name', 'like', '%' . request('search') . '%')->orWhere('company_name', 'like', '%' . request('search') . '%')->orWhere('company_type', 'like', '%' . request('search') . '%');
+        }
+
+        if (request('type')) {
+            $query->whereHas('type', function ($q) {
+                $q->where('slug', request('type'));
+            });
+        }
+
+        if (request('region')) {
+            $query->whereHas('region', function ($q) {
+                $q->where('slug', request('region'));
+            });
         }
 
         if (request('sort')) {
-            $query->orderBy('name',request('sort'));
+            $query->orderBy('name', request('sort'));
         }
 
         if (request('role')) {
