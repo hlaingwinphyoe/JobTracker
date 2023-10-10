@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\WebApi;
 
 use App\Http\Controllers\Controller;
-use App\Models\Type;
-use App\Models\User;
+use App\Models\Employer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -22,9 +24,9 @@ class AuthController extends Controller
             'region' => ['required', 'integer', 'exists:regions,id'],
         ]);
 
-        $employer = Type::isType('user')->where('name', 'employer')->first();
+        // $employer = Type::isType('user')->where('name', 'employer')->first();
 
-        $user = User::create([
+        $employer = Employer::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -32,14 +34,32 @@ class AuthController extends Controller
             'company_name' => $request->company_name,
             'company_type' => $request->company_type,
             'region_id' => $request->region,
-            'type_id' => $employer->id,
+            'desc' => $request->desc,
         ])->assignRole('Employer');
 
-        Auth::login($user);
+        Auth::login($employer);
 
         return response()->json([
             'message' => 'Successful Login',
-            'user' => $user
+            'employer' => $employer
         ]);
+    }
+
+    public function employerLogin(Request $request)
+    {
+        $employer = Employer::where('name', $request->credentials)
+            ->orWhere('email', $request->credentials)
+            ->orWhere('phone', $request->credentials)->first();
+
+        if (!$employer || !Hash::check($request->password, $employer->password)) {
+            throw ValidationException::withMessages([
+                'credentials' => 'These credentials do not match our records.',
+            ]);
+        }
+
+        Auth::loginUsingId($employer->id);;
+        // Session::regenerate();
+
+        return redirect()->route('home.index');
     }
 }

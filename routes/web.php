@@ -25,11 +25,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 // auth
 Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::get('/employer-login', [AuthController::class, 'employerLogin'])->name('auth.employerLogin');
 
 Route::post('/register', [AuthController::class, 'customRegister'])->name('register.store');
 Route::post('/login', [AuthController::class, 'customLogin'])->name('login.store');
-
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 // Jobs
 Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');
@@ -41,7 +41,7 @@ Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('h
 Route::get('/employer-lists/{employer}', [HomeController::class, 'employerDetail'])->name('employers.show');
 
 // employee profile
-Route::prefix('/profile')->name('profile.')->controller(ProfileController::class)->group(function () {
+Route::prefix('/profile')->name('profile.')->middleware('auth')->controller(ProfileController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/saved-jobs', 'savedJobs')->name('saved');
     Route::get('/edit-profile', 'editProfile')->name('edit');

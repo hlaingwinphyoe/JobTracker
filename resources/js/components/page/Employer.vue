@@ -14,9 +14,9 @@
         <button
           @click="openRegisterModal"
           type="button"
-          class="text-white bg-secondary-600 hover:bg-secondary-700 focus:ring-2 focus:outline-none focus:ring-secondary-400 font-medium rounded-lg px-5 py-2.5 text-center"
+          class="btn btn-dark hover-border-1"
         >
-          Post a job now
+          <span>Post a job now</span>
         </button>
       </div>
       <img src="/images/collaborate.png" class="h-56 md:h-[30rem]" alt="" />

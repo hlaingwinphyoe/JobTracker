@@ -19,7 +19,10 @@
     <div id="job-app">
         <div class="min-h-screen bg-gray">
             <!-- Page Navigation -->
-            @if (!request()->routeIs('auth.login') && !request()->routeIs('auth.register'))
+            @if (
+                !request()->routeIs('auth.login') &&
+                    !request()->routeIs('auth.register') &&
+                    !request()->routeIs('auth.employerLogin'))
                 @include('layouts.header')
             @endif
             <!-- Page Content -->
@@ -28,7 +31,11 @@
             </main>
 
             <!-- Footer Section -->
-            @if (!request()->routeIs('auth.login') && !request()->routeIs('auth.register') && !request()->routeIs('profile.index'))
+            @if (
+                !request()->routeIs('auth.login') &&
+                    !request()->routeIs('auth.register') &&
+                    !request()->routeIs('auth.employerLogin') &&
+                    !request()->routeIs('profile.index'))
                 @include('layouts.footer')
             @endif
         </div>

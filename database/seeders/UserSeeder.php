@@ -47,16 +47,16 @@ class UserSeeder extends Seeder
             $operator->givePermissionTo($permission);
         }
 
-        $employers = User::factory()->count(80)->create();
+        // $employers = User::factory()->count(80)->create();
 
-        foreach($employers as $employer) {
-            $employer->assignRole('Employer');
+        // foreach($employers as $employer) {
+        //     $employer->assignRole('Employer');
 
-            $empr_role = Role::where('name', 'Employer')->first();
+        //     $empr_role = Role::where('name', 'Employer')->first();
 
-            foreach($empr_role->permissions as $permission) {
-                $employer->givePermissionTo($permission);
-            }
-        }
+        //     foreach($empr_role->permissions as $permission) {
+        //         $employer->givePermissionTo($permission);
+        //     }
+        // }
     }
 }

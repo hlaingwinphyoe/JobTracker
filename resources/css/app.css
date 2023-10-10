@@ -11,7 +11,7 @@ html {
   scroll-behavior: smooth;
 }
 
-  /* Tutorial on https://fossheim.io/writing/posts/css-text-gradient. */
+/* Tutorial on https://fossheim.io/writing/posts/css-text-gradient. */
 
 .gradient-text {
   margin-left: auto;
@@ -20,22 +20,23 @@ html {
   width: 400px;
 
   /* Fallback: Set a background color. */
-  background-color: #27A26F;
-  
+  background-color: #27a26f;
+
   /* Create the gradient. */
-   background-image: linear-gradient(
-        45deg,
-        #27A26F 16.666%, 
-        #27A079 16.666%, 
-        #2797A2 33.333%, 
-        #279998 33.333%, 
-        #275AA2 50%, 
-        #2950A2 50%, 
-        #6F27A2 66.666%, 
-        #7927A0 66.666%, 
-        #A22797 83.333%, 
-        #982799 83.333%);
-        /* #CA4246 16.666%, 
+  background-image: linear-gradient(
+    45deg,
+    #27a26f 16.666%,
+    #27a079 16.666%,
+    #2797a2 33.333%,
+    #279998 33.333%,
+    #275aa2 50%,
+    #2950a2 50%,
+    #6f27a2 66.666%,
+    #7927a0 66.666%,
+    #a22797 83.333%,
+    #982799 83.333%
+  );
+  /* #CA4246 16.666%, 
         #E16541 16.666%, 
         #E16541 33.333%, 
         #F18F43 33.333%, 
@@ -45,7 +46,7 @@ html {
         #476098 66.666%, 
         #476098 83.333%, 
         #A7489B 83.333%); */
-  
+
   /* Set the background size and repeat properties. */
   background-size: 100%;
   background-repeat: repeat;
@@ -53,29 +54,28 @@ html {
   /* Use the text as a mask for the background. */
   /* This will show the gradient as a text color rather than element bg. */
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  
-  /* Animate the text when loading the element. */
-    /* This animates it on page load and when hovering out. */
-    animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
+  -webkit-text-fill-color: transparent;
 
+  /* Animate the text when loading the element. */
+  /* This animates it on page load and when hovering out. */
+  animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
 }
 
-.gradient-text:hover{
-    animation: rainbow-text-simple-animation 0.5s ease-in forwards;
+.gradient-text:hover {
+  animation: rainbow-text-simple-animation 0.5s ease-in forwards;
 }
 
 /* Move the background and make it smaller. */
 /* Animation shown when entering the page and after the hover animation. */
 @keyframes rainbow-text-simple-animation-rev {
   0% {
-      background-size: 650%;
+    background-size: 650%;
   }
   40% {
-      background-size: 650%;
+    background-size: 650%;
   }
   100% {
-      background-size: 100%;
+    background-size: 100%;
   }
 }
 
@@ -83,13 +83,13 @@ html {
 /* Animation shown when hovering over the text. */
 @keyframes rainbow-text-simple-animation {
   0% {
-      background-size: 100%;
+    background-size: 100%;
   }
   80% {
-      background-size: 650%;
+    background-size: 650%;
   }
   100% {
-      background-size: 650%;
+    background-size: 650%;
   }
 }
 
@@ -98,4 +98,81 @@ html {
   grid-template-rows: auto auto;
   grid-template-columns: 15rem minmax(0, 1fr);
   grid-gap: 30px;
+}
+
+/* :active,
+:hover,
+:focus {
+  outline: 0 !important;
+  outline-offset: 0;
+} */
+::before,
+::after {
+  position: absolute;
+  content: "";
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  /* margin: 0px 25px 15px; */
+  min-width: 150px;
+}
+.btn span {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px 15px;
+  transition: 0.3s;
+}
+
+.btn-dark {
+  padding: 5px;
+}
+.btn-dark span {
+  color: rgb(255, 255, 255);
+  background-color: rgb(54, 56, 55);
+}
+.btn-dark::before,
+.btn-dark::after {
+  background: transparent;
+  z-index: 2;
+}
+.btn.hover-border-1::before,
+.btn.hover-border-1::after {
+  width: 10%;
+  height: 25%;
+  transition: 0.35s;
+}
+.btn.hover-border-1::before {
+  top: 0;
+  left: 0;
+  border-left: 1px solid rgb(28, 31, 30);
+  border-top: 1px solid rgb(28, 31, 30);
+  border-radius: 6px 0 0 0;
+}
+.btn.hover-border-1::after {
+  bottom: 0;
+  right: 0;
+  border-right: 1px solid rgb(28, 31, 30);
+  border-bottom: 1px solid rgb(28, 31, 30);
+  border-radius: 0 0 6px 0;
+}
+.btn.hover-border-1:hover::before,
+.btn.hover-border-1:hover::after {
+  width: 99%;
+  height: 98%;
+  border-radius: 6px;
 }
