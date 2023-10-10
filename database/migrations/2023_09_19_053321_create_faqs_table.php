@@ -11,18 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('faq_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('slug')->unique();
-            $table->text('name');
-            $table->timestamps();
-        });
-
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
             $table->text('desc')->nullable();
-            $table->foreignId('faq_type_id')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('terms', function (Blueprint $table) {
+            $table->id();
+            $table->string('title')->nullable();
+            $table->text('desc')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('policy', function (Blueprint $table) {
+            $table->id();
+            $table->string('title')->nullable();
+            $table->text('desc')->nullable();
             $table->timestamps();
         });
     }
@@ -32,7 +38,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('policy');
+        Schema::dropIfExists('terms');
         Schema::dropIfExists('faqs');
-        Schema::dropIfExists('faq_types');
     }
 };

@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\FAQ;
 use App\Models\JobPost;
+use App\Models\TermsAndConditions;
 use App\Models\Type;
 use App\Models\User;
 use App\Policies\CategoryPolicy;
@@ -43,7 +44,8 @@ class AuthServiceProvider extends ServiceProvider
         Type::class       => TypePolicy::class,
 
         FAQ::class       => FAQPolicy::class,
-        // FAQ::class       => TermsAndConditionsPolicy::class,
+        TermsAndConditions::class => TermsAndConditionsPolicy::class,
+        PrivacyPolicy::class => PrivacyPolicyPolicy::class,
     ];
 
     /**
@@ -51,6 +53,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->registerPolicies();
         // FacadesGate::before(function (User $user, string $ability) {
         //     return $user->isSuperAdmin() ? true: null;     
         // });

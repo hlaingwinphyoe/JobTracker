@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Permission;
 class FAQPolicy
 {
     // use FAQTrait;
+    // use TermsAndConditionsPolicy;
 
     public function viewAny(User $user): bool
     {

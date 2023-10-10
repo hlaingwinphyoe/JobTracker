@@ -6,26 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\FAQ;
+use App\Models\PrivacyPolicy;
+use App\Models\TermsAndConditions;
 
 class PageController extends Controller
 {
     public function faq()
     {
-        $faqs = FAQ::isType('faq')->get();
+        $faqs = FAQ::get();
         
         return view('pages.pages.faq', compact('faqs'));
     }
 
     public function terms()
     {
-        $terms = FAQ::isType('terms-and-conditions')->get()->last();
+        $terms = TermsAndConditions::get()->last();
         
         return view('pages.pages.terms', compact('terms'));
     }
 
     public function policy()
     {
-        $policy = FAQ::isType('privacy-policy')->get()->last();
+        $policy = PrivacyPolicy::get()->last();
         
         return view('pages.pages.policy', compact('policy'));
     }

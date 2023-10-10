@@ -12,7 +12,7 @@
                         {{-- background: linear-gradient(to right, rgb(39 162 111 / 64%), rgb(59 130 246 / 66%)) --}}
                         {{-- linear-gradient(to bottom, #27A26F, #3b82f6); --}}
                         {{-- linear-gradient(rgb(39 162 111 / 7%), rgb(59 130 246 / 14%)); --}}
-                            <h5 class="text-4xl mb-4 font-bold gradient-text">
+                            <h5 class="text-3xl mb-4 font-bold gradient-text">
                             {{-- background: -webkit-linear-gradient(#27A26F, #3b82f6);
                             -webkit-background-clip: text;
                             -webkit-text-fill-color: transparent; --}}
