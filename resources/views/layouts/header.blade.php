@@ -1,5 +1,6 @@
 <section class="w-full px-8 text-secondary-700 bg-white bg-opacity-90 backdrop-blur-sm sticky top-0 z-50">
-    <div class="md:container flex flex-wrap items-center justify-between py-1 md:py-5 md:mx-auto flex-row w-full md:max-w-9xl">
+    <div
+        class="md:container flex flex-wrap items-center justify-between py-1 md:py-5 md:mx-auto flex-row w-full md:max-w-9xl">
         <div class="relative flex flex-col md:flex-row">
             <img src="{{ asset('logo-notext.svg') }}" class="h-8 mr-1.5" alt="">
             <a href="{{ route('home.index') }}"
@@ -61,13 +62,13 @@
                     <form method="POST" action="{{ route('auth.logout') }}">
                         @csrf
 
-                        <a href="{{ route('auth.logout') }}"
-                            class="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100"
+                        <a href="{{ route('auth.logout') }}" class="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100"
                             onclick="event.preventDefault();
                                             this.closest('form').submit();">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout inline-flex items-center mb-[3px]"
-                                width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-logout inline-flex items-center mb-[3px]" width="20"
+                                height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
                                 <path d="M9 12h12l-3 -3" />
@@ -89,6 +90,10 @@
                 <a href="{{ route('auth.register') }}"
                     class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary-500 border border-transparent rounded-md shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
                     Sign up
+                </a>
+
+                <a href="{{ route('auth.employerLogin') }}" class="btn btn-dark hover-border-1">
+                    <span>Post a job</span>
                 </a>
             </div>
         @endguest

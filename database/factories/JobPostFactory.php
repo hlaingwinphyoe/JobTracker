@@ -32,7 +32,7 @@ class JobPostFactory extends Factory
             'slug' => Str::slug($title),
             'salary' => fake()->numberBetween(10, 5000),
             'image' => fake()->imageUrl(600,280),
-            'desc' => fake()->sentence(400),
+            'desc' => fake()->paragraph(),
             'type_id' => Type::isType('job')->get()->random()->id,
             'category_id' => Category::all()->random()->id,
             'status_id' => Status::isType('job_status')->get()->random()->id,

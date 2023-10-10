@@ -41,7 +41,6 @@ class UserFactory extends Factory
             'company_type' => fake()->text(15),
             'region_id' => Region::all()->random()->id,
             'desc' => fake()->text(),
-            'type_id' => $employer->id
         ];
     }
 
