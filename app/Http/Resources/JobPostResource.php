@@ -22,6 +22,7 @@ class JobPostResource extends JsonResource
             'region_name' => $this->region ? $this->region->name : '',
             'job_type' => $this->type ? $this->type->name : '',
             'status_name' => $this->status->title,
+            'owner_id' => $this->user->id,
             'owner' => $this->user->name,
             'publish' => $this->created_at->diffForHumans(),
             'salary' => $this->salary,

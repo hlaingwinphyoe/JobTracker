@@ -12,13 +12,11 @@
 
             <div class="mt-3 sm:mx-auto sm:w-full sm:max-w-sm">
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="list-disc">
-                            @foreach ($errors->all() as $error)
-                                <li class="text-danger">{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    <ul class="mt-1.5 list-disc list-inside p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 @endif
                 <form class="space-y-6" action="{{ route('register.store') }}" method="POST">
                     @csrf

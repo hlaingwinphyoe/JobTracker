@@ -66,7 +66,7 @@ class AuthController extends Controller
 
         Auth::login($user);
         Session::regenerate();
-        return redirect()->route('home.index')->with(['message', 'Login Successfull']);
+        return redirect()->route('profile.index')->with(['message', 'Login Successfull']);
     }
 
     public function logout()

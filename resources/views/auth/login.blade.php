@@ -13,17 +13,15 @@
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    <ul class="mt-1.5 list-disc list-inside p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 @endif
                 <form class="space-y-6" action="{{ route('login.store') }}" method="POST">
                     @csrf
-                    <x-input label="Name, Email or Phone" name="credentials">
+                    <x-input label="Name, Email or Phone" name="credentials" placeholder="Name, Email or Phone">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-user-square-rounded text-primary-500" width="17"
                             height="17" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -35,7 +33,7 @@
                         </svg>
                     </x-input>
 
-                    <x-input label="Password" name="password" type="password">
+                    <x-input label="Password" name="password" type="password" placeholder="Password">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-lock-access text-primary-500" width="17" height="17"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"

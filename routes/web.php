@@ -43,8 +43,10 @@ Route::get('/employer-lists/{employer}', [HomeController::class, 'employerDetail
 // employee profile
 Route::prefix('/profile')->name('profile.')->controller(ProfileController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/saved-jobs', 'savedJobs')->name('edit');
-    Route::post('/change-password', 'changePassword')->name('changePassword');
+    Route::get('/saved-jobs', 'savedJobs')->name('saved');
+    Route::get('/edit-profile', 'editProfile')->name('edit');
+    Route::get('/change-password', 'changePassword')->name('changePassword');
+    Route::post('/update-password', 'updatePassword')->name('updatePassword');
     Route::patch('/change-info', 'changeInfo')->name('changeInfo');
     Route::post('/change-photo', 'changePhoto')->name('changePhoto');
 });

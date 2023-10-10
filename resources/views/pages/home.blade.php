@@ -1,11 +1,11 @@
 <section class="px-2 md:px-0" id="home">
     <div class="container flex items-center justify-center mx-auto lg:h-[95vh]">
-        <div class="flex flex-wrap items-center sm:-mx-3">
+        <div class="flex flex-wrap flex-col-reverse md:flex-row items-center sm:-mx-3">
             <div class="w-full md:w-1/2 md:px-3">
                 <div
                     class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg 2xl:max-w-xl md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                     <h1
-                        class="text-4xl font-extrabold tracking-wide text-gray-900 sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl">
+                        class="text-4xl text-center md:text-left font-extrabold tracking-wide text-gray-900 sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl">
                         <span class="block xl:inline">Let's Get Your</span>
                         <span
                             class="block text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-primary-400 to-tertiary-500 xl:inline">
@@ -35,7 +35,7 @@
                             <input type="text" name="price" id="price"
                                 class="block w-full rounded-full border-0 py-3.5 pl-12 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
                                 placeholder="Job Title">
-                            <div class="absolute inset-y-0 right-32 flex items-center divide-x-2 divide-gray-300">
+                            <div class="hidden absolute inset-y-0 right-32 md:flex items-center divide-x-2 divide-gray-300">
                                 <label for="currency" class="sr-only">Currency</label>
                                 <select id="currency" name="currency"
                                     class="h-auto min-w-md rounded-ee-full border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:outline-none focus:ring-0 sm:text-sm">

@@ -19,13 +19,22 @@
           <div class="px-4 pb-5">
             <div class="flex items-center justify-between mb-4">
               <div class="flex gap-1.5 items-center">
-                <img
-                  class="flex-shrink-0 w-8 h-8 rounded-full"
-                  src="https://i.imgur.com/7D7I6dI.png"
-                  alt=""
-                />
+                <a
+                  :href="'/employer-lists/' + jobPost.owner_id"
+                  class="cursor-pointer"
+                >
+                  <img
+                    class="flex-shrink-0 w-8 h-8 rounded-full"
+                    src="https://i.imgur.com/7D7I6dI.png"
+                    alt=""
+                  />
+                </a>
                 <div class="flex">
-                  <span class="text-sm">{{ jobPost.owner }}</span>
+                  <a
+                    :href="'/employer-lists/' + jobPost.owner_id"
+                    class="text-sm hover:underline"
+                    >{{ jobPost.owner }}</a
+                  >
                 </div>
               </div>
               <span>
