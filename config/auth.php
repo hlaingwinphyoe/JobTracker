@@ -41,12 +41,12 @@ return [
             'provider' => 'users',
         ],
 
-        'employer' => [
-            'driver' => 'session',
-            'provider' => 'employers',
-        ],
+        // 'employer' => [
+        //     'driver' => 'session',
+        //     'provider' => 'employers',
+        // ],
 
-        'web' => [
+        'employee' => [
             'driver' => 'session',
             'provider' => 'employees',
         ],
@@ -75,10 +75,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'employers' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Employer::class,
-        ],
+        // 'employers' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Employer::class,
+        // ],
 
         'employees' => [
             'driver' => 'eloquent',
@@ -112,6 +112,11 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'employees' => [
+            'provider' => 'eloquent',
+            'model' => App\Models\Employee::class,
+        ]
     ],
 
     /*

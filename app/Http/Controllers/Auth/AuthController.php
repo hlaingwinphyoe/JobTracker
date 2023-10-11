@@ -50,29 +50,35 @@ class AuthController extends Controller
             'phone' => $request->phone,
             'password' => bcrypt($request->password),
             'region_id' => $request->region,
-        ])->assignRole('Employee');
+        ]);
 
-        Auth::login($employee);
+        Auth::guard('employee')->login($employee);
 
         return redirect()->route('profile.index');
     }
 
     public function customLogin(Request $request)
     {
-        $employee = Employee::where('name', $request->credentials)
-            ->orWhere('email', $request->credentials)
-            ->orWhere('phone', $request->credentials)->first();
+        // $employee = Employee::where('name', $request->credentials)
+        //     ->orWhere('email', $request->credentials)
+        //     ->orWhere('phone', $request->credentials)->first();
 
-        if (!$employee || !Hash::check($request->password, $employee->password)) {
-            throw ValidationException::withMessages([
-                'credentials' => 'These credentials do not match our records.',
-            ]);
+        // if (!$employee || !Hash::check($request->password, $employee->password)) {
+        //     throw ValidationException::withMessages([
+        //         'credentials' => 'These credentials do not match our records.',
+        //     ]);
+        // }
+
+        $check = $request->all();
+
+        if (Auth::guard('employee')->attempt(['email' => $check['credentials'], 'password' => $check['password']])) {
+            dd('success');
+            return redirect()->route('profile.index')->with(['message', 'Login Successfull']);
+        } else {
+            dd('fails');
+            return back()->with('message', 'login fail');
         }
-
-        Auth::login($employee);
-        Session::regenerate();
-
-        return redirect()->route('profile.index')->with(['message', 'Login Successfull']);
+        // Session::regenerate();
     }
 
     public function logout()

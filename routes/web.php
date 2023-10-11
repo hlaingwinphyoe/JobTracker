@@ -23,13 +23,15 @@ use Spatie\Permission\Models\Role;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 // auth
+
 Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::get('/employer-login', [AuthController::class, 'employerLogin'])->name('auth.employerLogin');
 
 Route::post('/register', [AuthController::class, 'customRegister'])->name('register.store');
 Route::post('/login', [AuthController::class, 'customLogin'])->name('login.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+Route::get('/employer-login', [AuthController::class, 'employerLogin'])->name('auth.employerLogin');
 
 // Jobs
 Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WebApi;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmployerResource;
 use App\Http\Resources\JobPostResource;
+use App\Models\Employer;
 use App\Models\JobPost;
 use App\Models\Region;
 use App\Models\User;
@@ -34,9 +35,9 @@ class PageController extends Controller
     public function employerList(Request $request)
     {
         if (isset($request->page_size) && $request->page_size) {
-            $employers = User::employer()->filterOn()->orderBy('id', 'DESC')->paginate($request->page_size);
+            $employers = Employer::filterOn()->orderBy('id', 'DESC')->paginate($request->page_size);
         } else {
-            $employers = User::employer()->filterOn()->orderBy('id', 'DESC')->paginate(20);
+            $employers = Employer::filterOn()->orderBy('id', 'DESC')->paginate(20);
         }
 
         return EmployerResource::collection($employers);

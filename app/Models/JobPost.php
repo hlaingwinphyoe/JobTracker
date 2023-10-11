@@ -42,12 +42,12 @@ class JobPost extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employer::class);
     }
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_job_posts', 'job_post_id', 'user_id');
+        return $this->belongsToMany(Employer::class, 'user_job_posts', 'job_post_id', 'user_id');
     }
 
     public function applied_jobs(): HasMany

@@ -1,6 +1,6 @@
 <section class="w-full px-8 text-secondary-700 bg-white bg-opacity-90 backdrop-blur-sm sticky top-0 z-50">
     <div
-        class="md:container flex flex-wrap items-center justify-between py-1 md:py-5 md:mx-auto flex-row w-full md:max-w-9xl">
+        class="md:container flex flex-wrap items-center justify-between py-1 md:py-3 md:mx-auto flex-row w-full md:max-w-9xl">
         <div class="relative flex flex-col md:flex-row">
             <img src="{{ asset('logo-notext.svg') }}" class="h-8 mr-1.5" alt="">
             <a href="{{ route('home.index') }}"
@@ -92,9 +92,15 @@
                     Sign up
                 </a>
 
-                <a href="{{ route('auth.employerLogin') }}" class="btn btn-dark hover-border-1">
-                    <span>Post a job</span>
-                </a>
+                <div class="relative inline-flex group">
+                    <div
+                        class="absolute transitiona-all duration-1000 opacity-70 inset-3 bg-gradient-to-r from-primary-800 via-tertiary-500 to-tertiary-700 rounded-xl blur-lg group-hover:opacity-100 group-hover:inset-px group-hover:duration-200 animate-tilt">
+                    </div>
+                    <a href="{{ route('auth.employerLogin') }}" title="Get quote now"
+                        class="relative inline-flex items-center justify-center px-6 py-2 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                        role="button">Post a job
+                    </a>
+                </div>
             </div>
         @endguest
     </div>
