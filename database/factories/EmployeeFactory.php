@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employer>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employee>
  */
-class EmployerFactory extends Factory
+class EmployeeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -25,10 +25,9 @@ class EmployerFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            'company_name' => fake()->company(),
-            'company_type' => fake()->text(15),
+            'profile' => fake()->imageUrl(),
+            'desc' => fake()->text(15),
             'region_id' => Region::all()->random()->id,
-            'desc' => fake()->text(),
             'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
             'updated_at' => fake()->dateTimeBetween('-5 month', 'now'),
         ];

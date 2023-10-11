@@ -84,6 +84,11 @@ class PrivacyPolicyResource extends Resource
             ]);
     }
     
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->isType('privacy-policy');
+    }
+
     public static function getRelations(): array
     {
         return [

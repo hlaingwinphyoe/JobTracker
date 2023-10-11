@@ -84,6 +84,11 @@ class FAQResource extends Resource
                 CreateAction::make(),
             ]);
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->isType('faq');
+    }
     
     public static function getRelations(): array
     {

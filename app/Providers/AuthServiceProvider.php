@@ -5,12 +5,16 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\Category;
+use App\Models\Employee;
+use App\Models\Employer;
 use App\Models\FAQ;
 use App\Models\JobPost;
 use App\Models\TermsAndConditions;
 use App\Models\Type;
 use App\Models\User;
 use App\Policies\CategoryPolicy;
+use App\Policies\EmployeePolicy;
+use App\Policies\EmployerPolicy;
 use App\Policies\FAQPolicy;
 use App\Policies\JobPostPolicy;
 use App\Policies\PermissionPolicy;
@@ -46,6 +50,9 @@ class AuthServiceProvider extends ServiceProvider
         FAQ::class       => FAQPolicy::class,
         TermsAndConditions::class => TermsAndConditionsPolicy::class,
         PrivacyPolicy::class => PrivacyPolicyPolicy::class,
+
+        Employee::class       => EmployeePolicy::class,
+        Employer::class       => EmployerPolicy::class,
     ];
 
     /**

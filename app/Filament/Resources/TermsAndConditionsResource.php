@@ -84,6 +84,11 @@ class TermsAndConditionsResource extends Resource
             ]);
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->isType('terms-and-conditions');
+    }
+
     public static function getRelations(): array
     {
         return [

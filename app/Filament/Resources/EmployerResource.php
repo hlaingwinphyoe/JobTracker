@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class EmployerResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Employer::class;
 
     public static ?string $label = 'Employers';
 
