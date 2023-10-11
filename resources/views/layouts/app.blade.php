@@ -20,9 +20,9 @@
         <div class="min-h-screen bg-gray">
             <!-- Page Navigation -->
             @if (
-                !request()->routeIs('auth.login') &&
-                    !request()->routeIs('auth.register') &&
-                    !request()->routeIs('auth.employerLogin'))
+                !request()->routeIs('employee.login') &&
+                    !request()->routeIs('employee.register') &&
+                    !request()->routeIs('employer.login'))
                 @include('layouts.header')
             @endif
             <!-- Page Content -->
@@ -32,9 +32,9 @@
 
             <!-- Footer Section -->
             @if (
-                !request()->routeIs('auth.login') &&
-                    !request()->routeIs('auth.register') &&
-                    !request()->routeIs('auth.employerLogin') &&
+                !request()->routeIs('employee.login') &&
+                    !request()->routeIs('employee.register') &&
+                    !request()->routeIs('employer.login') &&
                     !request()->routeIs('profile.index'))
                 @include('layouts.footer')
             @endif

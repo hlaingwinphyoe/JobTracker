@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Permission\Traits\HasRoles;
 
-class Employer extends Authenticatable
+class Employer extends Authenticatable implements FilamentUser
 {
     use HasFactory, HasRoles;
 
@@ -19,6 +21,11 @@ class Employer extends Authenticatable
     protected $table = 'employers';
 
     protected $guarded = [];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
 
     public function region(): BelongsTo
     {

@@ -37,8 +37,6 @@ class AuthController extends Controller
             'desc' => $request->desc,
         ])->assignRole('Employer');
 
-        Auth::login($employer);
-
         return response()->json([
             'message' => 'Successful Login',
             'employer' => $employer
@@ -47,19 +45,24 @@ class AuthController extends Controller
 
     public function employerLogin(Request $request)
     {
-        $employer = Employer::where('name', $request->credentials)
-            ->orWhere('email', $request->credentials)
-            ->orWhere('phone', $request->credentials)->first();
+        // $employer = Employer::where('name', $request->credentials)
+        //     ->orWhere('email', $request->credentials)
+        //     ->orWhere('phone', $request->credentials)->first();
 
-        if (!$employer || !Hash::check($request->password, $employer->password)) {
-            throw ValidationException::withMessages([
-                'credentials' => 'These credentials do not match our records.',
-            ]);
+        // if (!$employer || !Hash::check($request->password, $employer->password)) {
+        //     throw ValidationException::withMessages([
+        //         'credentials' => 'These credentials do not match our records.',
+        //     ]);
+        // }
+
+        $check = $request->all();
+
+        if (Auth::guard('employer')->attempt(['email' => $check['credentials'], 'password' => $check['password']])) {
+            return redirect()->route('home.index')->with(['message', 'Login Successfull']);
+        } else {
+            return back()->with('message', 'login fail');
         }
 
-        Auth::loginUsingId($employer->id);;
-        // Session::regenerate();
-
-        return redirect()->route('home.index');
+        // return redirect()->route('home.index');
     }
 }

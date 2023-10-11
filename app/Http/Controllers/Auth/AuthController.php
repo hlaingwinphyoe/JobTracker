@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
-use App\Models\Employer;
 use App\Models\Region;
-use App\Models\Type;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,18 +15,30 @@ class AuthController extends Controller
 {
     public function register()
     {
-        $regions = Region::all();
-        return view('auth.register', compact('regions'));
+        if (Auth::guard('employee')->check()) {
+            return back();
+        } else {
+            $regions = Region::all();
+            return view('auth.register', compact('regions'));
+        }
     }
 
     public function login()
     {
-        return view('auth.login');
+        if (Auth::guard('employee')->check()) {
+            return back();
+        } else {
+            return view('auth.login');
+        }
     }
 
     public function employerLogin()
     {
-        return view('auth.employer-login');
+        if (Auth::guard('employer')->check()) {
+            return back();
+        } else {
+            return view('auth.employer-login');
+        }
     }
 
     public function customRegister(Request $request)
@@ -42,8 +51,6 @@ class AuthController extends Controller
             'region' => ['required', 'integer', 'exists:regions,id'],
         ]);
 
-        // $employee = Type::isType('user')->where('name', 'employee')->first();
-
         $employee = Employee::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -52,9 +59,7 @@ class AuthController extends Controller
             'region_id' => $request->region,
         ]);
 
-        Auth::guard('employee')->login($employee);
-
-        return redirect()->route('profile.index');
+        return redirect()->route('employee.login');
     }
 
     public function customLogin(Request $request)
@@ -72,20 +77,16 @@ class AuthController extends Controller
         $check = $request->all();
 
         if (Auth::guard('employee')->attempt(['email' => $check['credentials'], 'password' => $check['password']])) {
-            dd('success');
             return redirect()->route('profile.index')->with(['message', 'Login Successfull']);
         } else {
-            dd('fails');
             return back()->with('message', 'login fail');
         }
-        // Session::regenerate();
     }
 
     public function logout()
     {
+        Auth::guard('employee')->logout();
         Session::flush();
-        Auth::logout();
-
         return redirect()->route('home.index');
     }
 }

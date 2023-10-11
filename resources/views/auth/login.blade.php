@@ -19,9 +19,9 @@
                         @endforeach
                     </ul>
                 @endif
-                <form class="space-y-6" action="{{ route('login.store') }}" method="POST">
+                <form class="space-y-6" action="{{ route('employee.loginStore') }}" method="POST">
                     @csrf
-                    <x-input label="Name, Email or Phone" name="credentials" placeholder="Name, Email or Phone">
+                    <x-input label="Email" name="credentials" placeholder="Email">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-user-square-rounded text-primary-500" width="17"
                             height="17" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -64,7 +64,7 @@
 
                 <p class="mt-10 text-center text-sm text-gray-500">
                     Not a member?
-                    <a href="{{ route('auth.register') }}"
+                    <a href="{{ route('employee.register') }}"
                         class="font-semibold leading-6 text-primary-500 hover:text-primary-600">Register Here.</a>
                 </p>
             </div>

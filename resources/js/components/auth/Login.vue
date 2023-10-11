@@ -58,7 +58,7 @@
               <label
                 for="username"
                 class="block mb-2 text-sm font-medium text-gray-500"
-                >Username, Email or Phone
+                >Email
               </label>
               <div class="relative">
                 <div
@@ -92,7 +92,7 @@
                   v-model="form.credentials"
                   type="text"
                   class="bg-transparent caret-gray-500 border text-sm border-gray-400 text-gray-500 rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-9 p-2.5"
-                  placeholder="Username, Email or Phone"
+                  placeholder="Email"
                 />
               </div>
               <span v-if="errors.credentials" class="text-xs text-red-500">{{

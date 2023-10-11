@@ -17,91 +17,16 @@
                 {{-- <x-nav-link title="Blogs" /> --}}
             </nav>
         </div>
-        @auth
 
-            <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
-                class="flex mx-3 text-sm rounded-full md:mr-0 focus:ring-2 focus:ring-primary-400" type="button">
-                <span class="sr-only">Open user menu</span>
-                <img src="https://ui-avatars.com/api/?size=40&rounded=true&name={{ auth()->user()->name }}"
-                    alt="profile_img">
-            </button>
+        @if (Auth::guard('employee')->user())
+            @include('composables.auth-employee')
+        @elseif (Auth::guard('employer')->user())
+            @include('composables.auth-employer')
+        @elseif (Auth::guard('web')->user())
+            @include('composables.auth-admin')
+        @else
+            @include('composables.join-now')
+        @endif
 
-            <!-- Dropdown menu -->
-            <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-200 rounded-lg shadow w-44">
-                <div class="px-4 py-3 text-sm text-secondary-500 text-center ">
-                    <span class="fw-bold text-lg">{{ auth()->user()->name }}</span>
-                </div>
-                <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownUserAvatarButton">
-                    @role(['Employer', 'Developer', 'Admin'])
-                        <li>
-                            <a href="{{ route('filament.admin.pages.dashboard') }}" class="block px-4 py-2 hover:bg-gray-100">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="icon icon-tabler icon-tabler-layout-2 inline-flex items-center mb-[3px]"
-                                    width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                    fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                                    <path d="M4 13m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                                    <path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                                    <path d="M14 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                                </svg>
-                                Dashboard
-                            </a>
-                        </li>
-                    @endrole
-                    @role('Employee')
-                        <li>
-                            <a href="{{ route('profile.index') }}" class="block px-4 py-2 hover:bg-gray-100">
-                                Profile
-                            </a>
-                        </li>
-                    @endrole
-                </ul>
-                <div class="py-2">
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('auth.logout') }}">
-                        @csrf
-
-                        <a href="{{ route('auth.logout') }}" class="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100"
-                            onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="icon icon-tabler icon-tabler-logout inline-flex items-center mb-[3px]" width="20"
-                                height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                                <path d="M9 12h12l-3 -3" />
-                                <path d="M18 15l3 -3" />
-                            </svg>
-                            Log Out
-                        </a>
-                    </form>
-                </div>
-            </div>
-        @endauth
-
-        @guest
-            <div class="inline-flex items-center ml-5 space-x-6 lg:justify-end">
-                <a href="{{ route('auth.login') }}"
-                    class="text-base font-medium leading-6 text-gray-600 whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-900">
-                    Sign in
-                </a>
-                <a href="{{ route('auth.register') }}"
-                    class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary-500 border border-transparent rounded-md shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                    Sign up
-                </a>
-
-                <div class="relative inline-flex group">
-                    <div
-                        class="absolute transitiona-all duration-1000 opacity-70 inset-3 bg-gradient-to-r from-primary-800 via-tertiary-500 to-tertiary-700 rounded-xl blur-lg group-hover:opacity-100 group-hover:inset-px group-hover:duration-200 animate-tilt">
-                    </div>
-                    <a href="{{ route('auth.employerLogin') }}" title="Get quote now"
-                        class="relative inline-flex items-center justify-center px-6 py-2 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                        role="button">Post a job
-                    </a>
-                </div>
-            </div>
-        @endguest
     </div>
 </section>

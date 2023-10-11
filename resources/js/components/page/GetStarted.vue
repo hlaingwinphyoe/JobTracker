@@ -70,7 +70,7 @@
   </div>
 
   <Login v-model:login="login" />
-  <Register v-model:open="open" />
+  <Register v-model:open="open" @submitted="openLoginModal" />
 </template>
 
 <script>
@@ -80,7 +80,7 @@ import Register from "../auth/Register.vue";
 export default {
   components: {
     Login,
-    Register
+    Register,
   },
   setup() {
     const state = reactive({
