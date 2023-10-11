@@ -46,17 +46,5 @@ class UserSeeder extends Seeder
         foreach($operator_role->permissions as $permission) {
             $operator->givePermissionTo($permission);
         }
-
-        $employers = User::factory()->count(80)->create();
-
-        foreach($employers as $employer) {
-            $employer->assignRole('Employer');
-
-            $empr_role = Role::where('name', 'Employer')->first();
-
-            foreach($empr_role->permissions as $permission) {
-                $employer->givePermissionTo($permission);
-            }
-        }
     }
 }

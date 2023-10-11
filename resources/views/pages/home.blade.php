@@ -15,7 +15,7 @@
                     <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-lg md:max-w-3xl">Find your dream job
                         with our site. There are lot of trusted company advertise their for employees.
                     </p>
-                    <form method="GET" class=" z-10">
+                    <form method="GET" action="{{ route('home.jobs') }}" class=" z-10">
                         <div class="relative rounded-full shadow-sm">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5">
                                 <span class="text-gray-500 sm:text-sm">
@@ -32,12 +32,13 @@
                                     </svg>
                                 </span>
                             </div>
-                            <input type="text" name="price" id="price"
+                            <input type="text" name="search" id="search"
                                 class="block w-full rounded-full border-0 py-3.5 pl-12 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
                                 placeholder="Job Title">
-                            <div class="hidden absolute inset-y-0 right-32 md:flex items-center divide-x-2 divide-gray-300">
-                                <label for="currency" class="sr-only">Currency</label>
-                                <select id="currency" name="currency"
+                            <div
+                                class="hidden absolute inset-y-0 right-32 md:flex items-center divide-x-2 divide-gray-300">
+                                <label for="region" class="sr-only">Region</label>
+                                <select id="region" name="region"
                                     class="h-auto min-w-md rounded-ee-full border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:outline-none focus:ring-0 sm:text-sm">
                                     <option value="0" disabled selected>Choose Region</option>
                                     @foreach ($regions as $region)

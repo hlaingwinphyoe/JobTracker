@@ -5,6 +5,7 @@ use App\Http\Controllers\WebApi\PageController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/employer-register', [AuthController::class, 'employerRegister']);
+Route::post('/employer-login', [AuthController::class, 'employerLogin']);
 
 Route::get('/get-regions', [PageController::class, 'regionList']);
 Route::get('/get-jobs', [PageController::class, 'jobPostList']);

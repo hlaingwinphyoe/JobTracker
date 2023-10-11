@@ -18,7 +18,7 @@
                         @endforeach
                     </ul>
                 @endif
-                <form class="space-y-6" action="{{ route('register.store') }}" method="POST">
+                <form class="space-y-6" action="{{ route('employee.registerStore') }}" method="POST">
                     @csrf
                     <x-input label="Username" name="name" value="{{ old('name') }}">
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@
 
                 <p class="mt-3 text-center text-sm text-gray-500">
                     Already Registerd?
-                    <a href="{{ route('auth.register') }}"
+                    <a href="{{ route('employee.register') }}"
                         class="font-semibold leading-6 text-primary-500 hover:text-primary-600">Login Here.</a>
                 </p>
             </div>

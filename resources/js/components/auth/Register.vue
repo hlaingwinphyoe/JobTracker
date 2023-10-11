@@ -474,9 +474,10 @@ export default {
           state.isLoading = false;
           // console.log("sign in");
           closeModal();
-          setTimeout(() => {
-            location.reload();
-          }, 500);
+          emit('submitted', res.data)
+          // setTimeout(() => {
+          //   location.reload();
+          // }, 500);
         })
         .catch((err) => {
           state.isLoading = false;

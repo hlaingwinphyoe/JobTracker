@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('user_job_posts', function (Blueprint $table) {
             $table->foreignId('user_id');
             $table->foreignId('job_post_id');
+
+            $table->foreign('user_id')->references('id')->on('employees')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

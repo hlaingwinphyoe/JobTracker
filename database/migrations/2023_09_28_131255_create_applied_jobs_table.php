@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('cover_letter');
             $table->string('file');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('employees')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

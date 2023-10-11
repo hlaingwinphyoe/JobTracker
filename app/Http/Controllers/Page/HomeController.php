@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Employer;
 use App\Models\JobPost;
 use App\Models\Region;
 use App\Models\Type;
@@ -46,7 +47,7 @@ class HomeController extends Controller
 
     public function employerDetail($id)
     {
-        $employer = User::with('jobs')->findOrFail($id);
+        $employer = Employer::with('jobs')->findOrFail($id);
         $openJobTotal = JobPost::where('user_id', $employer->id)->statusAvailable()->get()->count();
         return view('pages.employers.show', compact('employer', 'openJobTotal'));
     }

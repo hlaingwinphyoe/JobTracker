@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\EmployerController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\Page\PageController;
 use App\Http\Controllers\Page\ProfileController;
@@ -22,14 +23,21 @@ use Spatie\Permission\Models\Role;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-// auth
-Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
-Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+// employee auth
+Route::name('employee.')->group(function () {
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
 
-Route::post('/register', [AuthController::class, 'customRegister'])->name('register.store');
-Route::post('/login', [AuthController::class, 'customLogin'])->name('login.store');
+    Route::post('/register', [AuthController::class, 'customRegister'])->name('registerStore');
+    Route::post('/login', [AuthController::class, 'customLogin'])->name('loginStore');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
+// employer auth
+Route::prefix('/employer')->name('employer.')->group(function () {
+    Route::get('/', [EmployerController::class, 'login'])->name('login');
+    Route::post('/logout', [EmployerController::class, 'logout'])->name('logout');
+});
 
 // Jobs
 Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');
@@ -41,7 +49,7 @@ Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('h
 Route::get('/employer-lists/{employer}', [HomeController::class, 'employerDetail'])->name('employers.show');
 
 // employee profile
-Route::prefix('/profile')->name('profile.')->controller(ProfileController::class)->group(function () {
+Route::prefix('/profile')->name('profile.')->middleware('auth:employee')->controller(ProfileController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/saved-jobs', 'savedJobs')->name('saved');
     Route::get('/edit-profile', 'editProfile')->name('edit');
@@ -67,12 +75,3 @@ Route::get('added-permissions/{id}', function ($id) {
 
     return "success";
 });
-
-
-// Route::get('test', function() {
-// $user = User::employer()->get();
-//     $user = User::whereHas('roles', function ($q) {
-//         $q->where('name', 'Employer');
-//     })->get();
-//     dd($user);
-// });
