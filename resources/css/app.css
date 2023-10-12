@@ -11,6 +11,10 @@ html {
   scroll-behavior: smooth;
 }
 
+* {
+  font-family: "Nunito", sans-serif;
+}
+
 /* Tutorial on https://fossheim.io/writing/posts/css-text-gradient. */
 
 .gradient-text {

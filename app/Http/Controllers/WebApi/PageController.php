@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WebApi;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmployerResource;
 use App\Http\Resources\JobPostResource;
+use App\Models\Employee;
 use App\Models\Employer;
 use App\Models\JobPost;
 use App\Models\Region;
@@ -52,5 +53,18 @@ class PageController extends Controller
         }
 
         return JobPostResource::collection($jobPosts);
+    }
+
+    public function savedJobs(Employee $employee, JobPost $jobPost)
+    {
+        $added_data = $employee->job_posts()->where('job_post_id', $jobPost->id)->first();
+
+        if ($added_data) {
+            return redirect()->back()->with('error', 'Already saved jobs');
+        } else {
+            $employee->job_posts()->attach($jobPost);
+
+            return redirect()->back()->with('message', 'Saved jobs');
+        }
     }
 }

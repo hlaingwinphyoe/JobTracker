@@ -13,7 +13,7 @@
       ></div>
 
       <div
-        class="bg-white rounded-3xl md:p-4 z-50 md:m-4 relative h-auto md:min-h-fit w-full md:max-w-xl"
+        class="bg-white rounded-3xl md:p-4 z-50 md:m-4 relative h-auto md:min-h-fit w-full md:max-w-2xl"
       >
         <div class="p-6 space-y-6 mb-5">
           <h4 class="text-2xl font-semibold text-secondary-600">
@@ -41,7 +41,7 @@
             <span class="sr-only">Close modal</span>
           </button>
 
-          <form action="" @submit="onSubmit" class="space-y-4">
+          <div class="space-y-4">
             <div class="flex items-center justify-center gap-6 w-full">
               <div v-if="imageUrl">
                 <div
@@ -135,7 +135,7 @@
             />
 
             <!-- Avatars -->
-            <!-- <ul
+            <ul
               class="grid w-full gap-2 grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
             >
               <li v-for="avatar in avatars" :key="avatar.name">
@@ -150,12 +150,12 @@
                 />
                 <label
                   :for="avatar.name"
-                  class="inline-flex items-center justify-center w-full px-2 py-3 border-2 rounded cursor-pointer border-secondary-500 peer-checked:text-white peer-checked:border-primary-500 peer-checked:shadow-lg text-gray-400 hover:border-primary-400"
+                  class="inline-flex items-center justify-center w-full px-2 py-3 border-2 rounded cursor-pointer border-secondary-100 peer-checked:text-white peer-checked:border-primary-500 peer-checked:shadow-lg text-gray-400 hover:border-primary-400"
                 >
                   <div class="block">
                     <div class="w-full mb-2">
                       <img
-                        :src="siteApi + avatar.url"
+                        :src="avatar.url"
                         class="h-12 object-contain mx-auto rounded"
                         :alt="avatar.name"
                       />
@@ -163,16 +163,17 @@
                   </div>
                 </label>
               </li>
-            </ul> -->
+            </ul>
 
             <button
-              type="submit"
+              type="button"
+              @click="onSubmit"
               class="normal-font text-white bg-primary-500 hover:bg-primary-600 focus:ring-2 focus:outline-none focus:ring-primary-300 font-medium rounded text-sm px-5 py-2.5 mt-3 block mb-0 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
               :disabled="!avatarForm.avatar_name && !imageUrl"
             >
               Upload
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -182,7 +183,7 @@
 <script>
 import { computed, onMounted, reactive, toRaw, toRefs, watch } from "vue";
 export default {
-  props: ["upload"],
+  props: ["upload", "employee_id"],
   emits: ["update:upload"],
   setup(props, { emit }) {
     const state = reactive({
@@ -220,7 +221,23 @@ export default {
     };
 
     const onSubmit = () => {
-      console.log("hello submit");
+      if (state.avatarForm.avatar_name) {
+        axios
+          .post(`/wapi/avatar-upload/${props.employee_id}`, state.avatarForm)
+          .then((res) => {
+            closeModal();
+            location.reload();
+          });
+      }
+      else {
+        state.form.append("media", state.imageRef);
+        axios
+          .post(`/wapi/image-upload/${props.employee_id}`, state.form)
+          .then((res) => {
+            closeModal();
+            location.reload();
+          });
+      }
     };
 
     const closeModal = () => {
@@ -236,6 +253,12 @@ export default {
       state.imageRef = "";
       state.imageUrl = "";
     };
+
+    onMounted(() => {
+      axios.get("/wapi/get-avatars").then((res) => {
+        state.avatars = res.data;
+      });
+    });
 
     return {
       ...toRefs(state),

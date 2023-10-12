@@ -110,7 +110,11 @@
                   Saved Post
                   <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
-                <a href="javascript:void(0)" data-tooltip-target="save-tooltip">
+                <a
+                  href="javascript:void(0)"
+                  @click="saveJob"
+                  data-tooltip-target="save-tooltip"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-heart text-gray-500"
@@ -139,9 +143,32 @@
 </template>
 
 <script>
+import { onMounted, reactive, toRefs } from "vue";
 export default {
   props: ["jobPost"],
-  setup() {},
+  setup(props, { emit }) {
+    const state = reactive({
+      employee: "",
+    });
+    const saveJob = () => {
+      axios
+        .get(`/wapi/employee-jobs/${state.employee.id}/${props.jobPost.id}`)
+        .then((res) => {
+          console.log("save jobs");
+        });
+    };
+
+    onMounted(() => {
+      axios.get("/wapi/get-auth-employee").then((res) => {
+        state.employee = res.data.auth_employee;
+      });
+    });
+
+    return {
+      ...toRefs(state),
+      saveJob,
+    };
+  },
 };
 </script>
 
