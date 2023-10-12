@@ -19,6 +19,7 @@ class PermissionSeeder extends Seeder
             'employee' => ['Access Employee','Write Employee','View Employee', 'Edit Employee','Delete Employee'],
             'employer' => ['Access Employer','Write Employer','View Employer', 'Edit Employer','Delete Employer'],
             'job' => ['Access Job','Write Job','View Job', 'Edit Job','Delete Job'],
+            'applied job' => ['Access Applied Job','Write Applied Job','View Applied Job','Edit Applied Job','Delete Applied Job'],
             'category' => ['Access Category','Write Category','View Category', 'Edit Category','Delete Category'],
             'type' => ['Access Type','Write Type','View Type', 'Edit Type','Delete Type'],
             'role' => ['Access Role','Write Role','View Role', 'Edit Role','Delete Role'],

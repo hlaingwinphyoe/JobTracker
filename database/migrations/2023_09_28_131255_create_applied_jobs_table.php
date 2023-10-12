@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('applied_jobs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('employee_id');
             $table->foreignId('job_id');
             $table->double('amount', 2)->nullable();
             $table->text('cover_letter');
             $table->string('file');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('employees')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
