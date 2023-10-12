@@ -72,7 +72,7 @@ class ProfileController extends Controller
 
             // login again
             Auth::guard('employee')->logout();
-            return redirect()->route('employee.login')->with('logout', "Successfully Changed.Please Login Again");
+            return redirect()->route('employee.login')->with('message', "Successfully Changed.Please Login Again");
         }
     }
 }

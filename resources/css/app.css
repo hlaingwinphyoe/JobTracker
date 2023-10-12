@@ -103,3 +103,9 @@ html {
   grid-template-columns: 15rem minmax(0, 1fr);
   grid-gap: 30px;
 }
+
+.swal2-toast {
+  background-color: #27A26F !important;
+  color: #fff;
+  border-radius: 6px !important;
+}

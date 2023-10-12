@@ -64,7 +64,9 @@ class PageController extends Controller
         } else {
             $employee->job_posts()->attach($jobPost);
 
-            return redirect()->back()->with('message', 'Saved jobs');
+            return response()->json([
+                'message' => "Saved jobs",
+            ]);
         }
     }
 }

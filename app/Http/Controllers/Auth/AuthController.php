@@ -77,6 +77,7 @@ class AuthController extends Controller
         $check = $request->all();
 
         if (Auth::guard('employee')->attempt(['email' => $check['credentials'], 'password' => $check['password']])) {
+            Session::regenerate();
             return redirect()->route('profile.index')->with(['message', 'Login Successfull']);
         } else {
             return back()->with('message', 'login fail');
@@ -87,6 +88,6 @@ class AuthController extends Controller
     {
         Auth::guard('employee')->logout();
         Session::flush();
-        return redirect()->route('home.index');
+        return redirect()->route('home.index')->with('message', 'Logout Successful');
     }
 }

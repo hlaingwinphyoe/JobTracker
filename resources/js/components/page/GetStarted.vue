@@ -1,22 +1,50 @@
 <template>
   <nav class="absolute top-0 left-0 bg-transparent w-full z-20">
     <div
-      class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      class="container flex flex-wrap items-center justify-between mx-auto p-4"
     >
-      <a href="/" class="flex items-center">
-        <img src="/logo.png" class="h-8 mr-3" alt="Logo" />
-        <span
-          class="self-center text-white text-2xl font-semibold whitespace-nowrap"
-          >{{ siteName }}</span
+      <div class="flex items-center">
+        <a href="/" class="flex items-center">
+          <img src="/logo.png" class="h-8 mr-3" alt="Logo" />
+          <span
+            class="self-center text-white text-2xl font-semibold whitespace-nowrap"
+            >{{ siteName }}</span
+          >
+        </a>
+
+        <nav
+          class="hidden md:flex flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200"
         >
-      </a>
+          <a
+            href="/"
+            class="mr-5 leading-6 text-gray-200 hover:text-white relative text-base w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          >
+            Home
+          </a>
+
+          <a
+            href="/job-lists"
+            class="mr-5 leading-6 text-gray-200 hover:text-white relative text-base w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          >
+            Browse Jobs
+          </a>
+
+          <a
+            href="/employer-lists"
+            class="mr-5 leading-6 text-gray-200 hover:text-white relative text-base w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          >
+            Employers
+          </a>
+        </nav>
+      </div>
+
       <div class="flex md:order-2">
         <button
           @click="openRegisterModal"
           type="button"
-          class="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0"
+          class="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-md text-sm px-4 py-2.5 text-center mr-3 md:mr-0"
         >
-          Get started
+          Get Started
         </button>
       </div>
     </div>
@@ -61,7 +89,7 @@
         </svg>
       </button>
       <a
-        href="#"
+        href="javascript:void(0)"
         class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
       >
         Learn more
@@ -69,8 +97,8 @@
     </div>
   </div>
 
-  <Login v-model:login="login" />
-  <Register v-model:open="open" />
+  <Login v-model:login="login" @open-register="openRegisterModal" />
+  <Register v-model:open="open" @open-login="openLoginModal" />
 </template>
 
 <script>

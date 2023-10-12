@@ -71,7 +71,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($savedJobs as $job_post)
+                            @forelse ($savedJobs as $job_post)
                                 <tr class="bg-transparent border-b">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900">
                                         {{ $job_post->title }}
@@ -124,7 +124,24 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-mood-empty inline-flex items-center mb-1" width="20" height="20"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                                            <path d="M9 10l.01 0" />
+                                            <path d="M15 10l.01 0" />
+                                            <path d="M9 15l6 0" />
+                                        </svg>
+                                        Nothing yet.
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
 

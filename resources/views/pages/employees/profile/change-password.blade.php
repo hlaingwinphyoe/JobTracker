@@ -2,11 +2,11 @@
 
 @section('content')
     <section class="container mx-auto mt-8">
-        <div class="layout">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
 
             @include('pages.employees.profile.navigation')
 
-            <div class="bg-gray-100 rounded-[24px] p-10">
+            <div class="bg-gray-100 rounded-[24px] p-10 col-span-3 mt-5 lg:mt-0">
                 <h4 class="text-3xl font-bold mb-2">Edit Profile</h4>
                 <span class="text-gray-500">Update Your Personal Details For Better Job.</span>
 

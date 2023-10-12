@@ -18,8 +18,8 @@
       >
         <div class="p-6 space-y-6 mb-5">
           <div>
-            <div class="flex items-center justify-center">
-              <img src="/logo-notext.svg" class="h-16 w-16" alt="" />
+            <div class="flex items-center justify-center mb-5">
+              <img src="/logo.png" class="h-16 w-16" alt="" />
               <h4 class="text-2xl font-semibold text-secondary-600">
                 {{ siteName }}
               </h4>
@@ -427,6 +427,7 @@
           <div class="text-sm font-medium text-gray-500 normal-font">
             Already have an account?
             <a
+              @click="$emit('openLogin')"
               href="javascript:void(0)"
               class="text-primary-500 hover:underline normal-font"
               >Login
@@ -475,7 +476,7 @@ export default {
           state.isLoading = false;
           closeModal();
           setTimeout(() => {
-            location.href = '/';
+            location.href = "/";
           }, 500);
         })
         .catch((err) => {
@@ -497,7 +498,7 @@ export default {
         company_type: "",
         region: "",
         desc: "",
-        type: ""
+        type: "",
       };
       document.body.classList.remove("overflow-hidden");
     };

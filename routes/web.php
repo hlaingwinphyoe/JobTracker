@@ -62,7 +62,7 @@ Route::prefix('/profile')->name('profile.')->middleware('auth:employee')->contro
 Route::get('faq', [PageController::class, 'faq'])->name('faq');
 Route::get('terms', [PageController::class, 'terms'])->name('terms');
 Route::get('policy', [PageController::class, 'policy'])->name('policy');
-Route::get('/save-jobs/{employee}/{jobPost}', [PageController::class, 'savedJobs'])->name('employee-jobs.store');
+Route::get('/save-jobs/{employee}/{jobPost}', [PageController::class, 'savedJob'])->name('employee-jobs.store');
 Route::get('/unsave-jobs/{employee}/{jobPost}', [PageController::class, 'detach'])->name('jobPost.detach');
 
 Route::get('/apply-job/{jobPost}', [PageController::class, 'applyJob'])->name('jobPost.apply');

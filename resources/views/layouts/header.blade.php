@@ -1,8 +1,8 @@
 <section class="w-full px-8 text-secondary-700 bg-white bg-opacity-90 backdrop-blur-sm sticky top-0 z-50">
     <div
-        class="md:container flex flex-wrap items-center justify-between py-1 md:py-3 md:mx-auto flex-row w-full md:max-w-9xl">
+        class="md:container flex items-center justify-between py-1 md:py-3 md:mx-auto flex-row w-full md:max-w-9xl">
         <div class="relative flex flex-col md:flex-row">
-            <img src="{{ asset('logo-notext.svg') }}" class="h-8 mr-1.5" alt="">
+            <img src="{{ asset('logo.png') }}" class="h-8 mr-1.5" alt="">
             <a href="{{ route('home.index') }}"
                 class="flex items-center mb-5 font-medium text-secondary-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
                 <span

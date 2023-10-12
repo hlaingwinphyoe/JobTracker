@@ -150,11 +150,30 @@ export default {
     const state = reactive({
       employee: "",
     });
+
+    const showToast = (icon, message) => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-right",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+      Toast.fire({
+        icon: icon,
+        title: message,
+      });
+    };
+
     const saveJob = () => {
       axios
         .get(`/wapi/save-jobs/${state.employee.id}/${props.jobPost.id}`)
         .then((res) => {
-          console.log("save jobs");
+          showToast('success', res.data.message)
         });
     };
 
