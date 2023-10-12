@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -11,7 +12,7 @@ class EmployerController extends Controller
 {
     public function login()
     {
-        if (Auth::guard('employer')->check()) {
+        if (Auth::check()) {
             return back();
         } else {
             return view('auth.employer-login');
@@ -21,7 +22,7 @@ class EmployerController extends Controller
     public function logout()
     {
         Session::flush();
-        Auth::guard('employer')->logout();
+        Auth::logout();
 
         return redirect()->route('home.index');
     }

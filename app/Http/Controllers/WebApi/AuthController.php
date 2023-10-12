@@ -4,6 +4,8 @@ namespace App\Http\Controllers\WebApi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employer;
+use App\Models\Type;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,9 +26,9 @@ class AuthController extends Controller
             'region' => ['required', 'integer', 'exists:regions,id'],
         ]);
 
-        // $employer = Type::isType('user')->where('name', 'employer')->first();
+        $employerType = Type::isType('user')->where('slug', 'employer')->first();
 
-        $employer = Employer::create([
+        $employer = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -34,8 +36,11 @@ class AuthController extends Controller
             'company_name' => $request->company_name,
             'company_type' => $request->company_type,
             'region_id' => $request->region,
+            'type_id' => $employerType->id,
             'desc' => $request->desc,
         ])->assignRole('Employer');
+
+        Auth::login($employer);
 
         return response()->json([
             'message' => 'Successful Login',
@@ -45,24 +50,18 @@ class AuthController extends Controller
 
     public function employerLogin(Request $request)
     {
-        // $employer = Employer::where('name', $request->credentials)
-        //     ->orWhere('email', $request->credentials)
-        //     ->orWhere('phone', $request->credentials)->first();
+        $employer = User::where('name', $request->credentials)
+            ->orWhere('email', $request->credentials)
+            ->orWhere('phone', $request->credentials)->first();
 
-        // if (!$employer || !Hash::check($request->password, $employer->password)) {
-        //     throw ValidationException::withMessages([
-        //         'credentials' => 'These credentials do not match our records.',
-        //     ]);
-        // }
-
-        $check = $request->all();
-
-        if (Auth::guard('employer')->attempt(['email' => $check['credentials'], 'password' => $check['password']])) {
-            return redirect()->route('home.index')->with(['message', 'Login Successfull']);
-        } else {
-            return back()->with('message', 'login fail');
+        if (!$employer || !Hash::check($request->password, $employer->password)) {
+            throw ValidationException::withMessages([
+                'credentials' => 'These credentials do not match our records.',
+            ]);
         }
 
-        // return redirect()->route('home.index');
+        Auth::login($employer);
+
+        return redirect()->route('home.index');
     }
 }

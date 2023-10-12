@@ -455,6 +455,7 @@ export default {
         company_type: "",
         region: "",
         desc: "",
+        type: props.employer ? props.employer.id : "",
       },
       isLoading: false,
       regionList: [],
@@ -472,12 +473,10 @@ export default {
         .post("/wapi/employer-register", state.form)
         .then((res) => {
           state.isLoading = false;
-          // console.log("sign in");
           closeModal();
-          emit('submitted', res.data)
-          // setTimeout(() => {
-          //   location.reload();
-          // }, 500);
+          setTimeout(() => {
+            location.href = '/';
+          }, 500);
         })
         .catch((err) => {
           state.isLoading = false;
@@ -498,6 +497,7 @@ export default {
         company_type: "",
         region: "",
         desc: "",
+        type: ""
       };
       document.body.classList.remove("overflow-hidden");
     };

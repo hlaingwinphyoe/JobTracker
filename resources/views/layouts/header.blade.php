@@ -47,9 +47,7 @@
 
         @if (Auth::guard('employee')->user())
             @include('composables.auth-employee')
-        @elseif (Auth::guard('employer')->user())
-            @include('composables.auth-employer')
-        @elseif (Auth::guard('web')->user())
+        @elseif (Auth::user())
             @include('composables.auth-admin')
         @else
             @include('composables.join-now')

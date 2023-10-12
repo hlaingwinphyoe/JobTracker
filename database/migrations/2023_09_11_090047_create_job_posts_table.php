@@ -23,11 +23,9 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->foreignId('status_id')->constrained()->cascadeOnDelete();
             $table->foreignId('region_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->boolean('disabled')->default(0);
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('employers')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
