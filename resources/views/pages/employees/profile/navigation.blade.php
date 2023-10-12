@@ -1,5 +1,5 @@
 <aside>
-    <div class="sticky top-20">
+    <div class="">
         <div class="mb-5">
             <employer-profile :employee="{{ $user }}" />
         </div>

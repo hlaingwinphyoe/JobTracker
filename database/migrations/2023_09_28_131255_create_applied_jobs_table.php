@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('job_id');
-            $table->double('amount', 2);
-            $table->string('cover_letter');
+            $table->double('amount', 2)->nullable();
+            $table->text('cover_letter');
             $table->string('file');
             $table->timestamps();
 

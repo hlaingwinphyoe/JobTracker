@@ -21,7 +21,7 @@ Route::post('/image-upload/{id}', [ProfileController::class, 'imageUpload']);
 
 
 // save jobs
-Route::get('/employee-jobs/{employee}/{jobPost}', [PageController::class, 'savedJobs'])->name('employee-jobs.store');
+Route::get('/save-jobs/{employee}/{jobPost}', [PageController::class, 'savedJobs']);
 
 Route::get('/get-auth-employee', function () {
     $auth_employee = Auth::guard('employee')->user();

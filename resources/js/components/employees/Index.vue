@@ -7,7 +7,7 @@
     />
     <button
       @click="openUpload"
-      class="absolute p-2 text-gray-300 bg-gray-200 bottom-2 rounded-full right-[50px] hover:bg-gray-300"
+      class="absolute p-2 text-gray-300 bg-gray-200 bottom-1 rounded-full right-[60px] hover:bg-gray-300"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

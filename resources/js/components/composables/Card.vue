@@ -152,7 +152,7 @@ export default {
     });
     const saveJob = () => {
       axios
-        .get(`/wapi/employee-jobs/${state.employee.id}/${props.jobPost.id}`)
+        .get(`/wapi/save-jobs/${state.employee.id}/${props.jobPost.id}`)
         .then((res) => {
           console.log("save jobs");
         });

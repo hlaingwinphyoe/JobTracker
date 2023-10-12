@@ -22,7 +22,8 @@ class ProfileController extends Controller
     public function savedJobs()
     {
         $user = Auth::guard('employee')->user();
-        return view('pages.employees.profile.saved-jobs', compact('user'));
+        $savedJobs = $user->job_posts()->filterOn()->paginate(10);
+        return view('pages.employees.profile.saved-jobs', compact('user', 'savedJobs'));
     }
 
     public function editProfile()

@@ -92,15 +92,47 @@
                             </span>
                         </p>
                         @if ($jobPost->status->slug == 'available')
+                            @php
+                                $user = Auth::guard('employee')->user();
+                                $added = $user
+                                    ->job_posts()
+                                    ->where('job_post_id', $jobPost->id)
+                                    ->first();
+                            @endphp
                             <div class="flex items-center justify-center">
-                                <x-primary-button class="rounded-md mr-3" name="Apply Now" />
-                                <x-secondary-button class="rounded-md" name="Save" />
+                                <a href="{{ route('jobPost.apply', $jobPost->slug) }}"
+                                    class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary-500 border border-transparent shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                    Apply Now
+                                </a>
+                                @if (!$added)
+                                    <a href="{{ route('employee-jobs.store', ['employee' => $user->id, 'jobPost' => $jobPost->id]) }}"
+                                        class="flex items-center px-4 py-2.5 text-gray-500 bg-gray-100 hover:bg-tertiary-100 hover:text-gray-600 rounded-md">
+                                        Save
+                                    </a>
+                                @endif
                             </div>
                         @endif
 
                     </article>
 
                     <article class="pt-6 space-y-4">
+
+                        <p class="flex">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-triangle-square-circle text-gray-500" width="20"
+                                height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M12 3l-4 7h8z" />
+                                <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                <path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                            </svg>
+                            <span class="flex flex-col text-gray-500 ml-1">
+                                <span class="font-light text-sm mb-1">Category</span>
+                                <span
+                                    class="text-secondary-500 font-semibold tracking-wide">{{ $jobPost->category->name }}</span>
+                            </span>
+                        </p>
                         <p class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-briefcase text-gray-500" width="20" height="20"
@@ -140,8 +172,7 @@
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                <path
-                                    d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
+                                <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
                                 <path d="M12 7v10" />
                             </svg>
                             <span class="flex flex-col text-gray-500 ml-1">
@@ -215,8 +246,7 @@
                                 viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                                <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
                                 <path d="M3 7l9 6l9 -6" />
                             </svg>
                             <span class="text-gray-500 tracking-wide ml-1">{{ $jobPost->user->email }}</span>
@@ -293,8 +323,7 @@
                                     width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+                                    <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
                                 </svg>
                                 {{ $jobPost->region->name }}
                             </span>
