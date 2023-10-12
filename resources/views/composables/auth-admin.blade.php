@@ -1,13 +1,13 @@
 <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
     class="flex mx-3 text-sm rounded-full md:mr-0 focus:ring-2 focus:ring-primary-400" type="button">
     <span class="sr-only">Open user menu</span>
-    {{-- <img src="https://ui-avatars.com/api/?size=40&rounded=true&name={{ Auth::user()->name }}" alt="profile_img"> --}}
+    <img src="https://ui-avatars.com/api/?size=40&rounded=true&name={{ Auth::user()->name }}" alt="profile_img">
 </button>
 
 <!-- Dropdown menu -->
 <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-200 rounded-lg shadow w-44">
     <div class="px-4 py-3 text-sm text-secondary-500 text-center ">
-        {{-- <span class="fw-bold text-lg">{{ Auth::user()->name }}</span> --}}
+        <span class="fw-bold text-lg">{{ Auth::user()->name }}</span>
     </div>
     <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownUserAvatarButton">
         <li>

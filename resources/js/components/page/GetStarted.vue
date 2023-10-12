@@ -70,7 +70,7 @@
   </div>
 
   <Login v-model:login="login" />
-  <Register v-model:open="open" @submitted="openLoginModal" />
+  <Register v-model:open="open" />
 </template>
 
 <script>

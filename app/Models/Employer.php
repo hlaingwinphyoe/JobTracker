@@ -2,30 +2,23 @@
 
 namespace App\Models;
 
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Spatie\Permission\Traits\HasRoles;
 
-class Employer extends Authenticatable implements FilamentUser
+class Employer extends Model
 {
-    use HasFactory, HasRoles;
+    use HasFactory;
 
-    protected array $guard_name = ['employer', 'web'];
+    // protected array $guard = ['employer', 'web'];
+    protected $guard = 'web';
 
-    protected $table = 'employers';
+    protected $table = 'users';
 
     protected $guarded = [];
-
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return true;
-    }
 
     public function region(): BelongsTo
     {
@@ -40,16 +33,6 @@ class Employer extends Authenticatable implements FilamentUser
     public function jobs(): HasMany  // employer create jobs
     {
         return $this->hasMany(JobPost::class, 'user_id', 'id');
-    }
-
-    public function job_posts(): BelongsToMany  // employee's favourite posts
-    {
-        return $this->belongsToMany(JobPost::class, 'user_job_posts', 'user_id', 'job_post_id');
-    }
-
-    public function applied_jobs(): HasMany  // employee applied jobs
-    {
-        return $this->hasMany(AppliedJob::class, 'user_id', 'id');
     }
 
     public function type(): BelongsTo
@@ -77,12 +60,6 @@ class Employer extends Authenticatable implements FilamentUser
 
         if (request('sort')) {
             $query->orderBy('name', request('sort'));
-        }
-
-        if (request('role')) {
-            $query->whereHas('roles', function ($q) {
-                $q->where('name', request('role'));
-            });
         }
     }
 }
