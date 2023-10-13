@@ -17,11 +17,11 @@ class AppliedJob extends Model
 
     public function job_post(): BelongsTo
     {
-        return $this->belongsTo(JobPost::class);
+        return $this->belongsTo(JobPost::class, 'job_id');
     }
 
-    public function user(): BelongsTo
+    public function employee(): BelongsTo
     {
-        return $this->belongsTo(Employer::class);
+        return $this->belongsTo(Employee::class);
     }
 }

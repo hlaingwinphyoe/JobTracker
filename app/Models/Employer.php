@@ -40,6 +40,13 @@ class Employer extends Model
         return $this->belongsTo(Type::class);
     }
 
+    public function scopeIsType($query, $type)
+    {
+        $query->whereHas('type', function ($q) use ($type) {
+            $q->where('slug', $type);
+        });
+    }
+
     public function scopeFilterOn($query)
     {
         if (request('search')) {

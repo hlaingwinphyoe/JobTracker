@@ -11,7 +11,7 @@ class AppliedJobPolicy
     public function viewAny(User $user): bool
     {
         // return $user->hasAnyPermission(['Access AppliedJob', 'Write AppliedJob', 'Edit AppliedJob', 'Delete AppliedJob']);
-        return $user->hasDirectPermission('Access AppliedJob');
+        return $user->hasDirectPermission('Access Applied Job');
     }
 
     /**
@@ -19,7 +19,7 @@ class AppliedJobPolicy
      */
     public function view(User $user, AppliedJob $appliedjob): bool
     {
-        return $user->hasDirectPermission('View AppliedJob');
+        return $user->hasDirectPermission('View Applied Job');
     }
 
     /**
@@ -27,7 +27,7 @@ class AppliedJobPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasDirectPermission('Write AppliedJob');
+        return $user->hasDirectPermission('Write Applied Job');
     }
 
     /**
@@ -35,7 +35,7 @@ class AppliedJobPolicy
      */
     public function update(User $user, AppliedJob $appliedjob): bool
     {
-        return $user->hasDirectPermission('Edit AppliedJob');
+        return $user->hasDirectPermission('Edit Applied Job');
     }
 
     /**
@@ -43,6 +43,6 @@ class AppliedJobPolicy
      */
     public function delete(User $user, AppliedJob $appliedjob): bool
     {
-        return $user->hasDirectPermission('Delete AppliedJob');
+        return $user->hasDirectPermission('Delete Applied Job');
     }
 }

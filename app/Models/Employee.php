@@ -33,7 +33,7 @@ class Employee extends Authenticatable
 
     public function applied_jobs(): HasMany  // employee applied jobs
     {
-        return $this->hasMany(AppliedJob::class, 'user_id', 'id');
+        return $this->hasMany(AppliedJob::class, 'employee_id', 'id');
     }
 
     public function region(): BelongsTo
