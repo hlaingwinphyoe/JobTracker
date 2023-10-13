@@ -1,7 +1,7 @@
 <aside>
     <div class="">
         <div class="mb-5">
-            <employer-profile :employee="{{ $user }}" />
+            <employee-profile :employee="{{ $user }}" />
         </div>
         <ul>
             <li>

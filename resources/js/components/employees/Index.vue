@@ -1,10 +1,14 @@
 <template>
   <div class="relative">
     <img
-      :src="employee.profile ? employee.profile : '/user.png'"
+      :src="
+        employee.profile
+          ? '/storage/employee_profile/' + employee.profile
+          : '/user.png'
+      "
       class="h-32 w-32 p-3 mx-auto rounded-full border-2 border-tertiary-500 object-contain mb-3 md:mb-0"
       alt="user"
-    />
+  />
     <button
       @click="openUpload"
       class="absolute p-2 text-gray-300 bg-gray-200 bottom-1 rounded-full right-[60px] hover:bg-gray-300"

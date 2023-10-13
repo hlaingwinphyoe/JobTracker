@@ -1,7 +1,7 @@
 <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
     class="flex mx-3 text-sm rounded-full md:mr-0 focus:ring-2 focus:ring-primary-400" type="button">
     <span class="sr-only">Open user menu</span>
-    <img src="https://ui-avatars.com/api/?size=40&rounded=true&name={{ Auth::guard('employee')->user()->name }}"
+    <img src="{{ isset(Auth::guard('employee')->user()->profile) ? asset('storage/employee_profile/' . Auth::guard('employee')->user()->profile) : asset('user.png') }}" class="w-9 h-9 rounded-full"
         alt="profile_img">
 </button>
 

@@ -53,21 +53,18 @@ class ProfileController extends Controller
             'media' => 'required|mimes:jpeg,png,svg|max:50000'
         ]);
 
+        $dir = "public/employee_profile";
+
+        Storage::delete($dir . $employee->profile);
+
         if (!Storage::exists('public/employee_profile')) {
             Storage::makeDirectory('public/employee_profile');
         }
 
-        // $newName = uniqid() . "_employee_profile." . $media->extension();
-        // $url = $media->storeAs('public/employee_profile/', $newName);
+        $newName = uniqid() . "_user_photo." . $request->file("media")->extension();
+        $request->file("media")->storeAs($dir, $newName);
 
-        $file = $request->file('media');
-        $fileNameWithExt = $file->getClientOriginalName();
-        $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-        $fileNameToStore = $fileName . '_' . time() . '.' . $file->extension();
-
-        $url = $file->storeAs('public/employee_profile', $fileNameToStore);
-
-        $employee->profile = $url;
+        $employee->profile = $newName;
         $employee->update();
 
         return response()->json([
