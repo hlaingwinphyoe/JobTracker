@@ -10,8 +10,8 @@
         <div class="space-y-4">
           <a :href="'/job-lists' + jobPost.slug">
             <img
-              class="rounded-t-lg"
-              src="https://placehold.co/400x250"
+              class="rounded-t-lg h-48 w-full object-cover"
+              :src="jobPost.thumbnail ? jobPost.thumbnail : '/images/job.jpg'"
               alt=""
             />
           </a>
@@ -24,8 +24,8 @@
                   class="cursor-pointer"
                 >
                   <img
-                    class="flex-shrink-0 w-8 h-8 rounded-full"
-                    src="https://i.imgur.com/7D7I6dI.png"
+                    class="flex-shrink-0 w-8 h-8 rounded-full border border-tertiary-500 p-1"
+                    :src="employee.profile ? employee.profile : '/user.png'"
                     alt=""
                   />
                 </a>
@@ -39,7 +39,7 @@
               </div>
               <span>
                 <a
-                  href="#"
+                  href="javascript:void(0)"
                   class="bg-tertiary-100 hover:bg-tertiary-200 text-tertiary-800 text-xs font-semibold px-2.5 py-1 rounded border border-tertiary-400 whitespace-nowrap"
                   >{{ jobPost.job_type }}</a
                 >
@@ -101,39 +101,41 @@
                   >/Month</span
                 >
               </h5>
-              <span>
-                <div
-                  id="save-tooltip"
-                  role="tooltip"
-                  class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-                >
-                  Saved Post
-                  <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <a
-                  href="javascript:void(0)"
-                  @click="saveJob"
-                  data-tooltip-target="save-tooltip"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-heart text-gray-500"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+              <div v-if="employee">
+                <span>
+                  <div
+                    id="save-tooltip"
+                    role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
                   >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path
-                      d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
-                    />
-                  </svg>
-                </a>
-              </span>
+                    Saved Post
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                  <a
+                    href="javascript:void(0)"
+                    @click="saveJob"
+                    data-tooltip-target="save-tooltip"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-heart text-gray-500"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path
+                        d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
+                      />
+                    </svg>
+                  </a>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -173,7 +175,7 @@ export default {
       axios
         .get(`/wapi/save-jobs/${state.employee.id}/${props.jobPost.id}`)
         .then((res) => {
-          showToast('success', res.data.message)
+          showToast("success", res.data.message);
         });
     };
 

@@ -4,7 +4,9 @@
     <section class="bg-tertiary-100 p-8">
         <div class="container mx-auto py-6 flex justify-between items-center">
             <div class="flex items-center">
-                <img class="rounded-full h-32 w-32 mr-5" src="https://placehold.co/60x60" alt="" />
+                <img class="rounded-full h-32 w-32 mr-5 border-2 border-tertiary-500 p-1"
+                    src="{{ isset(Auth::user()->profile) ? asset('storage/profile/' . Auth::user()->profile) : asset('user.png') }}"
+                    alt="" />
                 <div>
                     <h3 class="text-4xl font-semibold tracking-tight">{{ $employer->name }}</h3>
                     <p class="my-3">
@@ -69,7 +71,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="{{ route('home.employers') }}"
+                            <a href="{{ route('employers.index') }}"
                                 class="ml-1 text-sm font-medium text-secondary-400 hover:text-primary-500 md:ml-2">Employers
                                 List</a>
                         </div>
@@ -150,8 +152,7 @@
                                 viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                                <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
                                 <path d="M3 7l9 6l9 -6" />
                             </svg>
                             <span class="text-gray-500 tracking-wide ml-1">{{ $employer->email }}</span>

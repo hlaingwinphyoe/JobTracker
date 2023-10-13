@@ -11,7 +11,7 @@
     @include('pages.latestJobs')
 
     <!-- Know About User -->
-    @guest
+    @if (!Auth::guard('employee')->user())
         <employer></employer>
-    @endguest
+    @endif
 @endsection

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Category;
-use App\Models\Employer;
 use App\Models\JobPost;
 use App\Models\Region;
 use App\Models\Status;
@@ -28,11 +27,12 @@ class JobPostFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
             'title' => $title = fake()->unique()->jobTitle(),
             'slug' => Str::slug($title),
             'salary' => fake()->numberBetween(10, 5000),
-            'image' => fake()->imageUrl(600,280),
+            // 'image' => fake()->image(public_path('job_images'),400,300, null, false),
             'desc' => fake()->paragraph(),
             'type_id' => Type::isType('job')->get()->random()->id,
             'category_id' => Category::all()->random()->id,

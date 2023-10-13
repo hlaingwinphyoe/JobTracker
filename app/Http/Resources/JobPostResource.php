@@ -24,7 +24,7 @@ class JobPostResource extends JsonResource
             'status_name' => $this->status->title,
             'owner_id' => $this->user->id,
             'owner' => $this->user->name,
-            'publish' => $this->created_at->diffForHumans(),
+            'publish' => $this->updated_at->diffForHumans(),
             'salary' => $this->salary,
             'categroy_name' => $this->category->name,
             'thumbnail' => $this->image,

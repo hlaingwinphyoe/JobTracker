@@ -15,7 +15,7 @@
                     <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-lg md:max-w-3xl">Find your dream job
                         with our site. There are lot of trusted company advertise their for employees.
                     </p>
-                    <form method="GET" action="{{ route('home.jobs') }}" class=" z-10">
+                    <form method="GET" action="{{ route('jobs.index') }}" class=" z-10">
                         <div class="relative rounded-full shadow-sm">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5">
                                 <span class="text-gray-500 sm:text-sm">

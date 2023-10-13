@@ -42,12 +42,12 @@ class JobPost extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(Employer::class);
+        return $this->belongsTo(User::class);
     }
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(Employer::class, 'user_job_posts', 'job_post_id', 'user_id');
+        return $this->belongsToMany(User::class, 'user_job_posts', 'job_post_id', 'user_id');
     }
 
     public function applied_jobs(): HasMany
@@ -89,8 +89,8 @@ class JobPost extends Model
             });
         }
 
-        if (request('sortSalary')) {
-            $query->orderBy('salary', request('sortSalary'));
+        if (request('sort')) {
+            $query->orderBy('updated_at', request('sort'));
         }
     }
 

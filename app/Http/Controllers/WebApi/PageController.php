@@ -25,9 +25,9 @@ class PageController extends Controller
     public function jobPostList(Request $request)
     {
         if (isset($request->page_size) && $request->page_size) {
-            $jobPosts = JobPost::with('user', 'type', 'region')->filterOn()->orderBy('id', 'DESC')->paginate($request->page_size);
+            $jobPosts = JobPost::with('user', 'type', 'region')->filterOn()->orderBy('updated_at', 'DESC')->paginate($request->page_size);
         } else {
-            $jobPosts = JobPost::with('user', 'type', 'region')->filterOn()->orderBy('id', 'DESC')->paginate(20);
+            $jobPosts = JobPost::with('user', 'type', 'region')->filterOn()->orderBy('updated_at', 'DESC')->paginate(20);
         }
 
         return JobPostResource::collection($jobPosts);
@@ -36,9 +36,9 @@ class PageController extends Controller
     public function employerList(Request $request)
     {
         if (isset($request->page_size) && $request->page_size) {
-            $employers = Employer::filterOn()->orderBy('id', 'DESC')->paginate($request->page_size);
+            $employers = User::employer()->filterOn()->orderBy('id', 'DESC')->paginate($request->page_size);
         } else {
-            $employers = Employer::filterOn()->orderBy('id', 'DESC')->paginate(20);
+            $employers = User::employer()->filterOn()->orderBy('id', 'DESC')->paginate(20);
         }
 
         return EmployerResource::collection($employers);

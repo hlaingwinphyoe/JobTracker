@@ -135,9 +135,8 @@ class JobPostResource extends Resource
                             ->relationship(
                                 name: "status",
                                 titleAttribute: "title",
-                                modifyQueryUsing: fn (Builder $query) => $query->where('type', 'status')
+                                modifyQueryUsing: fn (Builder $query) => $query->where('type', 'job_status')
                             )
-                            ->default(7)
                             ->native(false)
                             ->required(),
                     ])->columnSpan(1),
@@ -182,6 +181,7 @@ class JobPostResource extends Resource
             ->columns([
                 TextColumn::make('id')->label("No.")->sortable(),
                 ImageColumn::make('image')
+                    ->circular()
                     ->label('Image'),
                 TextColumn::make('title')->searchable()->sortable(),
                 TextColumn::make("salary")->suffix('Lakhs')->sortable(),
@@ -319,9 +319,9 @@ class JobPostResource extends Resource
     {
         $employer = Type::where('slug', 'employer')->first();
 
-        if(auth()->user()->type->id == $employer->id) {
+        if (auth()->user()->type->id == $employer->id) {
             return parent::getEloquentQuery()->where('user_id', auth()->user()->id);
-        }else {
+        } else {
             return parent::getEloquentQuery();
         }
     }

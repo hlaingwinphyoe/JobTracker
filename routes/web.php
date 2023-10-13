@@ -39,14 +39,14 @@ Route::prefix('/employer')->name('employer.')->group(function () {
     Route::post('/logout', [EmployerController::class, 'logout'])->name('logout');
 });
 
+// Employers
+Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('employers.index');
+Route::get('/employer-lists/{employer}', [HomeController::class, 'employerDetail'])->name('employers.show');
+
 // Jobs
-Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');
+Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('jobs.index');
 Route::get('/job-lists/{job}', [HomeController::class, 'jobDetail'])->name('jobs.show');
 
-
-// Employers
-Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('home.employers');
-Route::get('/employer-lists/{employer}', [HomeController::class, 'employerDetail'])->name('employers.show');
 
 // employee profile
 Route::prefix('/profile')->name('profile.')->middleware('auth:employee')->controller(ProfileController::class)->group(function () {

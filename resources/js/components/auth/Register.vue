@@ -28,7 +28,7 @@
               <h3
                 class="text-xl uppercase font-bold text-center text-primary-500 underline underline-offset-2"
               >
-                Join Us
+                Join As Company
               </h3>
             </div>
           </div>

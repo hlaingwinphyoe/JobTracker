@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
-    const IMAGE_URL = 'https://source.unsplash.com/random/200x200/?img=1';
+    // const IMAGE_URL = 'https://source.unsplash.com/random/600x400/?img=1';
     /**
      * Seed the application's database.
      */

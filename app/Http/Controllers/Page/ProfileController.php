@@ -16,7 +16,9 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('employee')->user();
 
-        return view('pages.employees.profile.index', compact('user'));
+        $appliedJobs = $user->applied_jobs()->filterOn()->paginate(10);
+
+        return view('pages.employees.profile.index', compact('user', 'appliedJobs'));
     }
 
     public function savedJobs()

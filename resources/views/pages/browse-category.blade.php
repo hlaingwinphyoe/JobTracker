@@ -10,7 +10,7 @@
     </div>
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         @foreach ($categories as $category)
-            <a href="{{ route('home.jobs', ['category' => $category->slug]) }}"
+            <a href="{{ route('jobs.index', ['category' => $category->slug]) }}"
                 class="flex flex-col items-center space-y-7 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
                 <h5 class="text-2xl text-center font-semibold tracking-tight text-secondary-500">
                     {{ $category->name }}

@@ -8,14 +8,15 @@ use Illuminate\View\Component;
 
 class NavLink extends Component
 {
-    public $link, $title;
+    public $link, $title, $class;
     /**
      * Create a new component instance.
      */
-    public function __construct($link = "javascript:void(0)", $title = "Title")
+    public function __construct($link = "javascript:void(0)", $title = "Title", $class = "")
     {
         $this->link = $link;
         $this->title = $title;
+        $this->class = $class;
     }
 
     /**

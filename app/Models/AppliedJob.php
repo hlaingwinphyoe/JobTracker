@@ -24,4 +24,14 @@ class AppliedJob extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+
+    // scope function
+    public function scopeFilterOn($query)
+    {
+        if (request('search')) {
+            $query->whereHas('job_post', function ($q) {
+                $q->where('title', 'like', '%' . request('search') . '%');
+            });
+        }
+    }
 }

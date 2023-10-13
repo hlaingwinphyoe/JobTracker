@@ -30,3 +30,11 @@ Route::get('/get-auth-employee', function () {
         'auth_employee' => $auth_employee
     ]);
 });
+
+Route::get('/get-auth-user', function () {
+    $auth_user = Auth::user();
+
+    return response()->json([
+        'auth_user' => $auth_user
+    ]);
+});

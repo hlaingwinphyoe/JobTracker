@@ -10,6 +10,8 @@ use App\Models\FAQ;
 use App\Models\JobPost;
 use App\Models\PrivacyPolicy;
 use App\Models\TermsAndConditions;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
@@ -67,11 +69,31 @@ class PageController extends Controller
         if ($added_data) {
             return redirect()->back()->with('error', 'Already Submitted!');
         } else {
-            $employee->applied_jobs()->create([
-                "cover_letter" => $request->cover_letter,
-            ]);
+            $employee = DB::transaction(function () use ($request, $employee, $jobPost) {
+                $request->validate([
+                    'cover_letter' => 'required',
+                    'file' => 'required|file|mimes:jpeg,bmp,png,svg,pdf'
+                ]);
 
-            return redirect()->route('home.jobs')->with('message', 'Successfully Submitted.');
+                $dir = "public/employee_attachment";
+
+                if (!Storage::exists('public/employee_attachment')) {
+                    Storage::makeDirectory('public/employee_attachment');
+                }
+
+                $newName = uniqid() . "_cv_letter." . $request->file("file")->extension();
+                $request->file("file")->storeAs($dir, $newName);
+
+                $employee->applied_jobs()->create([
+                    "job_id" => $jobPost->id,
+                    "cover_letter" => $request->cover_letter,
+                    "file" => $newName
+                ]);
+
+                return $employee;
+            });
+
+            return redirect()->route('jobs.index')->with('message', 'Successfully Submitted.');
         }
     }
 }

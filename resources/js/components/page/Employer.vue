@@ -16,7 +16,8 @@
             class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-primary-800 via-tertiary-500 to-tertiary-700 rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
           ></div>
           <a
-            href=""
+            @click="checkAuth"
+            href="javascript:void(0)"
             title="Get quote now"
             class="relative inline-flex items-center justify-center px-6 py-2.5 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
             role="button"
@@ -31,25 +32,53 @@
     ></div>
   </section>
 
-  <Register v-model:open="open" />
+  <Login v-model:login="login" @open-register="openRegisterModal" />
+  <Register v-model:open="open" @open-login="openLoginModal" />
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
+import { onMounted, reactive, toRefs } from "vue";
 import Register from "../auth/Register.vue";
+import Login from "../auth/Login.vue";
 export default {
-  components: { Register },
+  components: { Register, Login },
   setup() {
     const state = reactive({
+      login: false,
       open: false,
+      user: "",
     });
+
+    const openLoginModal = () => {
+      state.open = false;
+      state.login = !state.login;
+      document.body.classList.add("overflow-hidden");
+    };
+
     const openRegisterModal = () => {
       state.open = !state.open;
       document.body.classList.add("overflow-hidden");
     };
+
+    const checkAuth = () => {
+      if (state.user) {
+        location.href = "/admin";
+      } else {
+        openRegisterModal();
+      }
+    };
+
+    onMounted(() => {
+      axios.get("/wapi/get-auth-user").then((res) => {
+        state.user = res.data.auth_user;
+      });
+    });
+
     return {
       ...toRefs(state),
       openRegisterModal,
+      openLoginModal,
+      checkAuth,
     };
   },
 };

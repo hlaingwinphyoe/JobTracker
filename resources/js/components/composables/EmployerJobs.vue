@@ -1,6 +1,6 @@
 <template>
-  <div class="px-5">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-6">
+  <div>
+    <div class="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-3 gap-4 lg:gap-6">
       <div class="" v-for="jobPost in jobPosts" :key="jobPost.id">
         <Card :jobPost="jobPost" />
       </div>

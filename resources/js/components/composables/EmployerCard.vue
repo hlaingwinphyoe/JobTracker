@@ -10,8 +10,8 @@
         <div class="space-y-4">
           <!-- <img src="https://nuxt.com/assets/home/ux-fast-light.svg" alt="" /> -->
           <img
-            src="https://placehold.co/600x600"
-            class="employer-profile mx-auto block"
+            :src="employee.profile ? '/storage/profile/'+employee.profile : 'user.png'"
+            class="employer-profile mx-auto block border-2 border-gray-300 rounded-full p-1"
             alt=""
           />
           <article class="pb-4">

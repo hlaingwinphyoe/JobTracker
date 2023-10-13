@@ -33,11 +33,18 @@ class Employee extends Authenticatable
 
     public function applied_jobs(): HasMany  // employee applied jobs
     {
-        return $this->hasMany(AppliedJob::class, 'employee_id', 'id');
+        return $this->hasMany(AppliedJob::class, 'user_id', 'id');
     }
 
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
     }
+
+    // public function checkFavorite($query,$jobPostId)
+    // {
+    //     $query->whereHas('job_posts', function ($query) use ($jobPostId) {
+    //         $query->where('job_post_id', $jobPostId)->first();
+    //     });
+    // }
 }
