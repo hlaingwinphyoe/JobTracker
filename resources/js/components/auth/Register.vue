@@ -500,6 +500,8 @@ export default {
         desc: "",
         type: "",
       };
+
+      state.errors = [];
       document.body.classList.remove("overflow-hidden");
     };
 
