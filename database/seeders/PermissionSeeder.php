@@ -16,6 +16,8 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+            'stats widget' => 'Access Stats Widget',
+            'chart widget' => 'Access Chart Widget',
             'employee' => ['Access Employee','Write Employee','View Employee', 'Edit Employee','Delete Employee'],
             'employer' => ['Access Employer','Write Employer','View Employer', 'Edit Employer','Delete Employer'],
             'job' => ['Access Job','Write Job','View Job', 'Edit Job','Delete Job'],
