@@ -10,6 +10,7 @@ use App\Models\FAQ;
 use App\Models\JobPost;
 use App\Models\PrivacyPolicy;
 use App\Models\TermsAndConditions;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,8 +59,12 @@ class PageController extends Controller
 
     public function applyJob($slug)
     {
-        $jobPost = JobPost::where('slug', $slug)->first();
-        return view('pages.jobs.apply-job', compact('jobPost'));
+        if (Auth::check() || Auth::guard('employee')->check()) {
+            return redirect()->route('employee.login')->with('message' , 'Please Login');
+        } else {
+            $jobPost = JobPost::where('slug', $slug)->first();
+            return view('pages.jobs.apply-job', compact('jobPost'));
+        }
     }
 
     public function submitJob(Request $request, Employee $employee, JobPost $jobPost)

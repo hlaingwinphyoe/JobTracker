@@ -12,8 +12,8 @@ class EmployerController extends Controller
 {
     public function login()
     {
-        if (Auth::check()) {
-            return back();
+        if (Auth::check() || Auth::guard('employee')->check()) {
+            return view('composables.404');
         } else {
             return view('auth.employer-login');
         }

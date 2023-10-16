@@ -27,8 +27,8 @@
         <div
           class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-8"
         >
-          <div class="" v-for="employee in employers" :key="employee.id">
-            <EmployerCard :employee="employee" />
+          <div class="" v-for="employer in employers" :key="employer.id">
+            <EmployerCard :employer="employer" />
           </div>
         </div>
         <div class="text-center mt-10">

@@ -5,7 +5,7 @@
     <ul>
         <li class="mb-1">
             <a href="{{ route('profile.index') }}"
-                class="{{ request()->routeIs('profile.index') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-gray-900 rounded-lg group">
+                class="{{ request()->routeIs('profile.index') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-tertiary-500 rounded-lg group">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clipboard-list" width="20"
                     height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
                     stroke-linecap="round" stroke-linejoin="round">

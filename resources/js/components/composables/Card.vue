@@ -25,7 +25,7 @@
                 >
                   <img
                     class="flex-shrink-0 w-8 h-8 rounded-full border border-tertiary-500 p-1"
-                    :src="employee.profile ? employee.profile : '/user.png'"
+                    :src="jobPost.profile ? jobPost.profile : '/user.png'"
                     alt=""
                   />
                 </a>
@@ -145,6 +145,7 @@
 </template>
 
 <script>
+import { initFlowbite } from "flowbite";
 import { onMounted, reactive, toRefs } from "vue";
 export default {
   props: ["jobPost"],
@@ -180,6 +181,7 @@ export default {
     };
 
     onMounted(() => {
+      initFlowbite();
       axios.get("/wapi/get-auth-employee").then((res) => {
         state.employee = res.data.auth_employee;
       });

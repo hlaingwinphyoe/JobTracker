@@ -32,14 +32,14 @@ class AuthController extends Controller
         }
     }
 
-    public function employerLogin()
-    {
-        if (Auth::guard('employer')->check()) {
-            return back();
-        } else {
-            return view('auth.employer-login');
-        }
-    }
+    // public function employerLogin()
+    // {
+    //     if (Auth::check()) {
+    //         return back();
+    //     } else {
+    //         return view('auth.employer-login');
+    //     }
+    // }
 
     public function customRegister(Request $request)
     {
@@ -59,29 +59,34 @@ class AuthController extends Controller
             'region_id' => $request->region,
         ]);
 
-        return redirect()->route('employee.login');
+        Auth::guard('employee')->login($employee);
+        return redirect()->route('profile.index')->with(['message', 'Login Successfull']);
+        // return redirect()->route('employee.login');
     }
 
     public function customLogin(Request $request)
     {
-        // $employee = Employee::where('name', $request->credentials)
-        //     ->orWhere('email', $request->credentials)
-        //     ->orWhere('phone', $request->credentials)->first();
+        $employee = Employee::where('name', $request->credentials)
+            ->orWhere('email', $request->credentials)
+            ->orWhere('phone', $request->credentials)->first();
 
-        // if (!$employee || !Hash::check($request->password, $employee->password)) {
-        //     throw ValidationException::withMessages([
-        //         'credentials' => 'These credentials do not match our records.',
-        //     ]);
-        // }
-
-        $check = $request->all();
-
-        if (Auth::guard('employee')->attempt(['email' => $check['credentials'], 'password' => $check['password']])) {
-            Session::regenerate();
-            return redirect()->route('profile.index')->with(['message', 'Login Successfull']);
-        } else {
-            return back()->with('message', 'login fail');
+        if (!$employee || !Hash::check($request->password, $employee->password)) {
+            throw ValidationException::withMessages([
+                'credentials' => 'These credentials do not match our records.',
+            ]);
         }
+
+        Auth::guard('employee')->login($employee);
+        return redirect()->route('profile.index')->with(['message', 'Login Successfull']);
+
+        // $check = $request->all();
+
+        // if (Auth::guard('employee')->attempt(['email' => $check['credentials'], 'password' => $check['password']])) {
+        //     Session::regenerate();
+        //     return redirect()->route('profile.index')->with(['message', 'Login Successfull']);
+        // } else {
+        //     return back()->with('message', 'login fail');
+        // }
     }
 
     public function logout()

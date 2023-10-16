@@ -62,11 +62,14 @@ Route::prefix('/profile')->name('profile.')->middleware('auth:employee')->contro
 Route::get('faq', [PageController::class, 'faq'])->name('faq');
 Route::get('terms', [PageController::class, 'terms'])->name('terms');
 Route::get('policy', [PageController::class, 'policy'])->name('policy');
-Route::get('/save-jobs/{employee}/{jobPost}', [PageController::class, 'savedJob'])->name('employee-jobs.store');
-Route::get('/unsave-jobs/{employee}/{jobPost}', [PageController::class, 'detach'])->name('jobPost.detach');
 
-Route::get('/apply-job/{jobPost}', [PageController::class, 'applyJob'])->name('jobPost.apply');
-Route::post('/apply-job/{employee}/{jobPost}', [PageController::class, 'submitJob'])->name('jobPost.apply-submit');
+Route::middleware('auth:employee')->group(function () {
+    Route::get('/save-jobs/{employee}/{jobPost}', [PageController::class, 'savedJob'])->name('employee-jobs.store');
+    Route::get('/unsave-jobs/{employee}/{jobPost}', [PageController::class, 'detach'])->name('jobPost.detach');
+
+    Route::get('/apply-job/{jobPost}', [PageController::class, 'applyJob'])->name('jobPost.apply');
+    Route::post('/apply-job/{employee}/{jobPost}', [PageController::class, 'submitJob'])->name('jobPost.apply-submit');
+});
 
 Route::get('added-permissions/{id}', function ($id) {
     $user = User::find($id);
@@ -79,4 +82,9 @@ Route::get('added-permissions/{id}', function ($id) {
     $user->givePermissionTo(Permission::all());
 
     return "success";
+});
+
+// for missing route
+Route::fallback(function () {
+    return view('composables.404');
 });

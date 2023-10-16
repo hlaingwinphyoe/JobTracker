@@ -1,4 +1,4 @@
-<section class="w-full px-8 text-secondary-700 bg-white bg-opacity-90 backdrop-blur-sm sticky top-0 z-50">
+<section class="w-full px-8 text-secondary-700 bg-gray-50 bg-opacity-90 backdrop-blur-sm sticky top-0 z-50">
     <div class="md:container flex items-center justify-between py-1 md:py-3 md:mx-auto flex-row w-full md:max-w-9xl">
         <div class="relative flex flex-col md:flex-row">
             <a href="{{ route('home.index') }}">

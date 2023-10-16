@@ -10,17 +10,17 @@
         <div class="space-y-4">
           <!-- <img src="https://nuxt.com/assets/home/ux-fast-light.svg" alt="" /> -->
           <img
-            :src="employee.profile ? '/storage/profile/'+employee.profile : 'user.png'"
+            :src="employer.profile ? '/storage/profile/'+employer.profile : 'user.png'"
             class="employer-profile mx-auto block border-2 border-gray-300 rounded-full p-1"
             alt=""
           />
           <article class="pb-4">
             <div class="text-center my-3">
               <a
-                :href="'/employer-lists/' + employee.id"
+                :href="'/employer-lists/' + employer.id"
                 class="hover:underline"
               >
-                <h5 class="font-bold">{{ employee.name }}</h5>
+                <h5 class="font-bold">{{ employer.name }}</h5>
               </a>
               <small class="text-gray-500 text-opacity-75">
                 <svg
@@ -44,7 +44,7 @@
                   <path d="M17 11l0 .01" />
                   <path d="M17 15l0 .01" />
                 </svg>
-                {{ employee.company }}
+                {{ employer.company }}
               </small>
             </div>
             <p class="flex items-center justify-between my-4">
@@ -66,7 +66,7 @@
                     d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"
                   />
                 </svg>
-                {{ employee.region_name }}
+                {{ employer.region_name }}
               </span>
               <span class="text-sm text-gray-500 mb-3">
                 <svg
@@ -89,17 +89,17 @@
                   <path d="M12 12l0 .01" />
                   <path d="M3 13a20 20 0 0 0 18 0" />
                 </svg>
-                {{ employee.industry }}
+                {{ employer.industry }}
               </span>
             </p>
             <div class="text-center">
               <!-- <a
-                :href="'/employer-lists/' + employee.id"
+                :href="'/employer-lists/' + employer.id"
                 class="border-2 border-primary-400 hover:bg-primary-500 hover:text-white hover:border-primary-500 p-3 rounded-lg"
-                >{{ employee.job_count }} Open Jobs</a
+                >{{ employer.job_count }} Open Jobs</a
               > -->
               <a
-                :href="'/employer-lists/' + employee.id"
+                :href="'/employer-lists/' + employer.id"
                 class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-transparent rounded border border-primary-500 group"
               >
                 <span
@@ -107,7 +107,7 @@
                 ></span>
                 <span
                   class="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white"
-                  >{{ employee.job_count }} Open Jobs</span
+                  >{{ employer.job_count }} Open Jobs</span
                 >
               </a>
             </div>
@@ -120,7 +120,7 @@
 
 <script>
 export default {
-  props: ["employee"],
+  props: ["employer"],
   setup() {},
 };
 </script>

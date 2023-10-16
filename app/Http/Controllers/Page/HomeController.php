@@ -41,14 +41,22 @@ class HomeController extends Controller
     {
         $jobPost = JobPost::with('user', 'category', 'type')->where('slug', $slug)->first();
 
-        $relatedJobs = JobPost::with('user', 'category', 'type')->where('category_id', $jobPost->category_id)->where('id', '!=', $jobPost->id)->inRandomOrder()->get()->take(4);
-        return view('pages.jobs.show', compact('jobPost', 'relatedJobs'));
+        if ($jobPost) {
+            $relatedJobs = $jobPost->where('category_id', $jobPost->category_id)->where('id', '!=', $jobPost->id)->inRandomOrder()->get()->take(4);
+            return view('pages.jobs.show', compact('jobPost', 'relatedJobs'));
+        }else{
+            return view('composables.404');
+        }
     }
 
     public function employerDetail($id)
     {
         $employer = Employer::with('jobs')->findOrFail($id);
-        $openJobTotal = JobPost::where('user_id', $employer->id)->statusAvailable()->get()->count();
-        return view('pages.employers.show', compact('employer', 'openJobTotal'));
+
+        $openJobTotal = $employer->jobs()->statusAvailable()->get()->count();
+
+        $categories = Category::inRandomOrder()->get()->take(5);
+
+        return view('pages.employers.show', compact('employer', 'openJobTotal', 'categories'));
     }
 }
