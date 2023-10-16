@@ -319,6 +319,7 @@
             </div>
         </div>
 
+        
         <!-- Related Jobs-->
         <div class="h-[2px] bg-gray-300 w-full mt-12 mb-8 relative">
             <h4 class="text-3xl font-semibold tracking-wider absolute -top-5 bg-white pr-4">Related Jobs</h4>
