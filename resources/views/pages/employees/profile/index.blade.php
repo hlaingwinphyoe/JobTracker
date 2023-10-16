@@ -53,7 +53,7 @@
                                         Submitted
                                     </th>
                                     <th scope="col" class="px-8 py-3">
-                                        <a href="{{ route('profile.saved') }}"
+                                        <a href="{{ route('profile.index') }}"
                                             class="p-1.5 text-sm font-medium text-white bg-tertiary-500 rounded-lg border border-tertiary-500 hover:bg-tertiary-600 focus:outline-none flex items-center justify-center">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="icon icon-tabler icon-tabler-refresh" width="20" height="20"
@@ -74,7 +74,7 @@
                                             <p class="mb-1">
                                                 {{ $appliedJob->job_post->title }}
                                             </p>
-                                            <small class="text-gray-500">
+                                            <small class="text-gray-500 whitespace-nowrap">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor"
                                                     class="w-4 h-4 inline-flex items-center mb-1">

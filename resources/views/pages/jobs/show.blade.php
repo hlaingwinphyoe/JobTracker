@@ -43,6 +43,13 @@
                 ->where('job_post_id', $jobPost->id)
                 ->first()
             : '';
+
+        $applied = $user
+            ? $user
+                ->applied_jobs()
+                ->where('job_id', $jobPost->id)
+                ->first()
+            : '';
     @endphp
 
     <section class="container mx-auto my-10">
@@ -59,8 +66,18 @@
                 <div class="flex items-center justify-between">
                     @if ($jobPost->status->slug == 'available')
                         <div class="flex items-center">
-                            <x-primary-button class="rounded-md mr-3" name="Apply Now" />
                             @if ($user)
+                                @if (!$applied)
+                                    <a href="{{ route('jobPost.apply', $jobPost->slug) }}"
+                                        class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary-500 border border-transparent shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                        Apply Now
+                                    </a>
+                                @else
+                                    <a href="javascript:void(0)"
+                                        class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-primary-700 whitespace-no-wrap bg-primary-100 border border-transparent shadow-sm hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                        Already Applied
+                                    </a>
+                                @endif
                                 @if (!$added)
                                     <a href="{{ route('employee-jobs.store', ['employee' => $user->id, 'jobPost' => $jobPost->id]) }}"
                                         class="flex items-center px-4 py-2.5 text-gray-500 bg-gray-100 hover:bg-tertiary-100 hover:text-gray-600 rounded-md">
@@ -114,20 +131,34 @@
                             </span>
                         </p>
                         @if ($jobPost->status->slug == 'available')
-                            <div class="flex items-center justify-center">
-                                <a href="{{ route('jobPost.apply', $jobPost->slug) }}"
-                                    class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary-500 border border-transparent shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
-                                    Apply Now
-                                </a>
-                                @if ($user)
+                            @if ($user)
+                                <div class="flex items-center justify-center">
+                                    @if (!$applied)
+                                        <a href="{{ route('jobPost.apply', $jobPost->slug) }}"
+                                            class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary-500 border border-transparent shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                            Apply Now
+                                        </a>
+                                    @else
+                                        <a href="javascript:void(0)"
+                                            class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-primary-700 whitespace-no-wrap bg-primary-100 border border-transparent shadow-sm hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                            Already Applied
+                                        </a>
+                                    @endif
+
                                     @if (!$added)
                                         <a href="{{ route('employee-jobs.store', ['employee' => $user->id, 'jobPost' => $jobPost->id]) }}"
                                             class="flex items-center px-4 py-2.5 text-gray-500 bg-gray-100 hover:bg-tertiary-100 hover:text-gray-600 rounded-md">
                                             Save
                                         </a>
+                                    @else
+                                        <a href="{{ route('jobPost.detach', ['employee' => $user->id, 'jobPost' => $jobPost->id]) }}"
+                                            class="flex items-center px-4 py-2.5 text-gray-500 bg-gray-100 hover:bg-tertiary-100 hover:text-gray-600 rounded-md">
+                                            UnSaved
+                                        </a>
                                     @endif
-                                @endif
-                            </div>
+
+                                </div>
+                            @endif
                         @endif
 
                     </article>
@@ -152,9 +183,9 @@
                         </p>
                         <p class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="icon icon-tabler icon-tabler-briefcase text-gray-500" width="20" height="20"
-                                viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
+                                class="icon icon-tabler icon-tabler-briefcase text-gray-500" width="20"
+                                height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
                                 <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" />
@@ -316,6 +347,19 @@
                                         src="{{ $jobPost->image ? $jobPost->image : '/images/job.jpg' }}"
                                         alt="" />
                                 </a>
+
+                                <div class="absolute top-0 left-3">
+                                    @if ($jobPost->status->title == 'Available')
+                                        <span class="bg-primary-100 text-primary-800 text-xs font-medium mr-2 px-2.5 py-1 rounded">
+                                            {{ $jobPost->status->title }}
+                                        </span>
+                                        @else
+                                        <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-1 rounded">
+                                            {{ $jobPost->status->title }}
+                                        </span>
+                                    @endif
+
+                                </div>
 
                                 <div class="px-4 pb-5">
                                     <div class="flex items-center justify-between mb-4">

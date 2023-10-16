@@ -59,12 +59,8 @@ class PageController extends Controller
 
     public function applyJob($slug)
     {
-        if (Auth::check() || Auth::guard('employee')->check()) {
-            return redirect()->route('employee.login')->with('message' , 'Please Login');
-        } else {
-            $jobPost = JobPost::where('slug', $slug)->first();
-            return view('pages.jobs.apply-job', compact('jobPost'));
-        }
+        $jobPost = JobPost::where('slug', $slug)->first();
+        return view('pages.jobs.apply-job', compact('jobPost'));
     }
 
     public function submitJob(Request $request, Employee $employee, JobPost $jobPost)

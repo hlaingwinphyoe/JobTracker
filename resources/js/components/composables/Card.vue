@@ -16,6 +16,14 @@
             />
           </a>
 
+          <div class="absolute top-0 left-3">
+            <span
+              :class="checkStatus(jobPost.status_name)"
+              class="text-xs font-medium mr-2 px-2.5 py-1 rounded"
+              >{{ jobPost.status_name }}</span
+            >
+          </div>
+
           <div class="px-4 pb-5">
             <div class="flex items-center justify-between mb-4">
               <div class="flex gap-1.5 items-center">
@@ -180,6 +188,14 @@ export default {
         });
     };
 
+    const checkStatus = (status) => {
+      if (status == "Available") {
+        return "bg-primary-100 text-primary-800 ";
+      } else {
+        return "bg-red-100 text-red-800 ";
+      }
+    };
+
     onMounted(() => {
       initFlowbite();
       axios.get("/wapi/get-auth-employee").then((res) => {
@@ -190,6 +206,7 @@ export default {
     return {
       ...toRefs(state),
       saveJob,
+      checkStatus
     };
   },
 };
