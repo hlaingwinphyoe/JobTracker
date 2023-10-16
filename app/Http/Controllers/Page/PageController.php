@@ -17,23 +17,33 @@ class PageController extends Controller
 {
     public function faq()
     {
-        $faqs = FAQ::get();
+        $faqs = FAQ::isType('faq')->get();
 
         return view('pages.pages.faq', compact('faqs'));
     }
 
     public function terms()
     {
-        $terms = TermsAndConditions::get()->last();
+        $terms = FAQ::isType('terms-and-conditions')->get()->last();
 
         return view('pages.pages.terms', compact('terms'));
     }
 
     public function policy()
     {
-        $policy = PrivacyPolicy::get()->last();
+        $policy = FAQ::isType('privacy-policy')->get()->last();
 
         return view('pages.pages.policy', compact('policy'));
+    }
+
+    public function aboutUs()
+    {
+        return view('pages.pages.about-us');
+    }
+
+    public function contactUs()
+    {
+        return view('pages.pages.contact-us');
     }
 
     public function savedJob(Employee $employee, JobPost $jobPost)
