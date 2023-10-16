@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use Filament\Facades\Filament;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Support\ServiceProvider;
 use Filament\Http\Responses\Auth\Contracts\LogoutResponse;
+use Filament\Navigation\NavigationGroup;
 use Illuminate\Contracts\Foundation\Application;
 
 class AppServiceProvider extends ServiceProvider

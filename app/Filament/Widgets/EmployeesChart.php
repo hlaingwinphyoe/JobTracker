@@ -8,7 +8,7 @@ use Filament\Widgets\ChartWidget;
 
 class EmployeesChart extends ChartWidget
 {
-    protected static ? int $sort = 3;
+    protected static ? int $sort = 4;
 
     protected static string $color = 'info';
     
@@ -30,6 +30,12 @@ class EmployeesChart extends ChartWidget
             'labels' => $data['months'],
         ];
     }
+
+    public static function canView(): bool 
+    {
+        return auth()->user()->can('Access Chart Widget');
+        // return auth()->user()->isAdmin();
+    } 
 
     protected function getType(): string
     {

@@ -102,6 +102,11 @@ class User extends Authenticatable
         });
     }
 
+    public function scopeIsAdmin()
+    {
+        return $this->roles->first()->name == 'Admin' || $this->roles->first()->name == 'Developer' ? true : false;
+    }
+
     public function scopeFilterOn($query)
     {
         if (request('search')) {

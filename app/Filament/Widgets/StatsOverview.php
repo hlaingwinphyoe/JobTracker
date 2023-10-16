@@ -33,8 +33,14 @@ class StatsOverview extends BaseWidget
             Stat::make('Closed Job Posts', JobPost::where('status_id', 11)->count())
                 ->description(('Closed Job Posts'))
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
-                ->color('info')
+                ->color('danger')
                 ->chart([7,3,4,5,6,2,1,3,8,6]),
         ];
     }
+
+    public static function canView(): bool 
+    {
+        // return auth()->user()->isAdmin();
+        return auth()->user()->hasDirectPermission('Access Stats Widget');
+    } 
 }

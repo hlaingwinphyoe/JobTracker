@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -39,6 +40,12 @@ class AuthController extends Controller
             'type_id' => $employerType->id,
             'desc' => $request->desc,
         ])->assignRole('Employer');
+
+        $role = Role::where('name', 'Employer')->first();
+
+        foreach($role->permissions as $permission){
+            $employer->givePermissionTo($permission);
+        }
 
         Auth::login($employer);
 
