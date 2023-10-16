@@ -26,7 +26,8 @@ class HomeController extends Controller
         $regions = Region::all();
         $categories = Category::orderBy('id')->get();
         $types = Type::isType('job')->orderBy('id')->get();
-        return view('pages.jobs.index', compact('regions', 'categories', 'types'));
+        $jobsTotal = JobPost::all()->count();
+        return view('pages.jobs.index', compact('regions', 'categories', 'types', 'jobsTotal'));
     }
 
     public function employerLists(Request $request)
@@ -34,7 +35,9 @@ class HomeController extends Controller
         $regions = Region::all();
         $categories = Category::orderBy('id')->get();
         $types = Type::isType('job')->orderBy('id')->get();
-        return view('pages.employers.index', compact('regions', 'categories', 'types'));
+
+        $jobsTotal = JobPost::all()->count();
+        return view('pages.employers.index', compact('regions', 'categories', 'types', 'jobsTotal'));
     }
 
     public function jobDetail($slug)
@@ -44,7 +47,7 @@ class HomeController extends Controller
         if ($jobPost) {
             $relatedJobs = $jobPost->where('category_id', $jobPost->category_id)->where('id', '!=', $jobPost->id)->inRandomOrder()->get()->take(4);
             return view('pages.jobs.show', compact('jobPost', 'relatedJobs'));
-        }else{
+        } else {
             return view('composables.404');
         }
     }

@@ -34,6 +34,14 @@
                     class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                     <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                         <li>
+                            <a href="{{ route('about-us') }}"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">About</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('contact-us') }}"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Contact Us</a>
+                        </li>
+                        <li>
                             <a href="{{ route('faq') }}"
                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">FAQs</a>
                         </li>
@@ -53,7 +61,7 @@
                     <x-nav-link title="Profile" link="{{ route('profile.index') }}"
                         class="{{ request()->routeIs('profile.*') ? 'border-b-2 border-primary-500 text-black' : '' }} ml-3" />
                 @elseif(Auth::user())
-                    <x-nav-link title="Dashboard" link="{{ route('filament.admin.pages.dashboard') }} ml-3" />
+                    <x-nav-link title="Dashboard" link="{{ route('filament.admin.pages.dashboard') }}" class="ml-3" />
                 @endif
             </nav>
         </div>

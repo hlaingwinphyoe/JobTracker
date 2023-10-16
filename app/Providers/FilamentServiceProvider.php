@@ -8,6 +8,7 @@ use Filament\Facades\Filament;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\UserMenuItem;
 use Filament\Tables\Columns\Layout\Panel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class FilamentServiceProvider extends ServiceProvider
@@ -30,7 +31,7 @@ class FilamentServiceProvider extends ServiceProvider
                 UserMenuItem::make()
                     ->label('Edit Profile')
                     // ->url(route('filament.admin.pages.edit-profile'))
-                    ->url(ProfileResource::getUrl('edit', ['record' => auth()->user()->id]))
+                    ->url(ProfileResource::getUrl('edit', ['record' => Auth::user()->id]))
                     ->icon('fas-user'),
                 // ...
             ]);

@@ -18,7 +18,6 @@
         rel="stylesheet">
 
     <!-- Scripts -->
-    <link rel="stylesheet" href="{{ asset('alert.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 @yield('style')
@@ -49,26 +48,15 @@
         </div>
     </div>
 
-    <script src="{{ asset('alert.js') }}"></script>
+    @include('composables.message')
 
     @if (session('message'))
-        <script type="module">
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-right',
-                iconColor: 'white',
-                showConfirmButton: false,
-                timer: 4000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-            Toast.fire({
-                icon: 'success',
-                title: '{{ session('message') }}'
-            });
+        <script>
+            setTimeout(() => {
+                let id = document.getElementById('toast-success');
+                // console.log(id);
+                id.style.display = 'none'
+            }, 3000);
         </script>
     @endif
 
