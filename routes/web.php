@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\EmployerController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\Page\PageController;
 use App\Http\Controllers\Page\ProfileController;
@@ -22,26 +23,33 @@ use Spatie\Permission\Models\Role;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-// auth
-Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
-Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+// employee auth
+Route::name('employee.')->group(function () {
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
 
-Route::post('/register', [AuthController::class, 'customRegister'])->name('register.store');
-Route::post('/login', [AuthController::class, 'customLogin'])->name('login.store');
+    Route::post('/register', [AuthController::class, 'customRegister'])->name('registerStore');
+    Route::post('/login', [AuthController::class, 'customLogin'])->name('loginStore');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
+// employer auth
+Route::prefix('/employer')->name('employer.')->group(function () {
+    Route::get('/', [EmployerController::class, 'login'])->name('login');
+    Route::post('/logout', [EmployerController::class, 'logout'])->name('logout');
+});
+
+// Employers
+Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('employers.index');
+Route::get('/employer-lists/{employer}', [HomeController::class, 'employerDetail'])->name('employers.show');
 
 // Jobs
-Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('home.jobs');
+Route::get('/job-lists', [HomeController::class, 'jobLists'])->name('jobs.index');
 Route::get('/job-lists/{job}', [HomeController::class, 'jobDetail'])->name('jobs.show');
 
 
-// Employers
-Route::get('/employer-lists', [HomeController::class, 'employerLists'])->name('home.employers');
-Route::get('/employer-lists/{employer}', [HomeController::class, 'employerDetail'])->name('employers.show');
-
 // employee profile
-Route::prefix('/profile')->name('profile.')->controller(ProfileController::class)->group(function () {
+Route::prefix('/profile')->name('profile.')->middleware('auth:employee')->controller(ProfileController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/saved-jobs', 'savedJobs')->name('saved');
     Route::get('/edit-profile', 'editProfile')->name('edit');
@@ -54,6 +62,14 @@ Route::prefix('/profile')->name('profile.')->controller(ProfileController::class
 Route::get('faq', [PageController::class, 'faq'])->name('faq');
 Route::get('terms', [PageController::class, 'terms'])->name('terms');
 Route::get('policy', [PageController::class, 'policy'])->name('policy');
+
+Route::middleware('auth:employee')->group(function () {
+    Route::get('/save-jobs/{employee}/{jobPost}', [PageController::class, 'savedJob'])->name('employee-jobs.store');
+    Route::get('/unsave-jobs/{employee}/{jobPost}', [PageController::class, 'detach'])->name('jobPost.detach');
+
+    Route::get('/apply-job/{jobPost}', [PageController::class, 'applyJob'])->name('jobPost.apply');
+    Route::post('/apply-job/{employee}/{jobPost}', [PageController::class, 'submitJob'])->name('jobPost.apply-submit');
+});
 
 Route::get('added-permissions/{id}', function ($id) {
     $user = User::find($id);
@@ -68,11 +84,7 @@ Route::get('added-permissions/{id}', function ($id) {
     return "success";
 });
 
-
-// Route::get('test', function() {
-// $user = User::employer()->get();
-//     $user = User::whereHas('roles', function ($q) {
-//         $q->where('name', 'Employer');
-//     })->get();
-//     dd($user);
-// });
+// for missing route
+Route::fallback(function () {
+    return view('composables.404');
+});

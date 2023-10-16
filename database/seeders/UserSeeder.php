@@ -49,12 +49,12 @@ class UserSeeder extends Seeder
 
         $employers = User::factory()->count(80)->create();
 
-        foreach($employers as $employer) {
+        foreach ($employers as $employer) {
             $employer->assignRole('Employer');
 
             $empr_role = Role::where('name', 'Employer')->first();
 
-            foreach($empr_role->permissions as $permission) {
+            foreach ($empr_role->permissions as $permission) {
                 $employer->givePermissionTo($permission);
             }
         }

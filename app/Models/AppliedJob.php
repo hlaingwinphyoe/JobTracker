@@ -17,11 +17,21 @@ class AppliedJob extends Model
 
     public function job_post(): BelongsTo
     {
-        return $this->belongsTo(JobPost::class);
+        return $this->belongsTo(JobPost::class, 'job_id');
     }
 
-    public function user(): BelongsTo
+    public function employee(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employee::class);
+    }
+
+    // scope function
+    public function scopeFilterOn($query)
+    {
+        if (request('search')) {
+            $query->whereHas('job_post', function ($q) {
+                $q->where('title', 'like', '%' . request('search') . '%');
+            });
+        }
     }
 }

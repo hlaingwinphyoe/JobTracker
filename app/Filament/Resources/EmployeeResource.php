@@ -14,8 +14,10 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,7 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class EmployeeResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Employee::class;
 
     public static ?string $label = 'Employees';
 
@@ -46,6 +48,8 @@ class EmployeeResource extends Resource
                     ->unique(),
 
                 TextInput::make('email'),
+                TextInput::make("applied_jobs_count")
+                    ->disabled(),
             ]);
     }
 
@@ -64,7 +68,9 @@ class EmployeeResource extends Resource
                 //
             ])
             ->actions([
-                EditAction::make(),
+                // EditAction::make(),
+                ViewAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -76,10 +82,10 @@ class EmployeeResource extends Resource
             ]);
     }
 
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->isType('employee');
-    }
+    // public static function getEloquentQuery(): Builder
+    // {
+    //     return parent::getEloquentQuery()->isType('employee');
+    // }
 
     public static function getRelations(): array
     {

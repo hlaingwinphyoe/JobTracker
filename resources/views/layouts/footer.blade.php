@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3">
             <div class="mb-6 md:mb-0 col-span-1">
                 <a href="{{ route('home.index') }}" class="flex items-center justify-center md:justify-start">
-                    <img src="{{ asset('logo-notext.svg') }}" class="h-8 mr-3" alt="Logo" />
+                    <img src="{{ asset('logo.png') }}" class="h-20 mr-3" alt="Logo" />
                     <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
                 </a>
                 <!--  Social Icons -->
@@ -70,10 +70,10 @@
                         <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Community</h2>
                         <ul class="text-gray-500 font-medium">
                             <li class="mb-4">
-                                <a href="{{ route('home.jobs') }}" class="hover:underline ">Browse Jobs</a>
+                                <a href="{{ route('jobs.index') }}" class="hover:underline ">Browse Jobs</a>
                             </li>
                             <li>
-                                <a href="{{ route('home.employers') }}" class="hover:underline">
+                                <a href="{{ route('employers.index') }}" class="hover:underline">
                                     Employers
                                 </a>
                             </li>

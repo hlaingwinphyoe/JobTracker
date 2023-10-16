@@ -65,19 +65,19 @@
         </h1>
         <div class="flex items-center">
           <span class="">
-            <label for="sortSalary" class="text-sm text-gray-500 mr-2">
-              Salary:
+            <label for="sort" class="text-sm text-gray-500 mr-2">
+              Order By:
             </label>
             <select
-              id="sortSalary"
-              name="sortSalary"
-              v-model="param.sortSalary"
+              id="sort"
+              name="sort"
+              v-model="param.sort"
               @change="filterSort"
               class="bg-transparent border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 text-sm"
             >
               <option selected value="">Default</option>
-              <option value="desc">Low to High</option>
-              <option value="asc">High to Low</option>
+              <option value="ASC">Oldest to Newest</option>
+              <option value="DESC">Newest to Oldest</option>
             </select>
           </span>
         </div>
@@ -119,7 +119,7 @@ export default {
     Slide,
     Loader,
   },
-  props: ["categories", "jobs"],
+  props: ["categories"],
   setup() {
     const state = reactive({
       jobPosts: [],
@@ -133,7 +133,7 @@ export default {
         category: "",
         type: "",
         region: "",
-        sortSalary: "",
+        sort: "",
       },
       settings: {
         itemsToShow: 1,

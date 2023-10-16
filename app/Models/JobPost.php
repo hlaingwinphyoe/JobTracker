@@ -89,8 +89,8 @@ class JobPost extends Model
             });
         }
 
-        if (request('sortSalary')) {
-            $query->orderBy('salary', request('sortSalary'));
+        if (request('sort')) {
+            $query->orderBy('updated_at', request('sort'));
         }
     }
 

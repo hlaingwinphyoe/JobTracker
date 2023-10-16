@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Traits\FAQTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class FAQ extends Model
 {
-    // use HasFactory, FAQTrait;
+    use HasFactory;
 
     protected $table = 'faqs';
 

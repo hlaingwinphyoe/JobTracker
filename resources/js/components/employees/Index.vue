@@ -1,19 +1,17 @@
 <template>
   <div class="relative">
     <img
-      src="/user.png"
+      :src="
+        employee.profile
+          ? '/storage/employee_profile/' + employee.profile
+          : '/user.png'
+      "
       class="h-32 w-32 p-3 mx-auto rounded-full border-2 border-tertiary-500 object-contain mb-3 md:mb-0"
       alt="user"
-    />
-    <!-- <img
-    :src="siteApi + profile_image"
-    class="h-36 rounded object-contain mb-3 md:mb-0"
-    :alt="profile_image"
-    v-else
-  /> -->
+  />
     <button
       @click="openUpload"
-      class="absolute p-2 text-gray-300 bg-gray-200 bottom-2 rounded-full right-[50px] hover:bg-gray-300"
+      class="absolute p-2 text-gray-300 bg-gray-200 bottom-1 rounded-full right-[70px] hover:bg-gray-300"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -37,13 +35,21 @@
     </button>
   </div>
 
-  <UploadModal v-model:upload="uploadModal" />
+  <div class="mt-4 text-center">
+    <h4 class="text-xl">{{ employee.name }}</h4>
+    <p class="text-gray-500">
+      {{ employee.email }}
+    </p>
+  </div>
+
+  <UploadModal v-model:upload="uploadModal" :employee_id="employee.id" />
 </template>
 
 <script>
 import { computed, reactive, toRefs } from "vue";
 import UploadModal from "./Upload.vue";
 export default {
+  props: ["employee"],
   components: {
     UploadModal,
   },

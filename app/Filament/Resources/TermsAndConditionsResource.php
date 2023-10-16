@@ -8,6 +8,7 @@ use App\Filament\Resources\TermsAndConditionsResource\Pages\EditTermsAndConditio
 use App\Filament\Resources\TermsAndConditionsResource\Pages\ListTermsAndConditions;
 use App\Filament\Resources\TermsAndConditionsResource\RelationManagers;
 use App\Models\FAQ;
+use App\Models\TermsAndConditions;
 use Filament\Forms;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Textarea;
@@ -30,7 +31,7 @@ use Filament\Tables\Actions\ViewAction;
 
 class TermsAndConditionsResource extends Resource
 {
-    protected static ?string $model = FAQ::class;
+    protected static ?string $model = TermsAndConditions::class;
 
     public static ?string $label = 'TermsAndConditions';
 
@@ -53,8 +54,6 @@ class TermsAndConditionsResource extends Resource
                 //     ->autosize()
                 //     ->required(),
                 RichEditor::make('desc'),
-                Hidden::make('faq_type_id')
-                    ->default(2),
             ]);
     }
 
@@ -87,9 +86,9 @@ class TermsAndConditionsResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('faq_type_id', 2);
+        return parent::getEloquentQuery()->isType('terms-and-conditions');
     }
-    
+
     public static function getRelations(): array
     {
         return [

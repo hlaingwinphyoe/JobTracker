@@ -1,11 +1,11 @@
 <aside>
-    <div class="mb-8">
-        <employer-profile />
+    <div class="mb-5">
+        <employee-profile :employee="{{ $user }}" />
     </div>
     <ul>
-        <li>
+        <li class="mb-1">
             <a href="{{ route('profile.index') }}"
-                class="{{ request()->routeIs('profile.index') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-gray-900 rounded-full group">
+                class="{{ request()->routeIs('profile.index') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-tertiary-500 rounded-lg group">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clipboard-list" width="20"
                     height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -20,9 +20,9 @@
                 <span class="ml-3">Your Activity</span>
             </a>
         </li>
-        <li>
+        <li class="mb-1">
             <a href="{{ route('profile.edit') }}"
-                class="{{ request()->routeIs('profile.edit') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-tertiary-500 group rounded-full">
+                class="{{ request()->routeIs('profile.edit') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-tertiary-500 group rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="20"
                     height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -35,9 +35,9 @@
             </a>
         </li>
 
-        <li>
+        <li class="mb-1">
             <a href="{{ route('profile.saved') }}"
-                class="{{ request()->routeIs('profile.saved') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-tertiary-500 group rounded-full">
+                class="{{ request()->routeIs('profile.saved') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-tertiary-500 group rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="20"
                     height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -48,9 +48,9 @@
             </a>
         </li>
 
-        <li>
+        <li class="mb-1">
             <a href="{{ route('profile.changePassword') }}"
-                class="{{ request()->routeIs('profile.changePassword') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-tertiary-500 group rounded-full">
+                class="{{ request()->routeIs('profile.changePassword') ? 'bg-tertiary-500 text-white hover:text-white' : '' }} flex items-center px-5 py-3 text-gray-900 hover:text-tertiary-500 group rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="20"
                     height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
                     stroke-linecap="round" stroke-linejoin="round">

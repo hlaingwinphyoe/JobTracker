@@ -22,7 +22,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->text('desc')->nullable();
-            $table->foreignId('faq_type_id')->nullable();
+            $table->foreignId('faq_type_id');
             $table->timestamps();
         });
     }
@@ -32,7 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('faqs');
         Schema::dropIfExists('faq_types');
+        Schema::dropIfExists('faqs');
     }
 };

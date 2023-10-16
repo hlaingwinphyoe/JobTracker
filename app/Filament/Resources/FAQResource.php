@@ -52,8 +52,8 @@ class FAQResource extends Resource
                 //     ->required(),
 
                 RichEditor::make('desc'),
-                Hidden::make('faq_type_id')
-                    ->default(1),
+                // Hidden::make('faq_type_id')
+                //     ->default(1),
             ]);
     }
 
@@ -66,7 +66,6 @@ class FAQResource extends Resource
                 TextColumn::make('desc')
                 // ->addslashes(),
                 ->html(),
-                // TextColumn::make('faq_type.name'),
             ])
             ->filters([
                 //
@@ -88,7 +87,7 @@ class FAQResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('faq_type_id', 1);
+        return parent::getEloquentQuery()->isType('faq');
     }
     
     public static function getRelations(): array

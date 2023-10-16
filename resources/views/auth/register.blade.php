@@ -4,8 +4,10 @@
     <section>
         <div class="flex min-h-screen flex-col justify-center px-6 py-6 lg:px-8">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=primary&shade=600"
-                    alt="Your Company">
+                <div class="flex items-center justify-center">
+                    <img class="h-16 w-auto" src="{{ asset('logo.png') }}" alt="Company Logo">
+                    <h4 class="text-2xl font-bold">{{ config('app.name') }}</h4>
+                </div>
                 <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign Up
                 </h2>
             </div>
@@ -18,7 +20,7 @@
                         @endforeach
                     </ul>
                 @endif
-                <form class="space-y-6" action="{{ route('register.store') }}" method="POST">
+                <form class="space-y-6" action="{{ route('employee.registerStore') }}" method="POST">
                     @csrf
                     <x-input label="Username" name="name" value="{{ old('name') }}">
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -86,8 +88,8 @@
 
                     <x-input label="Password" name="password" type="password" placeholder="Password">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-lock-access text-primary-500" width="17"
-                            height="17" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                            class="icon icon-tabler icon-tabler-lock-access text-primary-500" width="17" height="17"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M4 8v-2a2 2 0 0 1 2 -2h2" />
@@ -132,7 +134,7 @@
 
                 <p class="mt-3 text-center text-sm text-gray-500">
                     Already Registerd?
-                    <a href="{{ route('auth.register') }}"
+                    <a href="{{ route('employee.register') }}"
                         class="font-semibold leading-6 text-primary-500 hover:text-primary-600">Login Here.</a>
                 </p>
             </div>

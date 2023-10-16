@@ -19,6 +19,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
+    protected $guard = 'web';
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -65,16 +67,6 @@ class User extends Authenticatable
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
-    }
-
-    public function job_posts(): BelongsToMany  // employee's favourite posts
-    {
-        return $this->belongsToMany(JobPost::class, 'user_job_posts', 'user_id', 'job_post_id');
-    }
-
-    public function applied_jobs(): HasMany  // employee applied jobs
-    {
-        return $this->hasMany(AppliedJob::class, 'user_id', 'id');
     }
 
     public function type(): BelongsTo

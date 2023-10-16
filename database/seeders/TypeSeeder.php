@@ -16,7 +16,7 @@ class TypeSeeder extends Seeder
     {
         $names = [
             'job' => ['Full Time', 'Part Time', 'Remote'],
-            'user' => ['admin','developer','employer','employee'],
+            'user' => ['admin','developer','employer'],
         ];
 
         foreach ($names as $index => $name_ary) {

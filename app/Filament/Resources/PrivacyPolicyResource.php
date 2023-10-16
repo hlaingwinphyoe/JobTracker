@@ -8,6 +8,7 @@ use App\Filament\Resources\PrivacyPolicyResource\Pages\EditPrivacyPolicy;
 use App\Filament\Resources\PrivacyPolicyResource\Pages\ListPrivacyPolicies;
 use App\Filament\Resources\PrivacyPolicyResource\RelationManagers;
 use App\Models\FAQ;
+use App\Models\PrivacyPolicy;
 use Filament\Forms;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\EditAction;
@@ -30,7 +31,7 @@ use Filament\Tables\Actions\ViewAction;
 
 class PrivacyPolicyResource extends Resource
 {
-    protected static ?string $model = FAQ::class;
+    protected static ?string $model = PrivacyPolicy::class;
 
     public static ?string $label = 'PrivacyPolicy';
 
@@ -53,8 +54,6 @@ class PrivacyPolicyResource extends Resource
                 //     ->autosize()
                 //     ->required(),
                 RichEditor::make('desc'),
-                Hidden::make('faq_type_id')
-                    ->default(3),
             ]);
     }
 
@@ -84,12 +83,12 @@ class PrivacyPolicyResource extends Resource
                 CreateAction::make(),
             ]);
     }
-
+    
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('faq_type_id', 3);
+        return parent::getEloquentQuery()->isType('privacy-policy');
     }
-    
+
     public static function getRelations(): array
     {
         return [

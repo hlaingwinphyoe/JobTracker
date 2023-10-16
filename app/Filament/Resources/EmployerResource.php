@@ -9,13 +9,17 @@ use App\Filament\Resources\EmployerResource\RelationManagers;
 use App\Models\Employer;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,7 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class EmployerResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Employer::class;
 
     public static ?string $label = 'Employers';
 
@@ -37,7 +41,25 @@ class EmployerResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                    ->disabled(),
+                TextInput::make('phone')
+                    ->disabled(),
+                TextInput::make('email')
+                    ->disabled(),
+                TextInput::make('company_name')
+                    ->disabled(),
+                TextInput::make('company_type')
+                    ->disabled(),
+                Select::make('region_id')
+                    ->label('Region')
+                    ->placeholder('Choose region')
+                    ->relationship("region", "name")
+                    ->preload()
+                    ->searchable()
+                    ->required(),
+                TextInput::make("jobs_count")
+                    ->disabled(),
             ]);
     }
 
@@ -61,7 +83,9 @@ class EmployerResource extends Resource
                 //
             ])
             ->actions([
-                EditAction::make(),
+                // EditAction::make(),
+                ViewAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([

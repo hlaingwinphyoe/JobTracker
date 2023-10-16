@@ -18,8 +18,8 @@
       >
         <div class="p-6 space-y-6 mb-5">
           <div>
-            <div class="flex items-center justify-center">
-              <img src="/logo-notext.svg" class="h-16 w-16" alt="" />
+            <div class="flex items-center justify-center mb-5">
+              <img src="/logo.png" class="h-16 w-16" alt="" />
               <h4 class="text-2xl font-semibold text-secondary-600">
                 {{ siteName }}
               </h4>
@@ -28,7 +28,7 @@
               <h3
                 class="text-xl uppercase font-bold text-center text-primary-500 underline underline-offset-2"
               >
-                Join Us
+                Join As Company
               </h3>
             </div>
           </div>
@@ -427,6 +427,7 @@
           <div class="text-sm font-medium text-gray-500 normal-font">
             Already have an account?
             <a
+              @click="$emit('openLogin')"
               href="javascript:void(0)"
               class="text-primary-500 hover:underline normal-font"
               >Login
@@ -455,6 +456,7 @@ export default {
         company_type: "",
         region: "",
         desc: "",
+        type: props.employer ? props.employer.id : "",
       },
       isLoading: false,
       regionList: [],
@@ -472,10 +474,9 @@ export default {
         .post("/wapi/employer-register", state.form)
         .then((res) => {
           state.isLoading = false;
-          // console.log("sign in");
           closeModal();
           setTimeout(() => {
-            location.reload();
+            location.href = "/";
           }, 500);
         })
         .catch((err) => {
@@ -497,6 +498,7 @@ export default {
         company_type: "",
         region: "",
         desc: "",
+        type: "",
       };
       document.body.classList.remove("overflow-hidden");
     };

@@ -10,7 +10,15 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="icon" href="{{ asset('logo.png') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <!-- Scripts -->
+    <link rel="stylesheet" href="{{ asset('alert.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 @yield('style')
@@ -19,7 +27,10 @@
     <div id="job-app">
         <div class="min-h-screen bg-gray">
             <!-- Page Navigation -->
-            @if (!request()->routeIs('auth.login') && !request()->routeIs('auth.register'))
+            @if (
+                !request()->routeIs('employee.login') &&
+                    !request()->routeIs('employee.register') &&
+                    !request()->routeIs('employer.login'))
                 @include('layouts.header')
             @endif
             <!-- Page Content -->
@@ -28,17 +39,40 @@
             </main>
 
             <!-- Footer Section -->
-            @if (!request()->routeIs('auth.login') && !request()->routeIs('auth.register') && !request()->routeIs('profile.index'))
+            @if (
+                !request()->routeIs('employee.login') &&
+                    !request()->routeIs('employee.register') &&
+                    !request()->routeIs('employer.login') &&
+                    !request()->routeIs('profile.*'))
                 @include('layouts.footer')
             @endif
         </div>
     </div>
 
-    {{-- @if (session('logout'))
-    <script type="module">
-        Swal.fire('{{ session('logout') }}')
-    </script>
-@endif --}}
+    <script src="{{ asset('alert.js') }}"></script>
+
+    @if (session('message'))
+        <script type="module">
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-right',
+                iconColor: 'white',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('message') }}'
+            });
+        </script>
+    @endif
+
+    @stack('script')
 </body>
 
 </html>

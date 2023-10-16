@@ -19,17 +19,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $employer = Type::isType('user')->where('name','employer')->first();
-        // return [
-        //     'name' => fake()->name(),
-        //     'email' => fake()->unique()->safeEmail(),
-        //     'phone' => fake()->unique()->phoneNumber(),
-        //     'email_verified_at' => now(),
-        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        //     'remember_token' => Str::random(10),
-        //     'type_id' => $employee->id,
-        // ];
-
+        $employer = Type::isType('user')->where('slug', 'employer')->first();
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
@@ -41,7 +31,9 @@ class UserFactory extends Factory
             'company_type' => fake()->text(15),
             'region_id' => Region::all()->random()->id,
             'desc' => fake()->text(),
-            'type_id' => $employer->id
+            'type_id' => $employer->id,
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => fake()->dateTimeBetween('-5 month', 'now'),
         ];
     }
 
