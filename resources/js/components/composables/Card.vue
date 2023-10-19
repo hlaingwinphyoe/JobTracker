@@ -16,6 +16,14 @@
             />
           </a>
 
+          <div class="absolute top-0 left-3">
+            <span
+              :class="checkStatus(jobPost.status_name)"
+              class="text-xs font-medium mr-2 px-2.5 py-1 rounded"
+              >{{ jobPost.status_name }}</span
+            >
+          </div>
+
           <div class="px-4 pb-5">
             <div class="flex items-center justify-between mb-4">
               <div class="flex gap-1.5 items-center">
@@ -25,7 +33,7 @@
                 >
                   <img
                     class="flex-shrink-0 w-8 h-8 rounded-full border border-tertiary-500 p-1"
-                    :src="employee.profile ? employee.profile : '/user.png'"
+                    :src="jobPost.profile ? jobPost.profile : '/user.png'"
                     alt=""
                   />
                 </a>
@@ -145,6 +153,7 @@
 </template>
 
 <script>
+import { initFlowbite } from "flowbite";
 import { onMounted, reactive, toRefs } from "vue";
 export default {
   props: ["jobPost"],
@@ -153,33 +162,24 @@ export default {
       employee: "",
     });
 
-    const showToast = (icon, message) => {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-right",
-        iconColor: "white",
-        customClass: {
-          popup: "colored-toast",
-        },
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-      });
-      Toast.fire({
-        icon: icon,
-        title: message,
-      });
-    };
-
     const saveJob = () => {
       axios
         .get(`/wapi/save-jobs/${state.employee.id}/${props.jobPost.id}`)
         .then((res) => {
-          showToast("success", res.data.message);
+          console.log('success');
         });
     };
 
+    const checkStatus = (status) => {
+      if (status == "Available") {
+        return "bg-primary-100 text-primary-800 ";
+      } else {
+        return "bg-red-100 text-red-800 ";
+      }
+    };
+
     onMounted(() => {
+      initFlowbite();
       axios.get("/wapi/get-auth-employee").then((res) => {
         state.employee = res.data.auth_employee;
       });
@@ -188,6 +188,7 @@ export default {
     return {
       ...toRefs(state),
       saveJob,
+      checkStatus
     };
   },
 };

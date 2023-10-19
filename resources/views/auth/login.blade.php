@@ -4,14 +4,16 @@
     <section>
         <div class="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=primary&shade=600"
-                    alt="Your Company">
-                <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your
+                <div class="flex items-center justify-center">
+                    <img class="h-16 w-auto" src="{{ asset('logo.png') }}" alt="Company Logo">
+                    <h4 class="text-2xl font-bold">{{ config('app.name') }}</h4>
+                </div>
+                <h2 class="mt-3 text-center text-2xl font-medium leading-9 tracking-tight text-gray-900">Sign in to your
                     account
                 </h2>
             </div>
 
-            <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
                 @if ($errors->any())
                     <ul class="mt-1.5 list-disc list-inside p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
                         @foreach ($errors->all() as $error)

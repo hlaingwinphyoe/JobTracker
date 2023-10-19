@@ -131,7 +131,7 @@
             </div>
 
             <hr
-              class="h-1 border-0 bg-gradient-to-r from-primary-500 via-tertiary-400 to-tertiary-500"
+              class="h-1 border-0 bg-gradient-to-r from-tertiary-500 via-tertiary-400 to-tertiary-500"
             />
 
             <!-- Avatars -->
@@ -150,7 +150,7 @@
                 />
                 <label
                   :for="avatar.name"
-                  class="inline-flex items-center justify-center w-full px-2 py-3 border-2 rounded cursor-pointer border-secondary-100 peer-checked:text-white peer-checked:border-primary-500 peer-checked:shadow-lg text-gray-400 hover:border-primary-400"
+                  class="inline-flex items-center justify-center w-full px-2 py-3 border-2 rounded cursor-pointer border-secondary-100 peer-checked:text-white peer-checked:border-tertiary-500 peer-checked:shadow-lg text-gray-400 hover:border-tertiary-400"
                 >
                   <div class="block">
                     <div class="w-full mb-2">
@@ -168,7 +168,7 @@
             <button
               type="button"
               @click="onSubmit"
-              class="normal-font text-white bg-primary-500 hover:bg-primary-600 focus:ring-2 focus:outline-none focus:ring-primary-300 font-medium rounded text-sm px-5 py-2.5 mt-3 block mb-0 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
+              class="normal-font text-white bg-tertiary-500 enabled:hover:bg-tertiary-600 focus:ring-2 focus:outline-none focus:ring-tertiary-300 font-medium rounded text-sm px-5 py-2.5 mt-3 block mb-0 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
               :disabled="!avatarForm.avatar_name && !imageUrl"
             >
               Upload

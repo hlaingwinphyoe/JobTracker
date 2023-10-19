@@ -1,5 +1,5 @@
 <template>
-  <nav class="absolute top-0 left-0 bg-transparent w-full z-20">
+  <nav class="absolute top-0 left-0 bg-gray-50 w-full z-20">
     <div
       class="container flex flex-wrap items-center justify-between mx-auto p-4"
     >
@@ -7,7 +7,7 @@
         <a href="/" class="flex items-center">
           <img src="/logo.png" class="h-8 mr-3" alt="Logo" />
           <span
-            class="self-center text-white text-2xl font-semibold whitespace-nowrap"
+            class="self-center text-black text-2xl font-semibold whitespace-nowrap"
             >{{ siteName }}</span
           >
         </a>
@@ -17,21 +17,21 @@
         >
           <a
             href="/"
-            class="mr-5 leading-6 text-gray-200 hover:text-white relative text-base w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+            class="mr-5 leading-6 text-gray-500 hover:text-black relative text-base w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
           >
             Home
           </a>
 
           <a
             href="/job-lists"
-            class="mr-5 leading-6 text-gray-200 hover:text-white relative text-base w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+            class="mr-5 leading-6 text-gray-500 hover:text-black relative text-base w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
           >
             Browse Jobs
           </a>
 
           <a
             href="/employer-lists"
-            class="mr-5 leading-6 text-gray-200 hover:text-white relative text-base w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+            class="mr-5 leading-6 text-gray-500 hover:text-black relative text-base w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
           >
             Employers
           </a>
@@ -44,19 +44,19 @@
           type="button"
           class="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-md text-sm px-4 py-2.5 text-center mr-3 md:mr-0"
         >
-          Get Started
+          Sign Up
         </button>
       </div>
     </div>
   </nav>
   <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
     <h1
-      class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl"
+      class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-black md:text-5xl lg:text-6xl"
     >
       Recruit Faster and Grow your Employer Brand!
     </h1>
     <p
-      class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"
+      class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48"
     >
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis
       repellendus eius qui unde ratione nisi facilis minus exercitationem rem
@@ -89,8 +89,8 @@
         </svg>
       </button>
       <a
-        href="javascript:void(0)"
-        class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
+        href="/faq"
+        class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-black rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
       >
         Learn more
       </a>

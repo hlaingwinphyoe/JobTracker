@@ -10,6 +10,7 @@ use App\Models\FAQ;
 use App\Models\JobPost;
 use App\Models\PrivacyPolicy;
 use App\Models\TermsAndConditions;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="px-2 md:px-0" id="">
-        <div class="container flex items-center justify-center mx-auto">
+        <div class="container flex items-center justify-center mx-auto mt-8">
             <div class="flex flex-wrap items-center sm:-mx-3">
                 <div class="w-full">
                     <div class="w-full h-auto overflow-hidden rounded-md">

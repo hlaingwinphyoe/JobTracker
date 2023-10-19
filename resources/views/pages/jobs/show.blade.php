@@ -35,18 +35,56 @@
         </div>
     </section>
 
+    @php
+        $user = Auth::guard('employee')->user();
+        $added = $user
+            ? $user
+                ->job_posts()
+                ->where('job_post_id', $jobPost->id)
+                ->first()
+            : '';
+
+        $applied = $user
+            ? $user
+                ->applied_jobs()
+                ->where('job_id', $jobPost->id)
+                ->first()
+            : '';
+    @endphp
+
     <section class="container mx-auto my-10">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
             <div class="col-span-2 space-y-8">
-                <img class="rounded-xl w-full" src="https://placehold.co/600x280" alt="" />
-                <p class="text-lg text-left text-gray-500 indent-6 leading-8 first-letter:text-2xl">
-                    {!! $jobPost->desc !!}
-                </p>
+                <img class="rounded-xl w-full h-[20rem] object-cover"
+                    src="{{ $jobPost->image ? $jobPost->image : '/images/job.jpg' }}" alt="" />
+                <article>
+                    <h4 class="text-2xl font-bold mb-1">Job Description</h4>
+                    <p class="text-lg text-left text-gray-500 indent-6 leading-8 first-letter:text-2xl">
+                        {!! $jobPost->desc !!}
+                    </p>
+                </article>
                 <div class="flex items-center justify-between">
                     @if ($jobPost->status->slug == 'available')
                         <div class="flex items-center">
-                            <x-primary-button class="rounded-md mr-3" name="Apply Now" />
-                            <x-secondary-button class="rounded-md" name="Save Job" />
+                            @if ($user)
+                                @if (!$applied)
+                                    <a href="{{ route('jobPost.apply', $jobPost->slug) }}"
+                                        class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary-500 border border-transparent shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                        Apply Now
+                                    </a>
+                                @else
+                                    <a href="javascript:void(0)"
+                                        class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-primary-700 whitespace-no-wrap bg-primary-100 border border-transparent shadow-sm hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                        Already Applied
+                                    </a>
+                                @endif
+                                @if (!$added)
+                                    <a href="{{ route('employee-jobs.store', ['employee' => $user->id, 'jobPost' => $jobPost->id]) }}"
+                                        class="flex items-center px-4 py-2.5 text-gray-500 bg-gray-100 hover:bg-tertiary-100 hover:text-gray-600 rounded-md">
+                                        Save
+                                    </a>
+                                @endif
+                            @endif
                         </div>
                     @endif
 
@@ -69,7 +107,8 @@
                 <div class="bg-white border border-gray-200 shadow-sm p-4 rounded-xl divide-y divide-gray-200 space-y-6">
                     <article class="space-y-4">
                         <div class="flex items-center">
-                            <img src="https://placehold.co/40x40" class="rounded-full h-12" alt="">
+                            <img src="{{ $jobPost->user->profile ? $jobPost->user->profile : '/user.png' }}"
+                                class="rounded-full h-10 border border-primary-500 p-1" alt="">
                             <p class="flex flex-col ml-2">
                                 <span>{{ $jobPost->user->name }}</span>
                                 <span class="text-xs text-gray-500">
@@ -92,25 +131,34 @@
                             </span>
                         </p>
                         @if ($jobPost->status->slug == 'available')
-                            @php
-                                $user = Auth::guard('employee')->user();
-                                $added = $user
-                                    ->job_posts()
-                                    ->where('job_post_id', $jobPost->id)
-                                    ->first();
-                            @endphp
-                            <div class="flex items-center justify-center">
-                                <a href="{{ route('jobPost.apply', $jobPost->slug) }}"
-                                    class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary-500 border border-transparent shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
-                                    Apply Now
-                                </a>
-                                @if (!$added)
-                                    <a href="{{ route('employee-jobs.store', ['employee' => $user->id, 'jobPost' => $jobPost->id]) }}"
-                                        class="flex items-center px-4 py-2.5 text-gray-500 bg-gray-100 hover:bg-tertiary-100 hover:text-gray-600 rounded-md">
-                                        Save
-                                    </a>
-                                @endif
-                            </div>
+                            @if ($user)
+                                <div class="flex items-center justify-center">
+                                    @if (!$applied)
+                                        <a href="{{ route('jobPost.apply', $jobPost->slug) }}"
+                                            class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary-500 border border-transparent shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                            Apply Now
+                                        </a>
+                                    @else
+                                        <a href="javascript:void(0)"
+                                            class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-primary-700 whitespace-no-wrap bg-primary-100 border border-transparent shadow-sm hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                            Already Applied
+                                        </a>
+                                    @endif
+
+                                    @if (!$added)
+                                        <a href="{{ route('employee-jobs.store', ['employee' => $user->id, 'jobPost' => $jobPost->id]) }}"
+                                            class="flex items-center px-4 py-2.5 text-gray-500 bg-gray-100 hover:bg-tertiary-100 hover:text-gray-600 rounded-md">
+                                            Save
+                                        </a>
+                                    @else
+                                        <a href="{{ route('jobPost.detach', ['employee' => $user->id, 'jobPost' => $jobPost->id]) }}"
+                                            class="flex items-center px-4 py-2.5 text-gray-500 bg-gray-100 hover:bg-tertiary-100 hover:text-gray-600 rounded-md">
+                                            UnSaved
+                                        </a>
+                                    @endif
+
+                                </div>
+                            @endif
                         @endif
 
                     </article>
@@ -135,9 +183,9 @@
                         </p>
                         <p class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="icon icon-tabler icon-tabler-briefcase text-gray-500" width="20" height="20"
-                                viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
+                                class="icon icon-tabler icon-tabler-briefcase text-gray-500" width="20"
+                                height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
                                 <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" />
@@ -277,79 +325,128 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
             @foreach ($relatedJobs as $jobPost)
-                <div class="max-w-sm h-[25rem] bg-white border border-gray-200 rounded-lg shadow">
-                    <a href="{{ route('jobs.show', $jobPost->slug) }}">
-                        <img class="rounded-t-lg" src="https://placehold.co/400x250" alt="" />
-                    </a>
-                    <div class="p-5">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex gap-1.5 items-center">
-                                <a href="{{ route('employers.show', $jobPost->user_id) }}" class="cursor-pointer">
-                                    <img class="flex-shrink-0 w-8 h-8 rounded-full" src="https://i.imgur.com/7D7I6dI.png"
+                @php
+                    $user = Auth::guard('employee')->user();
+                    $added = $user
+                        ? $user
+                            ->job_posts()
+                            ->where('job_post_id', $jobPost->id)
+                            ->first()
+                        : '';
+                @endphp
+                <div class="flex items-center">
+                    <div
+                        class="group relative mx-auto w-96 overflow-hidden rounded-[16px] bg-gray-300 p-[1.5px] transition-all duration-300 ease-in-out hover:bg-gradient-to-r hover:from-primary-500 hover:via-purple-500 hover:to-tertiary-500">
+                        <div
+                            class="group-hover:animate-spin-slow invisible absolute -top-40 -bottom-40 left-10 right-10 bg-gradient-to-r from-transparent via-white/90 to-transparent group-hover:visible">
+                        </div>
+                        <div class="relative rounded-[15px] overflow-hidden h-[26rem] bg-white">
+                            <div class="space-y-4">
+                                <a href="{{ route('jobs.index', $jobPost->slug) }}">
+                                    <img class="rounded-t-lg h-48 w-full object-cover"
+                                        src="{{ $jobPost->image ? $jobPost->image : '/images/job.jpg' }}"
                                         alt="" />
                                 </a>
-                                <div class="flex">
-                                    <a href="{{ route('employers.show', $jobPost->user_id) }}"
-                                        class="text-sm hover:underline">{{ $jobPost->user->name }}</a>
+
+                                <div class="absolute top-0 left-3">
+                                    @if ($jobPost->status->title == 'Available')
+                                        <span class="bg-primary-100 text-primary-800 text-xs font-medium mr-2 px-2.5 py-1 rounded">
+                                            {{ $jobPost->status->title }}
+                                        </span>
+                                        @else
+                                        <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-1 rounded">
+                                            {{ $jobPost->status->title }}
+                                        </span>
+                                    @endif
+
+                                </div>
+
+                                <div class="px-4 pb-5">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="flex gap-1.5 items-center">
+                                            <a href="'{{ route('employers.index', $jobPost->user->id) }}"
+                                                class="cursor-pointer">
+                                                <img class="flex-shrink-0 w-8 h-8 rounded-full border border-tertiary-500 p-1"
+                                                    src="{{ $jobPost->user->profile ? $jobPost->user->profile : '/user.png' }}"
+                                                    alt="" />
+                                            </a>
+                                            <div class="flex">
+                                                <a href="{{ route('employers.show', $jobPost->user->id) }}"
+                                                    class="text-sm hover:underline">{{ $jobPost->user->name }}</a>
+                                            </div>
+                                        </div>
+                                        <span>
+                                            <a href="javascript:void(0)"
+                                                class="bg-tertiary-100 hover:bg-tertiary-200 text-tertiary-800 text-xs font-semibold px-2.5 py-1 rounded border border-tertiary-400 whitespace-nowrap">{{ $jobPost->type->name }}</a>
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('jobs.show', $jobPost->slug) }}">
+                                        <h5 class="mb-4 text-lg capitalize hover:underline line-clamp-2">
+                                            {{ $jobPost->title }}
+                                        </h5>
+                                    </a>
+
+                                    <div class="mb-2 flex justify-between items-center">
+                                        <span class="text-sm me-3 text-gray-500 mb-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-clock-hour-3 inline-flex items-center mb-[3px]"
+                                                width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                                                <path d="M12 12h3.5" />
+                                                <path d="M12 7v5" />
+                                            </svg>
+                                            {{ $jobPost->updated_at->diffForHumans() }}
+                                        </span>
+                                        <span class="text-sm text-gray-500 mb-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-location inline-flex items-center mb-[3px]"
+                                                width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path
+                                                    d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+                                            </svg>
+                                            {{ $jobPost->region->name }}
+                                        </span>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <h5 class="text-lg text-primary-500 font-semibold">
+                                            {{ $jobPost->salary }} Lakhs<span
+                                                class="text-sm text-gray-500 font-light">/Month</span>
+                                        </h5>
+                                        @if ($user)
+                                            <div>
+                                                <span>
+                                                    <div id="save-tooltip" role="tooltip"
+                                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                                        Saved Post
+                                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                                    </div>
+                                                    @if (!$added)
+                                                        <a href="{{ route('employee-jobs.store', ['employee' => $user->id, 'jobPost' => $jobPost->id]) }}"
+                                                            data-tooltip-target="save-tooltip">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="icon icon-tabler icon-tabler-heart text-gray-500"
+                                                                width="24" height="24" viewBox="0 0 24 24"
+                                                                stroke-width="1.5" stroke="currentColor" fill="none"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path
+                                                                    d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                                                            </svg>
+                                                        </a>
+                                                    @endif
+                                                </span>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                            <span>
-                                <a href=""
-                                    class="bg-tertiary-100 hover:bg-tertiary-200 text-tertiary-800 text-xs font-semibold px-2.5 py-1 rounded border border-tertiary-400 whitespace-nowrap">{{ $jobPost->type->name }}</a>
-                            </span>
-                        </div>
-                        <a href="{{ route('jobs.show', $jobPost->slug) }}">
-                            <h5 class="mb-4 text-lg capitalize hover:underline line-clamp-2">
-                                {{ $jobPost->title }}
-                            </h5>
-                        </a>
-
-                        <div class="mb-2 flex justify-between items-center">
-                            <span class="text-sm me-3 text-gray-500 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="icon icon-tabler icon-tabler-clock-hour-3 inline-flex items-center mb-[3px]"
-                                    width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                    <path d="M12 12h3.5" />
-                                    <path d="M12 7v5" />
-                                </svg>
-                                {{ $jobPost->created_at->diffForHumans() }}
-                            </span>
-                            <span class="text-sm text-gray-500 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="icon icon-tabler icon-tabler-location inline-flex items-center mb-[3px]"
-                                    width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
-                                </svg>
-                                {{ $jobPost->region->name }}
-                            </span>
-                        </div>
-
-                        <div class="flex items-center justify-between">
-                            <h5 class="text-lg text-primary-500 font-semibold">
-                                {{ $jobPost->salary }} Lakhs<span class="text-sm text-gray-500 font-light">/Month</span>
-                            </h5>
-                            <span>
-                                <div id="save-tooltip" role="tooltip"
-                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                    Saved Post
-                                    <div class="tooltip-arrow" data-popper-arrow></div>
-                                </div>
-                                <a href="javascript:void(0)" data-tooltip-target="save-tooltip">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-heart text-gray-500" width="24"
-                                        height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                                    </svg>
-                                </a>
-                            </span>
                         </div>
                     </div>
                 </div>

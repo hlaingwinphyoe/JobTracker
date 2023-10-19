@@ -76,7 +76,7 @@
                                             <p class="mb-1">
                                                 {{ $job_post->title }}
                                             </p>
-                                            <small class="text-gray-500">
+                                            <small class="text-gray-500 whitespace-nowrap">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-flex items-center mb-1">
                                                     <path stroke-linecap="round" stroke-linejoin="round"

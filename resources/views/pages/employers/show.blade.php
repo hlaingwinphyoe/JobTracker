@@ -2,13 +2,13 @@
 
 @section('content')
     <section class="bg-tertiary-100 p-8">
-        <div class="container mx-auto py-6 flex justify-between items-center">
-            <div class="flex items-center">
+        <div class="container mx-auto py-6 flex flex-col lg:flex-row justify-between items-center">
+            <div class="flex flex-col md:flex-row items-center">
                 <img class="rounded-full h-32 w-32 mr-5 border-2 border-tertiary-500 p-1"
                     src="{{ isset(Auth::user()->profile) ? asset('storage/profile/' . Auth::user()->profile) : asset('user.png') }}"
                     alt="" />
                 <div>
-                    <h3 class="text-4xl font-semibold tracking-tight">{{ $employer->name }}</h3>
+                    <h3 class="text-2xl lg:text-4xl mt-4 lg:mt-0 font-semibold tracking-tight whitespace-nowrap">{{ $employer->name }}</h3>
                     <p class="my-3">
                         <span class="text-sm text-gray-500 mr-5">
                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -90,16 +90,46 @@
                         {{ $employer->desc }}
                     </p>
                 </article>
+
+                <article>
+                    <h4 class="text-3xl font-semibold mb-4">Gallery</h4>
+                    <div class="grid grid-rows-2 grid-cols-2 md:grid-cols-3 grid-flow-row gap-4">
+                        <div>
+                            <img class="h-auto max-w-full rounded-xl" src="{{ asset('images/gallery3.jpg') }}"
+                                alt="">
+                        </div>
+                        <div class="row-span-2">
+                            <img class="h-auto max-w-full rounded-xl" src="{{ asset('images/gallery5.jpg') }}"
+                                alt="">
+                        </div>
+                        <div>
+                            <img class="h-auto max-w-full rounded-xl" src="{{ asset('images/gallery2.jpg') }}"
+                                alt="">
+                        </div>
+                        <div>
+                            <img class="h-auto max-w-full rounded-xl" src="{{ asset('images/gallery4.jpg') }}"
+                                alt="">
+                        </div>
+                        <div class="row-span-2">
+                            <img class="h-auto lg:h-[30rem] object-cover max-w-full rounded-xl"
+                                src="{{ asset('images/gallery.jpg') }}" alt="">
+                        </div>
+                        <div class="col-span-2">
+                            <img class="h-auto max-w-full rounded-xl" src="{{ asset('images/gallery6.jpg') }}"
+                                alt="">
+                        </div>
+                    </div>
+                </article>
             </div>
-            <div class="">
+            <div class="space-y-6">
                 <div class="bg-white border border-gray-200 shadow-sm p-4 rounded-xl divide-y divide-gray-200 space-y-6">
                     <h4 class="text-xl font-bold">Overview</h4>
                     <article class="pt-6 space-y-4">
                         <p class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-building-community text-gray-500" width="16"
-                                height="16" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
+                                height="16" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M8 9l5 5v7h-5v-4m0 4h-5v-7l5 -5m1 1v-6a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v17h-8" />
                                 <path d="M13 7l0 .01" />
@@ -157,6 +187,19 @@
                             </svg>
                             <span class="text-gray-500 tracking-wide ml-1">{{ $employer->email }}</span>
                         </p>
+                    </article>
+                </div>
+
+                <div class="bg-white border border-gray-200 shadow-sm p-5 rounded-xl divide-y divide-gray-200 space-y-6">
+                    <article class="space-y-4">
+                        <div class="flex flex-wrap items-center gap-4">
+                            @foreach ($categories as $category)
+                                <a href="{{ route('jobs.index', ['category' => $category->slug]) }}"
+                                    class="text-tertiary-700 bg-tertiary-100 hover:bg-tertiary-200 focus:ring-4 focus:outline-none focus:ring-tertiary-300 font-medium rounded-full text-sm px-5 py-1.5 text-center">
+                                    {{ $category->name }}
+                                </a>
+                            @endforeach
+                        </div>
                     </article>
                 </div>
             </div>
