@@ -1,7 +1,7 @@
 <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
     class="flex mx-3 text-sm rounded-full md:mr-0 focus:ring-2 focus:ring-primary-400" type="button">
     <span class="sr-only">Open user menu</span>
-    <img src="{{ isset(Auth::user()->profile) ? asset('storage/profile/' . Auth::user()->profile) : asset('user.png') }}"
+    <img src="{{ isset(Auth::user()->profile) ? asset(Auth::user()->profile) : asset('user.png') }}"
         class="w-9 h-9 rounded-full border border-primary-500 p-1" alt="profile_img">
 </button>
 

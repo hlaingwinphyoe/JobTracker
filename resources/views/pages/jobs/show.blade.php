@@ -371,7 +371,7 @@
                                                     alt="" />
                                             </a>
                                             <div class="flex">
-                                                <a href="{{ route('employers.index', $jobPost->user->id) }}"
+                                                <a href="{{ route('employers.show', $jobPost->user->id) }}"
                                                     class="text-sm hover:underline">{{ $jobPost->user->name }}</a>
                                             </div>
                                         </div>
