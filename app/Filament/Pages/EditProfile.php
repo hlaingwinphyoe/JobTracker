@@ -11,7 +11,7 @@ class EditProfile extends Page
 {
     protected static ?string $model = User::class;
 
-    // protected static bool $shouldRegisterNavigation = false;
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'fas-user';
 

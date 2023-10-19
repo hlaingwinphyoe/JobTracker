@@ -27,14 +27,14 @@ class FilamentServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Filament::serving(function () {
-            Filament::registerUserMenuItems([
-                UserMenuItem::make()
-                    ->label('Edit Profile')
-                    // ->url(route('filament.admin.pages.edit-profile'))
-                    ->url(ProfileResource::getUrl('edit', ['record' => Auth::user()->id]))
-                    ->icon('fas-user'),
-                // ...
-            ]);
+            // Filament::registerUserMenuItems([
+            //     UserMenuItem::make()
+            //         ->label('Edit Profile')
+            //         // ->url(route('filament.admin.pages.edit-profile'))
+            //         ->url(ProfileResource::getUrl('edit', ['record' => Auth::user()->id]))
+            //         ->icon('fas-user'),
+            //     //ImageColumn::make('avatar')
+            // ]);
         });
     }
 

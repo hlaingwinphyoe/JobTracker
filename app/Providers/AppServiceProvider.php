@@ -32,10 +32,10 @@ class AppServiceProvider extends ServiceProvider
             'panels::sidebar.expand-button' => 'fas-bars-staggered',
         ]);
 
-        Filament::serving(function () {
-            Filament::registerUserMenuItems([
-                'account' => UserMenuItem::make()->url(route('filament.admin.pages.my-profile')),
-            ]);
-        });
+        // Filament::serving(function () {
+        //     Filament::registerUserMenuItems([
+        //         'account' => UserMenuItem::make()->url(route('filament.admin.pages.my-profile')),
+        //     ]);
+        // });
     }
 }
