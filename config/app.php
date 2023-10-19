@@ -111,6 +111,9 @@ return [
 
     'faker_locale' => 'en_US',
 
+    "enable_profile_page" => false,
+ 
+    "registration_component_path" => \App\Http\Livewire\Register::class,
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -171,6 +174,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         App\Providers\FilamentServiceProvider::class,
+        Jeffgreco13\FilamentBreezy\FilamentBreezyServiceProvider::class
     ])->toArray(),
 
     /*
@@ -186,6 +190,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'FilamentBreezy' => Jeffgreco13\FilamentBreezy\Facades\FilamentBreezy::class
     ])->toArray(),
 
 ];
