@@ -2,13 +2,13 @@
 
 @section('content')
     <section class="bg-tertiary-100 p-8">
-        <div class="container mx-auto py-6 flex justify-between items-center">
-            <div class="flex items-center">
+        <div class="container mx-auto py-6 flex flex-col lg:flex-row justify-between items-center">
+            <div class="flex flex-col md:flex-row items-center">
                 <img class="rounded-full h-32 w-32 mr-5 border-2 border-tertiary-500 p-1"
                     src="{{ isset(Auth::user()->profile) ? asset('storage/profile/' . Auth::user()->profile) : asset('user.png') }}"
                     alt="" />
                 <div>
-                    <h3 class="text-4xl font-semibold tracking-tight">{{ $employer->name }}</h3>
+                    <h3 class="text-2xl lg:text-4xl mt-4 lg:mt-0 font-semibold tracking-tight whitespace-nowrap">{{ $employer->name }}</h3>
                     <p class="my-3">
                         <span class="text-sm text-gray-500 mr-5">
                             <svg xmlns="http://www.w3.org/2000/svg"

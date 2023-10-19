@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full gap-6 px-24 py-5">
+  <section class="w-full gap-6 px-10 lg:px-24 py-5">
     <!-- Content -->
     <div>
       <div class="mb-3 flex justify-between items-center">
