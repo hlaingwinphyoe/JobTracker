@@ -8,6 +8,7 @@ use App\Filament\Resources\AppliedJobResource\Pages\CreateAppliedJob;
 use App\Filament\Resources\AppliedJobResource\Pages\EditAppliedJob;
 use App\Filament\Resources\AppliedJobResource\RelationManagers;
 use App\Models\AppliedJob;
+use App\Models\Type;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -87,6 +88,19 @@ class AppliedJobResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $employer = Type::where('slug', 'employer')->first();
+
+        if (auth()->user()->type->id == $employer->id) {
+            return parent::getEloquentQuery()->whereHas('job_post', function($q) {
+                $q->where('user_id', auth()->user()->id);
+            });
+        } else {
+            return parent::getEloquentQuery();
+        }
     }
 
     public static function canCreate(): bool

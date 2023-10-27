@@ -17,11 +17,12 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             'stats widget' => ['Access Stats Widget'],
-            'chart widget' => ['Access Chart Widget'],
-            'employee' => ['Access Employee','Write Employee','View Employee', 'Edit Employee','Delete Employee'],
-            'employer' => ['Access Employer','Write Employer','View Employer', 'Edit Employer','Delete Employer'],
+            'applied job chart widget' => ['Access Applied Job Chart Widget'],
+            'registered chart widget' => ['Access Registered Chart Widget'],
+            'employee' => ['Access Employee','View Employee','Delete Employee'],
+            'employer' => ['Access Employer','View Employer','Delete Employer'],
             'job' => ['Access Job','Write Job','View Job', 'Edit Job','Delete Job'],
-            'applied job' => ['Access Applied Job','Write Applied Job','View Applied Job','Edit Applied Job','Delete Applied Job'],
+            'applied job' => ['Access Applied Job','View Applied Job'],
             'category' => ['Access Category','Write Category','View Category', 'Edit Category','Delete Category'],
             'type' => ['Access Type','Write Type','View Type', 'Edit Type','Delete Type'],
             'role' => ['Access Role','Write Role','View Role', 'Edit Role','Delete Role'],

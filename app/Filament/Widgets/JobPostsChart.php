@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\AppliedJob;
 use App\Models\JobPost;
+use App\Models\Type;
 use Carbon\Carbon;
 use Filament\Widgets\ChartWidget;
 
@@ -41,7 +42,7 @@ class JobPostsChart extends ChartWidget
 
     public static function canView(): bool 
     {
-        return auth()->user()->can('Access Chart Widget');
+        return auth()->user()->can('Access Applied Job Chart Widget');
         // return auth()->user()->isAdmin();
     } 
 
@@ -67,9 +68,18 @@ class JobPostsChart extends ChartWidget
 
         foreach ( collect(range(1,12)) as $month) {
             // $count = JobPost::whereMonth('created_at', Carbon::parse($now->month($month)->format('Y-m')))->count();
-            $count = AppliedJob::whereMonth('created_at', Carbon::parse($now->month($month)->format('Y-m')))->get()->groupBy('job_id')->count();
+            $employer = Type::where('slug', 'employer')->first();
+
+            if (auth()->user()->type->id == $employer->id) {
+                $count = AppliedJob::whereMonth('created_at', Carbon::parse($now->month($month)->format('Y-m')))->whereHas('job_post', function($q) {
+                    $q->where('user_id', auth()->user()->id);
+                })->get()->groupBy('job_id')->count();
+            }else{
+                $count = AppliedJob::whereMonth('created_at', Carbon::parse($now->month($month)->format('Y-m')))->get()->groupBy('job_id')->count();
+            }
+
             $postsPermonth[] = $count;
-// dd($count);
+
             $months[] = $now->month($month)->format('M');
         }
 

@@ -5,6 +5,10 @@ namespace App\Filament\Pages;
 use Filament\Pages\Page;
 use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Infolist;
 use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Support\Facades\Hash;
 use JeffGreco13\FilamentBreezy\FilamentBreezy;
@@ -101,8 +105,11 @@ class MyProfile extends Page
             Forms\Components\TextInput::make('company_type')->label('Company Type')->required()->maxLength(100)->autofocus(),
             // Forms\Components\TextInput::make('website')->prefix('https://')->maxLength(250)->required()->label('Website'),
             // Forms\Components\TextInput::make('address')->maxLength(100)->label('Address'),
-            // Forms\Components\FileUpload::make('profile')->image()->directory('logos')->label('Company Logo'),
+            // Forms\Components\FileUpload::make('profile')->image()->directory('logos'),
             // ImageColumn::make('profile'),
+            // FileUpload::make('profile')
+            //                 ->image()
+            //                 ->directory('logos')
         ];
     }
  
