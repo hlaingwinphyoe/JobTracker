@@ -1,6 +1,6 @@
 @if (session('message'))
     <div id="toast-success"
-        class="flex absolute top-12 right-1.5 ml-auto mt-2 items-center p-4 mb-4 w-full max-w-xs text-black bg-green-400 rounded-md shadow dark:text-gray-400 dark:bg-gray-800 animate__animated animate__fadeInUp animate__faster z-50"
+        class="flex absolute top-12 right-1.5 ml-auto mt-2 items-center p-4 mb-4 w-full max-w-xs text-black bg-gradient-to-r from-tertiary-400 to-blue-400 rounded-md shadow-sm animate__animated animate__fadeInUp animate__faster z-50"
         role="alert">
         <div
             class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-black bg-white/50 rounded-md dark:bg-green-800 dark:text-green-200">
@@ -14,7 +14,7 @@
         </div>
         <div class="ml-3 text-sm font-normal text-white">{{ session('message') }}</div>
         <button type="button"
-            class="ml-auto -mx-1.5 -my-1.5 bg-white/50 text-black hover:text-gray-900 rounded-md focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            class="ml-auto -mx-1.5 -my-1.5 bg-white/50 text-black hover:text-gray-900 rounded-md focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8"
             data-dismiss-target="#toast-success" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"

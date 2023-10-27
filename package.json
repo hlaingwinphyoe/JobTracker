@@ -23,6 +23,7 @@
         "bootstrap": "^5.3.1",
         "cors": "^2.8.5",
         "flowbite": "^1.8.1",
+        "scrollreveal": "^4.0.9",
         "sweetalert2": "^11.7.32",
         "vue": "^3.2.36",
         "vue3-carousel": "^0.3.1"

@@ -24,7 +24,7 @@
     </li>
   </ul>
   <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
-    <div class="" v-for="jobPost in jobPosts" :key="jobPost.id">
+    <div class="" v-for="jobPost in jobPosts" :key="jobPost.id" id="job-card">
       <Card :jobPost="jobPost" />
     </div>
   </div>
