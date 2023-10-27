@@ -102,9 +102,8 @@
                     <label for="cover_letter" class="block mb-2 text-sm font-medium text-gray-900">
                         Cover Letter <span class="text-red-500">*</span>
                     </label>
-                    <textarea id="cover_letter" rows="4" name="cover_letter"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500">
-                    </textarea>
+                    <textarea name="cover_letter" id="cover_letter" rows="5"
+                        class="text-sm focus:outline-none border border-gray-200 focus:ring-primary-500 rounded-lg w-full mt-1.5">{{ old('cover_letter') }}</textarea>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900">

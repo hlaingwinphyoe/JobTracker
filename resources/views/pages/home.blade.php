@@ -1,7 +1,7 @@
 <section class="px-2 md:px-0" id="home">
     <div class="container flex items-center justify-center mx-auto lg:h-[95vh]">
         <div class="flex flex-wrap flex-col-reverse md:flex-row items-center sm:-mx-3">
-            <div class="w-full md:w-1/2 md:px-3">
+            <div class="w-full md:w-1/2 md:px-3" id="hero-left">
                 <div
                     class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg 2xl:max-w-xl md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                     <h1
@@ -52,7 +52,7 @@
                     </form>
                 </div>
             </div>
-            <div class="w-full md:w-1/2">
+            <div class="w-full md:w-1/2" id="hero-right">
                 <div class="w-full h-auto overflow-hidden rounded-md">
                     <img src="/images/home.jpg" alt="home.jpg" class="h-full">
                 </div>

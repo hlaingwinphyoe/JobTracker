@@ -134,7 +134,7 @@
 
                 <p class="mt-3 text-center text-sm text-gray-500">
                     Already Registerd?
-                    <a href="{{ route('employee.register') }}"
+                    <a href="{{ route('employee.login') }}"
                         class="font-semibold leading-6 text-primary-500 hover:text-primary-600">Login Here.</a>
                 </p>
             </div>
