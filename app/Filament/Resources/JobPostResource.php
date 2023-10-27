@@ -170,6 +170,7 @@ class JobPostResource extends Resource
                     ->schema([
                         FileUpload::make('image')
                             ->image()
+                            ->directory('uploads')
                             ->maxSize(1024)
                     ])->columnSpan(1)
             ]);

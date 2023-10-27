@@ -13,7 +13,7 @@
           <a :href="'/job-lists' + jobPost.slug">
             <img
               class="rounded-t-lg h-48 w-full object-cover"
-              :src="jobPost.thumbnail ? jobPost.thumbnail : '/images/job.jpg'"
+              :src="jobPost.thumbnail"
               alt=""
             />
           </a>
