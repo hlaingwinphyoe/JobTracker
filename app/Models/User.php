@@ -15,16 +15,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+use App\Traits\HasProfilePhoto;
+use Filament\Models\Contracts\HasAvatar;
+
 
 // use JeffGreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasAvatar
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
     // use TwoFactorAuthenticatable;
+    use HasProfilePhoto;
 
 
     protected $guard = 'web';
+
+    protected $appends = [
+        'profile_photo_url',
+    ];
     
     /**
      * The attributes that are mass assignable.
@@ -79,6 +87,11 @@ class User extends Authenticatable
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class);
+    }
+ 
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->profile;
     }
 
     public function scopeNotAdmin($query)

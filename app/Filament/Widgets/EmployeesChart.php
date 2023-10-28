@@ -33,7 +33,7 @@ class EmployeesChart extends ChartWidget
 
     public static function canView(): bool 
     {
-        return auth()->user()->can('Access Chart Widget');
+        return auth()->user()->can('Access Registered Chart Widget');
         // return auth()->user()->isAdmin();
     } 
 

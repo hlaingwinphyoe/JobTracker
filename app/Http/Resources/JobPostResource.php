@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class JobPostResource extends JsonResource
 {
@@ -27,7 +28,8 @@ class JobPostResource extends JsonResource
             'publish' => $this->updated_at->diffForHumans(),
             'salary' => $this->salary,
             'categroy_name' => $this->category->name,
-            'thumbnail' => $this->image,
+            // 'thumbnail' => $this->image,
+            'thumbnail' => $this->image ? Storage::url('public/' . $this->image) : '/images/job.jpg',
             'profile' => $this->user->profile
         ];
     }

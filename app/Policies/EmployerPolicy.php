@@ -23,18 +23,18 @@ class EmployerPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
-    {
-        return $user->hasDirectPermission('Write Employer');
-    }
+    // public function create(User $user): bool
+    // {
+    //     return $user->hasDirectPermission('Write Employer');
+    // }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Employer $employer): bool
-    {
-        return $user->hasDirectPermission('Edit Employer');
-    }
+    // public function update(User $user, Employer $employer): bool
+    // {
+    //     return $user->hasDirectPermission('Edit Employer');
+    // }
 
     /**
      * Determine whether the user can delete the model.
