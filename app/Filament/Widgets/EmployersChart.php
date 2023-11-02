@@ -8,7 +8,9 @@ use Filament\Widgets\ChartWidget;
 
 class EmployersChart extends ChartWidget
 {
-    protected static ? int $sort = 3;
+    protected static ? int $sort = 4;
+
+    protected static string $color = 'info';
 
     protected static ?string $heading = 'Employers registered Chart in a year';
 
@@ -21,15 +23,23 @@ class EmployersChart extends ChartWidget
                 [
                     'label' => 'employer registered',
                     'data' => $data['employersPerMonth'],
+                    // 'backgroundColor' => '#36A2EB',
+                    // 'borderColor' => '#9BD0F5',
                 ]
                 ],
             'labels' => $data['months'],
         ];
     }
 
+    public static function canView(): bool 
+    {
+        return auth()->user()->can('Access Chart Widget');
+        // return auth()->user()->isAdmin();
+    } 
+
     protected function getType(): string
     {
-        return 'line';
+        return 'bar';
     }
 
     private function getEmployersPerMonth(): array

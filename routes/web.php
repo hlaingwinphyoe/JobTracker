@@ -62,6 +62,8 @@ Route::prefix('/profile')->name('profile.')->middleware('auth:employee')->contro
 Route::get('faq', [PageController::class, 'faq'])->name('faq');
 Route::get('terms', [PageController::class, 'terms'])->name('terms');
 Route::get('policy', [PageController::class, 'policy'])->name('policy');
+Route::get('about-us', [PageController::class, 'aboutUs'])->name('about-us');
+Route::get('contact-us', [PageController::class, 'contactUs'])->name('contact-us');
 
 Route::middleware('auth:employee')->group(function () {
     Route::get('/save-jobs/{employee}/{jobPost}', [PageController::class, 'savedJob'])->name('employee-jobs.store');

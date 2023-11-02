@@ -11,13 +11,7 @@
                 <span class="text-gray-500">Detailed list of your job applications.</span>
 
                 <div class="relative mt-5">
-                    <div class="flex items-center justify-between pb-4">
-                        <select id="date" name="date"
-                            class="h-auto rounded-lg border border-gray-400 bg-transparent p-2 text-gray-500 focus:outline-none focus:ring-0 sm:text-sm">
-                            <option value="7days" selected>Last 7 Days</option>
-                            <option value="30days">Last 30 Days</option>
-                            <option value="7days">Last 7 Days</option>
-                        </select>
+                    <div class="flex items-center justify-end pb-4">
                         <form class="flex items-center">
                             <label for="simple-search" class="sr-only">Search</label>
                             <input type="search" id="default-search" name="search" value="{{ request()->search }}"

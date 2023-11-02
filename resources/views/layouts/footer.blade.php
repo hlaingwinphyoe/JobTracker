@@ -59,10 +59,10 @@
                                 <a href="{{ route('home.index') }}" class="hover:underline">Home</a>
                             </li>
                             <li class="mb-4">
-                                <a href="javascript:void(0)" class="hover:underline">About</a>
+                                <a href="{{ route('about-us') }}" class="hover:underline">About</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" class="hover:underline">Contact Us</a>
+                                <a href="{{ route('contact-us') }}" class="hover:underline">Contact Us</a>
                             </li>
                         </ul>
                     </div>

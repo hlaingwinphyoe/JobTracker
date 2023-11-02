@@ -3,7 +3,8 @@
         <div class="mb-8">
             <h1 class="uppercase mb-3 text-3xl text-tertiary-500 font-bold">Search Companies</h1>
             <span class="text-secondary-400">
-                Search your career opportunity over <span class="font-semibold text-primary-500">12,800</span> companies
+                Search your career opportunity over <span
+                    class="font-semibold text-primary-500">{{ $jobsTotal }}</span> Jobs
             </span>
         </div>
         <form action="">
@@ -29,22 +30,27 @@
                         @endforeach
                     </select>
                 </div>
-                <div>
-                    <label for="type" class="block mb-2 font-medium text-gray-900">
-                        Type
-                    </label>
-                    <select id="type" name="type"
-                        class="bg-white border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
-                        <option selected value="">Choose Type</option>
-                        @foreach ($types as $type)
-                            <option value="{{ $type->slug }}" {{ request('type') == $type->slug ? 'selected' : '' }}>
-                                {{ $type->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                @if (!request()->routeIs('employers.index'))
+                    <div>
+                        <label for="type" class="block mb-2 font-medium text-gray-900">
+                            Type
+                        </label>
+                        <select id="type" name="type"
+                            class="bg-white border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                            <option selected value="">Choose Type</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->slug }}"
+                                    {{ request('type') == $type->slug ? 'selected' : '' }}>
+                                    {{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+
                 <div class="mt-[34px] flex items-center">
                     <x-primary-button name="Search" class="rounded-md"></x-primary-button>
-                    <a href="{{ request()->url() }}" data-tooltip-target="reset-tooltips" class="p-2.5 bg-red-500 rounded-lg ml-2 text-white">
+                    <a href="{{ request()->url() }}" data-tooltip-target="reset-tooltips"
+                        class="p-2.5 bg-red-500 rounded-lg ml-2 text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh"
                             width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             fill="none" stroke-linecap="round" stroke-linejoin="round">

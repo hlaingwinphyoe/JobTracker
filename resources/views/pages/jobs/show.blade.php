@@ -74,7 +74,7 @@
                                     </a>
                                 @else
                                     <a href="javascript:void(0)"
-                                        class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-primary-700 whitespace-no-wrap bg-primary-100 border border-transparent shadow-sm hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                        class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-primary-700 whitespace-no-wrap bg-primary-100 border border-transparent shadow-sm rounded-md mr-3 cursor-not-allowed">
                                         Already Applied
                                     </a>
                                 @endif
@@ -110,7 +110,7 @@
                             <img src="{{ $jobPost->user->profile ? $jobPost->user->profile : '/user.png' }}"
                                 class="rounded-full h-10 border border-primary-500 p-1" alt="">
                             <p class="flex flex-col ml-2">
-                                <span>{{ $jobPost->user->name }}</span>
+                                <a href="{{ route('employers.show', $jobPost->user->id) }}" class="hover:underline">{{ $jobPost->user->name }}</a>
                                 <span class="text-xs text-gray-500">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="icon icon-tabler icon-tabler-home-2 inline-flex items-center mb-[3px]"
@@ -140,7 +140,7 @@
                                         </a>
                                     @else
                                         <a href="javascript:void(0)"
-                                            class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-primary-700 whitespace-no-wrap bg-primary-100 border border-transparent shadow-sm hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 rounded-md mr-3">
+                                            class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-primary-700 whitespace-no-wrap bg-primary-100 border border-transparent shadow-sm cursor-not-allowed rounded-md mr-3">
                                             Already Applied
                                         </a>
                                     @endif
@@ -372,7 +372,7 @@
                                                     alt="" />
                                             </a>
                                             <div class="flex">
-                                                <a href="{{ route('employers.index', $jobPost->user->id) }}"
+                                                <a href="{{ route('employers.show', $jobPost->user->id) }}"
                                                     class="text-sm hover:underline">{{ $jobPost->user->name }}</a>
                                             </div>
                                         </div>

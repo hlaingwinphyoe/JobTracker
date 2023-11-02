@@ -57,10 +57,10 @@
   </section>
 
   <!-- Content -->
-  <section class="w-full gap-6 px-24">
+  <section class="w-full gap-6 px-10 lg:px-24">
     <div>
       <div class="mb-3 flex justify-between items-center">
-        <h1 class="text-2xl capitalize font-semibold">
+        <h1 class="text-xl lg:text-2xl capitalize font-semibold">
           {{ categoryTitle }} Jobs
         </h1>
         <div class="flex items-center">
@@ -140,6 +140,10 @@ export default {
         snapAlign: "center",
       },
       breakpoints: {
+        300: {
+          itemsToShow : 2,
+          snapAlign: "center"
+        },
         1024: {
           itemsToShow: 5,
           snapAlign: "start",

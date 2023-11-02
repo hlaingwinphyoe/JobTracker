@@ -1,4 +1,6 @@
 <template>
+  <Toast v-show="message" :message="message" />
+
   <div class="flex items-center">
     <div
       class="group relative mx-auto w-96 overflow-hidden rounded-[16px] bg-gray-300 p-[1.5px] transition-all duration-300 ease-in-out hover:bg-gradient-to-r hover:from-primary-500 hover:via-purple-500 hover:to-tertiary-500"
@@ -112,9 +114,9 @@
               <div v-if="employee">
                 <span>
                   <div
-                    id="save-tooltip"
+                    :id="'save-tooltip' + jobPost.id"
                     role="tooltip"
-                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip"
                   >
                     Saved Post
                     <div class="tooltip-arrow" data-popper-arrow></div>
@@ -122,7 +124,7 @@
                   <a
                     href="javascript:void(0)"
                     @click="saveJob"
-                    data-tooltip-target="save-tooltip"
+                    :data-tooltip-target="'save-tooltip' + jobPost.id"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -155,36 +157,30 @@
 <script>
 import { initFlowbite } from "flowbite";
 import { onMounted, reactive, toRefs } from "vue";
+import Toast from "./Toast.vue";
 export default {
   props: ["jobPost"],
+  components: {
+    Toast,
+  },
   setup(props, { emit }) {
     const state = reactive({
       employee: "",
+      message: "",
     });
-
-    const showToast = (icon, message) => {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-right",
-        iconColor: "white",
-        customClass: {
-          popup: "colored-toast",
-        },
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-      });
-      Toast.fire({
-        icon: icon,
-        title: message,
-      });
-    };
 
     const saveJob = () => {
       axios
         .get(`/wapi/save-jobs/${state.employee.id}/${props.jobPost.id}`)
         .then((res) => {
-          showToast("success", res.data.message);
+          state.message = res.data.message;
+
+          const toast = document.getElementById("toast-success");
+
+          setTimeout(() => {
+            state.message = "";
+            toast.style.display = "none";
+          }, 3000);
         });
     };
 
@@ -206,10 +202,14 @@ export default {
     return {
       ...toRefs(state),
       saveJob,
-      checkStatus
+      checkStatus,
     };
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.d-none {
+  display: none !important;
+}
+</style>

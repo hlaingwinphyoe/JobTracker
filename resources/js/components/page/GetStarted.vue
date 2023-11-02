@@ -44,7 +44,7 @@
           type="button"
           class="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-md text-sm px-4 py-2.5 text-center mr-3 md:mr-0"
         >
-          Get Started
+          Sign Up
         </button>
       </div>
     </div>

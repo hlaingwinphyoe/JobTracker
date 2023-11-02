@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use Filament\Facades\Filament;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Support\ServiceProvider;
 use Filament\Http\Responses\Auth\Contracts\LogoutResponse;
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\UserMenuItem;
 use Illuminate\Contracts\Foundation\Application;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,5 +31,11 @@ class AppServiceProvider extends ServiceProvider
             'panels::sidebar.collapse-button' => 'fas-bars-staggered',
             'panels::sidebar.expand-button' => 'fas-bars-staggered',
         ]);
+
+        // Filament::serving(function () {
+        //     Filament::registerUserMenuItems([
+        //         'account' => UserMenuItem::make()->url(route('filament.admin.pages.my-profile')),
+        //     ]);
+        // });
     }
 }
