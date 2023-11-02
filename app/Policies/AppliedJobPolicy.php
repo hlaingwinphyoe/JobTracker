@@ -25,24 +25,24 @@ class AppliedJobPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
-    {
-        return $user->hasDirectPermission('Write Applied Job');
-    }
+    // public function create(User $user): bool
+    // {
+    //     return $user->hasDirectPermission('Write Applied Job');
+    // }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, AppliedJob $appliedjob): bool
-    {
-        return $user->hasDirectPermission('Edit Applied Job');
-    }
+    // public function update(User $user, AppliedJob $appliedjob): bool
+    // {
+    //     return $user->hasDirectPermission('Edit Applied Job');
+    // }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, AppliedJob $appliedjob): bool
-    {
-        return $user->hasDirectPermission('Delete Applied Job');
-    }
+    // public function delete(User $user, AppliedJob $appliedjob): bool
+    // {
+    //     return $user->hasDirectPermission('Delete Applied Job');
+    // }
 }

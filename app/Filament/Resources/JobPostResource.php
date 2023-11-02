@@ -170,6 +170,7 @@ class JobPostResource extends Resource
                     ->schema([
                         FileUpload::make('image')
                             ->image()
+                            ->directory('uploads')
                             ->maxSize(1024)
                     ])->columnSpan(1)
             ]);
@@ -180,9 +181,9 @@ class JobPostResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->label("No.")->sortable(),
-                ImageColumn::make('image')
-                    ->circular()
-                    ->label('Image'),
+                // ImageColumn::make('image')
+                //     ->circular()
+                //     ->label('Image'),
                 TextColumn::make('title')->searchable()->sortable(),
                 TextColumn::make("salary")->suffix('Lakhs')->sortable(),
                 TextColumn::make("type.name")->badge()->toggleable(),

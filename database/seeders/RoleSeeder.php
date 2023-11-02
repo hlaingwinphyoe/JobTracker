@@ -24,7 +24,10 @@ class RoleSeeder extends Seeder
         $admin->syncPermissions(Permission::all());
         $developer->syncPermissions(Permission::all());
 
-        $employer->syncPermissions(Permission::whereIn('name', ['Access Job', 'Write Job','View Job', 'Edit Job'])->get()->pluck('name'));
+        $employer->syncPermissions(Permission::whereIn('name', ['Access Job', 'Write Job','View Job', 'Edit Job', 'Delete Job',
+        'Access Applied Job', 'View Applied Job', 
+        'Access Applied Job Chart Widget',
+        'Access Stats Widget'])->get()->pluck('name'));
 
         $operator->syncPermissions(Permission::whereIn('name', 
         ['Access Job', 'Write Job','View Job', 'Edit Job', 'Delete Job',
