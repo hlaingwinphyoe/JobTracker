@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class PermissionResource extends Resource
+class CustomPermissionResource extends Resource
 {
     protected static ?string $navigationIcon = 'heroicon-o-lock-closed';
 
