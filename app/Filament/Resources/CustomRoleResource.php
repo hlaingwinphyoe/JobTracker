@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class RoleResource extends Resource
+class CustomRoleResource extends Resource
 {
     protected static ?string $model = Role::class;
 

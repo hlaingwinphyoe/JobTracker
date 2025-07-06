@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources\RoleResource\Pages;
 
-use App\Filament\Resources\RoleResource;
+use Althinect\FilamentSpatieRolesPermissions\Resources\CustomRoleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateRole extends CreateRecord
 {
-    protected static string $resource = RoleResource::class;
+    protected static string $resource = CustomRoleResource::class;
 }
