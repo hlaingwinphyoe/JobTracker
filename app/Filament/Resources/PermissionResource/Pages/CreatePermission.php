@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources\PermissionResource\Pages;
 
-use App\Filament\Resources\PermissionResource;
+use Althinect\FilamentSpatieRolesPermissions\Resources\CustomPermissionResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreatePermission extends CreateRecord
 {
-    protected static string $resource = PermissionResource::class;
+    protected static string $resource = CustomPermissionResource::class;
 }
