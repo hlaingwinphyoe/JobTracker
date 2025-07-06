@@ -28,13 +28,13 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->id('admin')
             ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->authGuard('web')
             ->plugin(
                 BreezyCore::make()
             )
             ->default()
-            ->id('admin')
             ->path('admin')
             ->login()
             ->font("Montserrat")
@@ -67,6 +67,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->sidebarFullyCollapsibleOnDesktop()
             // ->profile(EditProfile::class)
-            ;
+        ;
     }
 }
