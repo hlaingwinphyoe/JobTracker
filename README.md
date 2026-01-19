@@ -86,7 +86,6 @@ Access the admin panel at `/admin`
 ### Default Roles
 
 - **Admin** - Full access to all features
-- **Developer** - Full access including roles & permissions management
 - **Employer** - Can create and manage their own job postings
 - **Employee** - Can view and apply to jobs
 

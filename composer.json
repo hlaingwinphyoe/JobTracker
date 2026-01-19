@@ -20,10 +20,10 @@
     "laravel/tinker": "^2.9",
     "livewire/livewire": "^3.0",
     "owenvoke/blade-fontawesome": "^2.4",
-    "spatie/laravel-permission": "^6.0"
+    "spatie/laravel-permission": "^6.0",
+    "fakerphp/faker": "^1.9.1"
   },
   "require-dev": {
-    "fakerphp/faker": "^1.9.1",
     "laravel/pint": "^1.0",
     "laravel/sail": "^1.18",
     "mockery/mockery": "^1.4.4",
