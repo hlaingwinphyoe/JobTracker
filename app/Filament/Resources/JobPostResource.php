@@ -118,7 +118,11 @@ class JobPostResource extends Resource
                         Select::make('type_id')
                             ->label('Type')
                             ->placeholder('Choose Type')
-                            ->relationship("type", "name")
+                            ->relationship(
+                                name: "type",
+                                titleAttribute: "name",
+                                modifyQueryUsing: fn(Builder $query) => $query->where('type', 'job')
+                            )
                             ->native(false)
                             ->required(),
                         TextInput::make('salary')
@@ -135,7 +139,7 @@ class JobPostResource extends Resource
                             ->relationship(
                                 name: "status",
                                 titleAttribute: "title",
-                                modifyQueryUsing: fn (Builder $query) => $query->where('type', 'job_status')
+                                modifyQueryUsing: fn(Builder $query) => $query->where('type', 'job_status')
                             )
                             ->native(false)
                             ->required(),
@@ -197,7 +201,7 @@ class JobPostResource extends Resource
                     //     'Available' => 'fas-check-circle',
                     //     'Closed' => 'fas-x-mark'
                     // })
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'Available' => 'success',
                         'Closed' => 'danger',
                     })->toggleable(),
@@ -229,7 +233,7 @@ class JobPostResource extends Resource
                     ->relationship(
                         name: "status",
                         titleAttribute: "title",
-                        modifyQueryUsing: fn (Builder $query) => $query->where('type', 'status')
+                        modifyQueryUsing: fn(Builder $query) => $query->where('type', 'status')
                     )->preload(),
                 Filter::make('created_at')
                     ->form([
@@ -256,7 +260,7 @@ class JobPostResource extends Resource
                         return $indicators;
                     })
             ])->filtersTriggerAction(
-                fn (Action $action) => $action
+                fn(Action $action) => $action
                     ->button()
                     ->label('Filter'),
             )

@@ -72,24 +72,24 @@ class CustomRoleResource extends Resource
                                 Select::make('permissions')
                                     ->multiple()
                                     ->label(__('filament-spatie-roles-permissions::filament-spatie.field.permissions'))
-                                //    ->options(
-                                //        function () {
-                                //            $permissions = config('filament-spatie-roles-permissions.permission_model', Permission::class)::select('id', 'guard_name', 'name')->get();
+                                    //    ->options(
+                                    //        function () {
+                                    //            $permissions = config('filament-spatie-roles-permissions.permission_model', Permission::class)::select('id', 'guard_name', 'name')->get();
 
-                                //            return $permissions->mapWithKeys(function ($permission) {
-                                //                return [$permission->id => $permission->name.' ('.$permission->guard_name.')'];
-                                //            });
-                                //        }
-                                //    )
+                                    //            return $permissions->mapWithKeys(function ($permission) {
+                                    //                return [$permission->id => $permission->name.' ('.$permission->guard_name.')'];
+                                    //            });
+                                    //        }
+                                    //    )
                                     ->relationship('permissions', 'name')
                                     ->preload(config('filament-spatie-roles-permissions.preload_permissions')),
                                 Select::make(config('permission.column_names.team_foreign_key', 'team_id'))
                                     ->label(__('filament-spatie-roles-permissions::filament-spatie.field.team'))
                                     ->hidden(! config('permission.teams', false))
                                     ->options(
-                                        fn () => config('filament-spatie-roles-permissions.team_model', App\Models\Team::class)::pluck('name', 'id')
+                                        fn() => config('filament-spatie-roles-permissions.team_model', App\Models\Team::class)::pluck('name', 'id')
                                     )
-                                    ->dehydrated(fn ($state) => (int) $state <= 0)
+                                    ->dehydrated(fn($state) => (int) $state <= 0)
                                     ->placeholder(__('filament-spatie-roles-permissions::filament-spatie.select-team'))
                                     ->hint(__('filament-spatie-roles-permissions::filament-spatie.select-team-hint')),
                             ]),
@@ -109,17 +109,15 @@ class CustomRoleResource extends Resource
                     ->searchable(),
                 TextColumn::make('permissions_count')
                     ->counts('permissions'),
-                    // ->label(__('filament-spatie-roles-permissions::filament-spatie.field.permissions_count'))
-                    // ->toggleable(isToggledHiddenByDefault: config('filament-spatie-roles-permissions.toggleable_guard_names.roles.isToggledHiddenByDefault', true))
-                    // ->searchable(),
+                // ->label(__('filament-spatie-roles-permissions::filament-spatie.field.permissions_count'))
+                // ->toggleable(isToggledHiddenByDefault: config('filament-spatie-roles-permissions.toggleable_guard_names.roles.isToggledHiddenByDefault', true))
+                // ->searchable(),
                 TextColumn::make('guard_name')
                     ->toggleable(isToggledHiddenByDefault: config('filament-spatie-roles-permissions.toggleable_guard_names.roles.isToggledHiddenByDefault', true))
                     ->label(__('filament-spatie-roles-permissions::filament-spatie.field.guard_name'))
                     ->searchable(),
             ])
-            ->filters([
-
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),

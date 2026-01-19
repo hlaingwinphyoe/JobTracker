@@ -9,9 +9,9 @@ class PermissionPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->hasDirectPermission('Access Permission');
+        return $user->hasAnyRole(['Admin', 'Developer']) || $user->hasDirectPermission('Access Permission');
     }
-   /**
+    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user): bool

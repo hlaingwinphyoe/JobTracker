@@ -2,6 +2,11 @@
 
 return [
 
+    'resources' => [
+        'PermissionResource' => \App\Filament\Resources\PermissionResource::class,
+        'RoleResource' => \App\Filament\Resources\RoleResource::class,
+    ],
+
     'preload_roles' => true,
 
     'preload_permissions' => true,

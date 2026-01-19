@@ -111,9 +111,6 @@ return [
 
     'faker_locale' => 'en_US',
 
-    "enable_profile_page" => false,
- 
-    "registration_component_path" => \App\Http\Livewire\Register::class,
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -167,14 +164,8 @@ return [
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
         App\Providers\FilamentServiceProvider::class,
-        Jeffgreco13\FilamentBreezy\FilamentBreezyServiceProvider::class
     ])->toArray(),
 
     /*
